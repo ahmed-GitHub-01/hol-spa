@@ -1,0 +1,20 @@
+.container-fluid {
+  direction: rtl;
+}
+
+.container-fluid h2 {
+  text-align: center;
+  font-size: 27px;
+  font-weight: bold;
+}
+
+.container-fluid label {
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.input-group-text {
+  background-color: #007bff;
+  color: #fff;
+}
+/*# sourceMappingURL=implemnttionreport.component.css.map */

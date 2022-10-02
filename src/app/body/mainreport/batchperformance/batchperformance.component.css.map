@@ -1,0 +1,9 @@
+{
+    "version": 3,
+    "mappings": "AAAA,AAAA,OAAO,CAAC;EACN,SAAS,EAAE,GAAG;CAIf;;AALD,AAEE,OAFK,CAEL,UAAU,CAAC;EACT,SAAS,EAAE,GAAG;CACf",
+    "sources": [
+        "batchperformance.component.scss"
+    ],
+    "names": [],
+    "file": "batchperformance.component.css"
+}

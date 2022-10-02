@@ -1,0 +1,62 @@
+.dropdown-menu {
+  left: -115px;
+}
+.navbar {
+  box-shadow: 0px 0px 20px #000;
+}
+.navbar-light .navbar-brand {
+  color: #fff;
+}
+.header-logo {
+  font-size: 20px;
+}
+
+nav {
+  .collapse {
+    i {
+      color: white;
+    }
+    .nav-item {
+      font-size: 15px;
+      margin-left: 20px;
+      span {
+        &.notification {
+          position: absolute;
+          background-color: #f00;
+          width: 25px;
+          height: 25px;
+          text-align: center;
+          border: 1px solid #777;
+          border-radius: 50%;
+          padding: 1px;
+          color: #fff;
+          top: 4px;
+          right: 120px;
+        }
+        &.message {
+          position: absolute;
+          background-color: #f00;
+          width: 25px;
+          height: 25px;
+          text-align: center;
+          border: 1px solid #777;
+          border-radius: 50%;
+          padding: 1px;
+          color: #fff;
+          top: 4px;
+          right: 173px;
+        }
+      }
+      fa-icon {
+        font-size: 20px;
+      }
+    }
+    .nav-link {
+      position: relative;
+      color: rgba(255, 255, 255, 0.9);
+      font-size: 17px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+  }
+}

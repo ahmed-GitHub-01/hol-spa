@@ -1,0 +1,284 @@
+<div class="mat-progress" *ngIf="loading$ | async">
+  <div class="mat-progress-spinner">
+    <mat-progress-spinner [mode]="'indeterminate'" *ngIf="loading$ | async"></mat-progress-spinner>
+  </div>
+</div>
+<section>
+  <!-- start container header -->
+  <div class="container-fluid">
+    <div class="row mt-3">
+      <div class="col-sm-12">
+        <h2>تقرير التفاوض والسداد</h2>
+      </div>
+    </div>
+    <div class="row mt-3">
+      <div class="col-sm-2 mt-1">
+        <input type="button" value="بحث" class="btn btn-block btn-dark" (click)="showContainer(1)">
+      </div>
+      <div class="col-sm-2 mt-1">
+        <input type="button" value="السداد" class="btn btn-block btn-dark" (click)="showContainer(2)">
+      </div>
+      <div class="col-sm-2 mt-1">
+        <input type="button" value="الافادات" class="btn btn-block btn-dark" (click)="showContainer(3)">
+      </div>
+    </div>
+    <hr />
+  </div>
+
+  <!-- End container header -->
+
+  <!-- start container search -->
+  <div class="container-fluid" *ngIf="show == 1">
+    <div class="row mt-2">
+      <label class="col-sm-1 mt-2">المدنى</label>
+      <div class="col-sm-3">
+        <!-- <input type="number" class="form-control" #civil (keypress)="onlyNumberAllowed($event)"
+          (keyup.enter)="search(civil.value, 'civilId')"> -->
+        <div class="input-group">
+          <input type="number" class="form-control" #civil (keyup.enter)="search(civil.value, 'civilId')"
+            (keypress)="onlyNumberAllowed($event)">
+          <div class="input-group-append">
+            <button class="input-group-text form-control" (click)="search(civil.value, 'civilId')"><i
+                class="fa fa-search"></i></button>
+          </div>
+        </div>
+      </div>
+      <label class="col-sm-1 mt-2">الاسم</label>
+      <div class="col-sm-3">
+        <!-- <input type="text" class="form-control" #name (keyup.enter)="search(name.value, 'name')"> -->
+        <div class="input-group">
+          <input type="text" class="form-control" #name (keyup.enter)="search(name.value, 'name')">
+          <div class="input-group-append">
+            <button class="input-group-text form-control" (click)="search(name.value, 'name')"><i
+                class="fa fa-search"></i></button>
+          </div>
+        </div>
+      </div>
+      <label class="col-sm-1 mt-2">العقد</label>
+      <div class="col-sm-3">
+        <!-- <input type="text" class="form-control" #cont (keyup.enter)="search(cont.value, 'cont')"> -->
+        <div class="input-group">
+          <input type="text" class="form-control" #cont (keyup.enter)="search(cont.value, 'cont')">
+          <div class="input-group-append">
+            <button class="input-group-text form-control" (click)="search(cont.value, 'cont')"><i
+                class="fa fa-search"></i></button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row mt-1">
+      <div class="col-sm-12">
+        <div class="outof-rtl">
+          <dx-data-grid [dataSource]="dataSearch" [rowAlternationEnabled]="true" [allowColumnReordering]="true"
+            [columnAutoWidth]="true" [showBorders]="true">
+            <dxo-paging [pageSize]="10"></dxo-paging>
+            <dxo-pager [showPageSizeSelector]="true" [allowedPageSizes]="[5,10,20,30,50,80,100]" [showInfo]="true">
+            </dxo-pager>
+            <dxo-filter-row [visible]="true" [applyFilter]="true"></dxo-filter-row>
+            <dxo-export [enabled]="true"></dxo-export>
+            <dxo-header-filter [visible]="true"></dxo-header-filter>
+            <dxi-column dataField="civilid" caption="المدنى"></dxi-column>
+            <dxi-column dataField="name" caption="الاسم"></dxi-column>
+            <dxi-column dataField="cases" caption="الحالة"></dxi-column>
+            <dxi-column dataField="contract" caption="العقد"></dxi-column>
+            <dxi-column dataField="totalDue" caption="المطالبة"></dxi-column>
+            <dxi-column dataField="totalPay" caption="المدفوع"></dxi-column>
+            <dxi-column dataField="remain" caption="المتبقى"></dxi-column>
+            <dxi-column type="buttons" caption="الافادات" cellTemplate="celTemp">
+              <div *dxTemplate="let data of 'celTemp'">
+                <button class="btn mce-btn-small" (click)="showStatment(data, showStatment2)"><i
+                    class="fa fa-calendar-week"></i></button>
+              </div>
+            </dxi-column>
+            <dxi-column type="buttons" caption="السداد" cellTemplate="celTemp1">
+              <div *dxTemplate="let data of 'celTemp1'">
+                <button class="btn mce-btn-small" (click)="showPayment(data, showPayment2)"><i
+                    class="fa fa-money-check-alt"></i></button>
+              </div>
+            </dxi-column>
+          </dx-data-grid>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- End container search -->
+
+  <!-- Start container Pay -->
+  <div class="container-fluid" *ngIf="show == 2">
+    <div class="row mt-2">
+      <label class="col-sm-1 mt-2">من تاريخ</label>
+      <div class="col-sm-2 mt-1">
+        <input type="text" class="form-control" bsDatepicker [(ngModel)]="dtp1" value="{{ dtp1 | date:'yyyy-MM-dd' }}">
+      </div>
+      <label class="col-sm-1 mt-2">الى تاريخ</label>
+      <div class="col-sm-2 mt-1">
+        <input type="text" class="form-control" bsDatepicker [(ngModel)]="dtp2" value="{{ dtp2 | date:'yyyy-MM-dd' }}">
+      </div>
+      <div class="col-sm-1 mt-1">
+        <input type="button" class="btn btn-block btn-primary" value="بحث" (click)="paymentDate()">
+      </div>
+    </div>
+    <div class="row mt-1">
+      <div class="col-sm-12">
+        <div class="outof-rtl">
+          <dx-data-grid [dataSource]="paymentBtween" [rowAlternationEnabled]="true" [allowColumnReordering]="true"
+            [columnAutoWidth]="true" [showBorders]="true">
+            <dxo-paging [pageSize]="10"></dxo-paging>
+            <dxo-search-panel [visible]="true" [highlightCaseSensitive]="true"></dxo-search-panel>
+            <dxo-pager [showPageSizeSelector]="true" [allowedPageSizes]="[5,10,20,30,50,80,100]" [showInfo]="true">
+            </dxo-pager>
+            <dxo-filter-row [visible]="true" [applyFilter]="true"></dxo-filter-row>
+            <dxo-export [enabled]="true"></dxo-export>
+            <dxo-header-filter [visible]="true"></dxo-header-filter>
+            <dxi-column dataField="civilId" caption="المدنى"></dxi-column>
+            <dxi-column dataField="name" caption="الاسم"></dxi-column>
+            <dxi-column dataField="contract" caption="العقد"></dxi-column>
+            <dxi-column dataField="cases" caption="الحالة"></dxi-column>
+            <dxi-column dataField="amount" caption="المدفوع"></dxi-column>
+            <dxi-column dataField="datePay" caption="تاريخ السداد" datatype="date"></dxi-column>
+            <dxi-column dataField="totalDue" caption="المطالبة"></dxi-column>
+            <dxi-column dataField="totalPay" caption="اجمالى المدفوع"></dxi-column>
+            <dxi-column dataField="remain" caption="المتبقى"></dxi-column>
+            <dxi-column type="buttons" caption="الافادات" cellTemplate="celTemp">
+              <div *dxTemplate="let data of 'celTemp'">
+                <button class="btn mce-btn-small" (click)="showStatment(data, showStatment2)"><i
+                    class="fa fa-calendar-week"></i></button>
+              </div>
+            </dxi-column>
+            <dxi-column type="buttons" caption="السداد" cellTemplate="celTemp1">
+              <div *dxTemplate="let data of 'celTemp1'">
+                <button class="btn mce-btn-small" (click)="showPayment(data, showPayment2)"><i
+                    class="fa fa-money-check-alt"></i></button>
+              </div>
+            </dxi-column>
+          </dx-data-grid>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- End container Pay -->
+
+  <!-- Start container statment -->
+  <div class="container-fluid" *ngIf="show == 3">
+    <div class="row mt-2">
+      <label class="col-sm-1 mt-2">من تاريخ</label>
+      <div class="col-sm-2 mt-1">
+        <input type="text" class="form-control" bsDatepicker [(ngModel)]="dtp1Statment"
+          value="{{ dtp1 | date:'yyyy-MM-dd' }}">
+      </div>
+      <label class="col-sm-1 mt-2">الى تاريخ</label>
+      <div class="col-sm-2 mt-1">
+        <input type="text" class="form-control" bsDatepicker [(ngModel)]="dtp2Statment"
+          value="{{ dtp2 | date:'yyyy-MM-dd' }}">
+      </div>
+      <div class="col-sm-1 mt-1">
+        <input type="button" class="btn btn-block btn-primary" value="بحث" (click)="statment()">
+      </div>
+    </div>
+    <div class="row mt-2">
+      <div class="col-sm-12">
+        <div class="outof-rtl">
+          <dx-data-grid [dataSource]="dataStatment" [rowAlternationEnabled]="true" [allowColumnReordering]="true"
+            [columnAutoWidth]="true" [showBorders]="true">
+            <dxo-paging [pageSize]="10"></dxo-paging>
+            <dxo-pager [showPageSizeSelector]="true" [allowedPageSizes]="[10,20,30,50,80,100]" [showInfo]="true">
+            </dxo-pager>
+            <dxo-filter-row [visible]="true" [applyFilter]="true"></dxo-filter-row>
+            <dxo-export [enabled]="true"></dxo-export>
+            <dxo-header-filter [visible]="true"></dxo-header-filter>
+            <dxo-search-panel [visible]="true" [highlightCaseSensitive]="true"></dxo-search-panel>
+            <dxi-column dataField="civilId" caption="المدنى"></dxi-column>
+            <dxi-column dataField="name" caption="الاسم"></dxi-column>
+            <dxi-column dataField="contract" caption="العقد"></dxi-column>
+            <dxi-column dataField="dateStatment" dataType="date" format="dd-MM-yyyy" caption="تاريخ الافادة">
+            </dxi-column>
+            <dxi-column dataField="stat" caption="الافادة"></dxi-column>
+            <dxi-column type="buttons" caption="الافادات" cellTemplate="celTemp">
+              <div *dxTemplate="let data of 'celTemp'">
+                <button class="btn mce-btn-small" (click)="showStatment(data, showStatment2)"><i
+                    class="fa fa-calendar-week"></i></button>
+              </div>
+            </dxi-column>
+            <dxi-column type="buttons" caption="السداد" cellTemplate="celTemp1">
+              <div *dxTemplate="let data of 'celTemp1'">
+                <button class="btn mce-btn-small" (click)="showPayment(data, showPayment2)"><i
+                    class="fa fa-money-check-alt"></i></button>
+              </div>
+            </dxi-column>
+          </dx-data-grid>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- End container statment -->
+</section>
+
+<!-- Start Payment Modal -->
+
+<ng-template #showPayment2>
+  <div class="modal-header">
+    <h3 class="modal-title pull-left">Payment</h3>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+      <span aria-hidden="true"><i class="fa fa-times-circle"></i></span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-sm-12">
+          <table class="table">
+            <thead>
+              <tr>
+                <th>Date</th>
+                <th>Amount</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let item of payment">
+                <td>{{ item.date }}</td>
+                <td>{{ item.amount }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-template>
+
+<!-- End Payment Modal -->
+
+<!-- Start Statment Modal -->
+
+<ng-template #showStatment2>
+  <div class="modal-header">
+    <h3 class="modal-title pull-left">Statment</h3>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+      <span aria-hidden="true"><i class="fa fa-times-circle"></i></span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-sm-12">
+          <table class="table">
+            <thead>
+              <tr>
+                <th>Date</th>
+                <th>Statment</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let item of statement">
+                <td>{{ item.date }}</td>
+                <td>{{ item.contact }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-template>
+
+<!-- End Statment Modal -->

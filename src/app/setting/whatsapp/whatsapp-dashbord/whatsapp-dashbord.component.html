@@ -1,0 +1,50 @@
+<nav class="sidbar">
+    <header>
+        <div class="image-text">
+            <span class="image">
+                <img src="../../../../assets/img/emp/houseoflaw.png" alt="House Of law">
+            </span>
+            <div class="text header-text">
+                <span class="profession">Whatsapp Dashboard</span>
+            </div>
+        </div>
+        <fa-icon [icon]="chavronRight"></fa-icon>
+    </header>
+    <div class="menu-bar">
+        <div class="menu">
+            <ul class="menu-link">
+                <li class="nav-link">
+                    <a (click)="showEmploye($event)">
+                        <fa-icon [icon]="faHomee"></fa-icon>
+                        <span class="text">Dashboard</span>
+                    </a>
+                </li>
+                <div class="collapsie" *ngIf="branch">
+                    <ul>
+                        <li>daf</li>
+                        <li>df</li>
+                        <li>sdf</li>
+                        <li>sfsdf</li>
+                        <li>sdf</li>
+                    </ul>
+                </div>
+                <li class="nav-link">
+                    <a (click)="showEmploye($event)">
+                        <fa-icon [icon]="faHomee"></fa-icon>
+                        <span class="text">Dashboard</span>
+                    </a>
+                </li>
+                <div class="collapsie">
+                    <ul>
+                        <li>daf</li>
+                        <li>df</li>
+                        <li>sdf</li>
+                        <li>sfsdf</li>
+                        <li>sdf</li>
+                    </ul>
+                </div>
+            </ul>
+        </div>
+
+    </div>
+</nav>

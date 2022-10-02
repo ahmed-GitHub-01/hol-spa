@@ -1,0 +1,31 @@
+export interface Main {
+    code: number;
+    name: string;
+    ReasonDue: string;
+    batchNo: string;
+    CivilId: number;
+    CodeClint: string;
+    national: string;
+    autoNum: string;
+    address: string;
+    contractNum: string;
+    note: string;
+    note2: string;
+    note3: string;
+    note4: string;
+    note5: string;
+    DateLogin: Date;
+    DateReceive: Date;
+    DateWithdrawal: Date;
+    lastPay: number;
+    lastPayDate: Date;
+    lastStatmentDate: Date;
+    lastStatmentEvent: string;
+    lastReviewDate: Date;
+    mohad: number;
+    caseCivilID: string;
+    motabaa: string;
+    dkhlia: string;
+    khesmCase: string;
+    twasol: string;
+}

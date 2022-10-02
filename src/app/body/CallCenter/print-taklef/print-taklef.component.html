@@ -1,0 +1,47 @@
+<div class="container">
+  <section id="printsection">
+    <div class="row mt-1">
+      <div class="col-sm-12">
+        <img src="../../../../assets/img/hol-header.png" alt="HOL" width="100%">
+      </div>
+    </div>
+    <div class="row mt-1">
+      <label class="col-sm-2"></label>
+      <label class="col-sm-2 pull-right">الكويت</label>
+      <label class="col-sm-6"></label>
+      <label class="col-sm-2 pull-left">مسجل</label>
+    </div>
+    <div class="row mt-1">
+      <div class="col-sm-3"><img src="../../../../assets/img/khetab.png" alt="HOL" width="100%"></div>
+      <label class="col-sm-5"></label>
+      <label class="col-sm-2">05-06-2021</label>
+      <label class="col-sm-2 pull-left">:التاريخ</label>
+    </div>
+    <div class="row mt-1">
+      <label class="col-sm-2 text-right">المحترم</label>
+      <label class="col-sm-8 text-right"></label>
+      <label class="col-sm-2 text-left">السيد</label>
+    </div>
+    <div class="row mt-1">
+      <label class="col-sm-4"></label>
+      <label class="col-sm-6 text-right">Lorem ipsum dolor sit amet consectetur adipisicing elit. Ducimus pariatur et
+        excepturi libero velit quos corporis cupiditate beatae architecto animi. Vero dolorem sint natus dolore debitis
+        culpa expedita sed aliquid.</label>
+      <label class="col-sm-1">:العنوان</label>
+    </div>
+    <div class="row">
+      <div class="col-sm-12">
+
+      </div>
+    </div>
+  </section>
+  <div class="row mt-1">
+    <div class="col-sm-2">
+      <button class="btn btn-outline-danger mt-2" [printStyle]="{label : {'font-size': '24px','font-weight': 'bold'}}"
+        printSectionId="printsection" [useExistingCss]="true" ngxPrint>Print</button>
+    </div>
+    <div class="col-sm-2">
+      <input type="button" value="pdf" class="btn btn-dark mt-2" (click)="download()">
+    </div>
+  </div>
+</div>

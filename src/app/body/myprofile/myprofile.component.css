@@ -1,0 +1,120 @@
+.home-stats .stat {
+  padding: 20px;
+  font-size: 20px;
+  color: #fff;
+  border-radius: 10px;
+  margin-bottom: 10px;
+}
+
+.home-stats a:hover {
+  text-decoration: none;
+}
+
+.home-stats .stat span {
+  display: block;
+  font-size: 60px;
+}
+
+.home-stats .st-members {
+  background-color: #16a085;
+}
+
+.home-stats .st-pending {
+  background-color: #e74c3c;
+}
+
+.home-stats .st-items {
+  background-color: #f39c12;
+}
+
+.home-stats .st-comments {
+  background-color: #8e44ad;
+}
+.home-stats .stat {
+  padding: 20px;
+  font-size: 15px;
+  border-radius: 10px;
+  margin-bottom: 10px;
+  overflow: hidden;
+  position: relative;
+  margin-top: 15px;
+  display: -ms-grid;
+  display: grid;
+}
+
+.home-stats .stat .icon1 {
+  font-size: 70px;
+}
+
+.home-stats .stat .info {
+  float: right;
+}
+
+.home-stats .stat div {
+  padding: 10px;
+}
+
+.home-stats a:hover {
+  -webkit-box-shadow: 0 50px 15px #34ace0;
+  box-shadow: 0 15px #34ace0;
+}
+
+.home-stats .stat .span1 {
+  display: block;
+  font-size: 60px;
+  color: #035c97;
+}
+
+.home-stats .stat .span2 {
+  color: #fff;
+  font-weight: bold;
+  font-size: 20px;
+}
+
+.home-stats .st-telecom {
+  background-color: #34ace0;
+  color: white;
+  -webkit-box-shadow: 0 0px 9px #34ace0;
+  box-shadow: 0 0 9px #34ace0;
+}
+
+.home-stats .st-sec {
+  background-color: #227093;
+  color: white;
+  -webkit-box-shadow: 0 0px 9px #227093;
+  box-shadow: 0 0 9px #227093;
+}
+
+.home-stats .st-imp {
+  background-color: #ff5252;
+  color: white;
+  -webkit-box-shadow: 0 0px 9px #ff5252;
+  box-shadow: 0 0 9px #ff5252;
+}
+
+.home-stats .st-fin {
+  background-color: #b33939;
+  color: white;
+  -webkit-box-shadow: 0 0px 9px #b33939;
+  box-shadow: 0 0 9px #b33939;
+}
+
+.home-stats .st-mtd {
+  background-color: #ff793f;
+  color: white;
+  -webkit-box-shadow: 0 0px 9px #ff793f;
+  box-shadow: 0 0 9px #ff793f;
+}
+
+.home-stats .st-edar {
+  background-color: #cd6133;
+  color: white;
+  -webkit-box-shadow: 0 0px 9px #cd6133;
+  box-shadow: 0 0 9px #cd6133;
+}
+.home-stats h3 {
+  margin-top: 15px;
+  font-size: 30px;
+  color: #035c97;
+  font-weight: bold;
+}

@@ -1,0 +1,96 @@
+$crimson: crimson;
+$black: #0d0d0d;
+$black-bg: #222222;
+$light-bg: #1a1a1a;
+$white: #fff;
+$light-color: #aaa;
+$box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.7);
+section {
+  margin: 0;
+  // padding: 5rem 9%;
+  box-sizing: border-box;
+  text-decoration: none;
+  outline: none;
+  border: none;
+  text-transform: capitalize();
+  font-size: 100%;
+  overflow-x: hidden;
+  background-color: $black-bg;
+  .container-fluid {
+    .count {
+      .box {
+        h3 {
+          font-size: 15px;
+          color: $white;
+          font-weight: normal;
+          span {
+            color: $light-color;
+            font-weight: lighter;
+          }
+        }
+      }
+      h1 {
+        font-size: 2rem;
+        color: $white;
+        padding-bottom: 1rem;
+      }
+      .box1 {
+        flex: 1 1 42rem;
+        border-radius: 0.5rem;
+        background-color: $light-bg;
+        margin-left: 5px;
+        margin-top: 5px;
+        box-shadow: $box-shadow;
+        padding-top: 15px;
+        h3 {
+          font-size: 30px;
+          color: $crimson;
+          text-align: center;
+          font-weight: bold;
+        }
+        p {
+          font-size: 15px;
+          color: $light-color;
+        }
+      }
+    }
+    .heading {
+      margin-top: 3rem;
+      text-align: center;
+      font-size: 40px;
+      color: $white;
+      margin-bottom: 3rem;
+      text-transform: uppercase;
+      font-family: "Oswald";
+      span {
+        text-transform: uppercase;
+        color: $crimson;
+      }
+    }
+    .btn {
+      display: inline-block;
+      margin-top: 1rem;
+      margin-bottom: 1rem;
+      border-radius: 25px;
+      background-color: $crimson;
+      // padding: 0.7rem;
+      font-size: 1rem;
+      color: $white;
+      padding-left: 2rem;
+      .span-i {
+        line-height: 2rem;
+        font-size: 1rem;
+        text-align: center;
+        background: $white;
+        color: $crimson;
+        border-radius: 25px;
+        margin-left: 1rem;
+        padding: 7px;
+        transition: 0.2s linear;
+        &:hover {
+          margin-left: 2rem;
+        }
+      }
+    }
+  }
+}

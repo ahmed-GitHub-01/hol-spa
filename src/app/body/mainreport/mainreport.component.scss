@@ -1,0 +1,17 @@
+.container-fluid {
+  direction: rtl;
+  .row {
+    .out-line {
+      background-color: #d9d9d9;
+      padding: 20px;
+      border: 1px solid #000;
+      border-radius: 7px;
+      .input-group {
+        direction: ltr;
+      }
+    }
+    .outof-rtl {
+      direction: ltr;
+    }
+  }
+}

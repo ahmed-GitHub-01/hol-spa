@@ -1,0 +1,147 @@
+<div class="container-fluid mt-lg-5">
+  <div class="row">
+    <div class="col-sm-4">
+      <div class="row mb-2">
+        <div class="col-sm-1 mt-2">
+          <label>الكود</label>
+        </div>
+        <div class="col-sm-8">
+          <input type="number" class="form-control btn-sm" placeholder="Code" #code
+            (keyup.enter)="uploadProcessFile(code.value)">
+        </div>
+        <div class="col-sm-3">
+          <input type="button" class="btn btn-primary btn-block btn-sm" value="Search">
+        </div>
+      </div>
+      <div class="row mb-2">
+        <div class="col-sm-1 mt-2">
+          <label>الاسم</label>
+        </div>
+        <div class="col-sm-11">
+          <input type="text" class="form-control btn-sm" placeholder="Name" [(ngModel)]="dataFile.name">
+        </div>
+      </div>
+      <div class="row mb-2">
+        <div class="col-sm-1 mt-2">
+          <label>المدنى</label>
+        </div>
+        <div class="col-sm-11">
+          <input type="number" class="form-control btn-sm" placeholder="Civil ID" [(ngModel)]="dataFile.civilid">
+        </div>
+      </div>
+      <div class="row mb-2">
+        <div class="col-sm-1 mt-2">
+          <label>العقد</label>
+        </div>
+        <div class="col-sm-11">
+          <input type="text" class="form-control btn-sm" placeholder="Contract" [(ngModel)]="dataFile.contract">
+        </div>
+      </div>
+      <div class="row mb-2">
+        <div class="col-sm-1 mt-2">
+          <label>المديونية</label>
+        </div>
+        <div class="col-sm-11">
+          <input type="text" class="form-control btn-sm" placeholder="Reason Due" [(ngModel)]="dataFile.due">
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-4">
+      <div class="row mb-2">
+        <div class="col-sm-1 mt-2">
+          <label>الموكل</label>
+        </div>
+        <div class="col-sm-11">
+          <input type="text" class="form-control btn-sm" placeholder="الموكل" [(ngModel)]="dataFile.clint">
+        </div>
+      </div>
+      <div class="row mb-2">
+        <div class="col-sm-1 mt-2">
+          <label>المدعى</label>
+        </div>
+        <div class="col-sm-11">
+          <input type="text" class="form-control btn-sm" placeholder="المدعى" [(ngModel)]="dataFile.draft">
+        </div>
+      </div>
+      <div class="row mb-2">
+        <div class="col-sm-1 mt-2">
+          <label>المحكمة</label>
+        </div>
+        <div class="col-sm-11">
+          <input type="text" class="form-control btn-sm" placeholder="Court" [(ngModel)]="dataFile.court">
+        </div>
+      </div>
+      <div class="row mb-2">
+        <div class="col-sm-1 mt-2">
+          <label>الالى</label>
+        </div>
+        <div class="col-sm-11">
+          <input type="text" class="form-control btn-sm" placeholder="Auto number" [(ngModel)]="dataFile.autoNum">
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-4">
+      <div class="row mb-2">
+        <div class="col-sm-2 mt-2">
+          <label>الاجراء</label>
+        </div>
+        <div class="col-sm-10">
+          <select class="custom-select custom-select-sm" [(ngModel)]="processNameValue">
+            <option *ngFor="let item of processName" [value]="item.value">{{ item.value }}</option>
+          </select>
+        </div>
+      </div>
+      <div class="row mb-2">
+        <div class="col-sm-2 mt-2">
+          <label>ملاحظات</label>
+        </div>
+        <div class="col-sm-10">
+          <textarea class="form-control" [(ngModel)]="dataFile.note"></textarea>
+        </div>
+      </div>
+      <div class="row mb-2">
+        <div class="col-sm-2"></div>
+        <div class="col-sm-5">
+          <input type="button" value="Save" class="btn btn-success btn-block btn-sm" (click)="addToarray()">
+        </div>
+        <div class="col-sm-5">
+          <input type="button" value="Cancel" class="btn btn-warning btn-block btn-sm">
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row mt-5">
+    <div class="col-sm-12">
+      <dx-data-grid [dataSource]="dataProcess" [rowAlternationEnabled]="true" [allowColumnReordering]="true"
+        [columnAutoWidth]="true" [showBorders]="true">
+        <dxo-paging [pageSize]="10"></dxo-paging>
+        <dxo-pager [showPageSizeSelector]="true" [allowedPageSizes]="[10,20,30,50,80,100]" [showInfo]="true">
+        </dxo-pager>
+        <dxo-filter-row [visible]="true" [applyFilter]="true"></dxo-filter-row>
+        <dxo-header-filter [visible]="true"></dxo-header-filter>
+        <dxi-column caption="الكود" dataField="CODE"></dxi-column>
+        <dxi-column caption="الاسم" dataField="NAME"></dxi-column>
+        <dxi-column caption="الحالة" dataField="Case"></dxi-column>
+        <dxi-column caption="المديونية" dataField="Due"></dxi-column>
+        <dxi-column caption="العقد" dataField="Contract"></dxi-column>
+        <dxi-column caption="المدنى" dataField="civilid"></dxi-column>
+        <dxi-column caption="الجنسية" dataField="National"></dxi-column>
+        <dxi-column caption="الالى" dataField="Auto"></dxi-column>
+        <dxi-column caption="الموكل" dataField="Clint"></dxi-column>
+        <dxi-column caption="المحكمة" dataField="Court"></dxi-column>
+        <dxi-column caption="تاريخ الدفع" dataField="DATE_" dataType="date" format="dd-MM-yyyy"></dxi-column>
+        <dxi-column caption="ملاحظات" dataField="NOTE"></dxi-column>
+        <dxi-column caption="الاجراءات" dataField="PROCE"></dxi-column>
+        <dxi-column caption="موظف المحكمة" dataField="EmpCourt"></dxi-column>
+        <!-- <dxi-column type="buttons" caption="Deleting">
+          <dxi-button hint="Delete" icon="trash" [onClick]="removeFromArray"></dxi-button>
+        </dxi-column> -->
+      </dx-data-grid>
+    </div>
+  </div>
+  <div class="row mt-3">
+    <div class="col-sm-2">
+      <input type="button" value="Save" class="btn btn-outline-dark btn-block" (click)="saveProcess()">
+    </div>
+  </div>
+</div>

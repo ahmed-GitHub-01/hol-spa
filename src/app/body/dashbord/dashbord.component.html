@@ -1,0 +1,1372 @@
+<!-- <nav class="main-menu">
+  <ul>
+    <li>
+      <a [routerLink]="['/profile']" routerLinkActive="router-link-active">
+        <i class="fa fa-home fa-2x side-bar"></i>
+        <span class="nav-text">My Profile</span>
+      </a>
+    </li>
+    <li class="has-subnav" (click)="homeTogle()">
+      <a>
+        <i class="fa fa-laptop fa-2x side-bar"></i>
+        <span class="nav-text">المفاوضات</span>
+      </a>
+    </li>
+    <li class="has-subnav" (click)="secToggle()">
+      <a>
+        <i class="fa fa-list fa-2x side-bar"></i>
+        <span class="nav-text">السكرتارية</span>
+      </a>
+    </li>
+    <li class="has-subnav" (click)="impToggle()">
+      <a>
+        <i class="fa fa-folder-open fa-2x side-bar"></i>
+        <span class="nav-text">التنفيذ</span>
+      </a>
+    </li>
+    <li>
+      <a>
+        <i class="fa fa-bar project-diagram side-bar"></i>
+        <span class="nav-text">التقارير</span>
+      </a>
+    </li>
+    <li>
+      <a>
+        <i class="fa fa-font fa-2x side-bar"></i>
+        <span class="nav-text">الادارة المالية</span>
+      </a>
+    </li>
+    <li>
+      <a>
+        <i class="fa fa-table fa-2x side-bar"></i>
+        <span class="nav-text">المتداول</span>
+      </a>
+    </li>
+    <li>
+      <a>
+        <i class="fa fa-map-marker fa-2x side-bar"></i>
+        <span class="nav-text">الشؤن الادارية</span>
+      </a>
+    </li>
+    <li>
+  </ul>
+  <ul class="logout">
+    <li>
+      <a (click)="logout()">
+        <i class="fa fa-power-off fa-2x side-bar"></i>
+        <span class="nav-text">Logout</span>
+      </a>
+    </li>
+  </ul>
+</nav>
+<div class="container home-stats text-center" *ngIf="appHome">
+  <div class="row">
+    <div class="col-md-3">
+      <a [routerLink]="['/calls']">
+        <div class="stat st-telecom">
+          <div class="info">
+            <span class="span2">المفاوضات</span>
+          </div>
+          <div class="info">
+            <i class="icon1 fa fa-phone-square"></i>
+          </div>
+        </div>
+      </a>
+    </div>
+    <div class="col-md-3">
+      <a [routerLink]="['/']">
+        <div class="stat st-sec">
+          <div class="info">
+            <span class="span2">بحث ارقام</span>
+          </div>
+          <div class="info">
+            <i class="icon1 fa fa-mobile"></i>
+          </div>
+        </div>
+      </a>
+    </div>
+    <div class="col-md-3">
+      <a [routerLink]="['/']">
+        <div class="stat st-imp">
+          <div class="info">
+            <span class="span2">بحث اقارب</span>
+          </div>
+          <div class="info">
+            <i class="icon1 fa fa-address-card"></i>
+          </div>
+        </div>
+      </a>
+    </div>
+    <div class="col-md-3">
+      <a [routerLink]="['/']">
+        <div class="stat st-imp">
+          <div class="info">
+            <span class="span2">الباتش الجديد</span>
+          </div>
+          <div class="info">
+            <i class="icon1 fa fa-file-alt"></i>
+          </div>
+        </div>
+      </a>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-3">
+      <a [routerLink]="['/']">
+        <div class="stat st-telecom">
+          <div class="info">
+            <span class="span2">رابط المكتب</span>
+          </div>
+          <div class="info">
+            <i class="icon1 fa fa-link"></i>
+          </div>
+        </div>
+      </a>
+    </div>
+    <div class="col-md-3">
+      <a [routerLink]="['/']">
+        <div class="stat st-sec">
+          <div class="info">
+            <span class="span2">مواقع ويب</span>
+          </div>
+          <div class="info">
+            <i class="icon1 fa fa-sitemap"></i>
+          </div>
+        </div>
+      </a>
+    </div>
+    <div class="col-md-3">
+      <a [routerLink]="['/']">
+        <div class="stat st-imp">
+          <div class="info">
+            <span class="span2">ترجمة</span>
+          </div>
+          <div class="info">
+            <i class="icon1 fa fa-sitemap"></i>
+          </div>
+        </div>
+      </a>
+    </div>
+    <div class="col-md-3">
+      <a [routerLink]="['/']">
+        <div class="stat st-imp">
+          <div class="info">
+            <span class="span2">فروع الشركات</span>
+          </div>
+          <div class="info">
+            <i class="icon1 fa fa-sitemap"></i>
+          </div>
+        </div>
+      </a>
+    </div>
+  </div>
+</div>
+
+<!-- Secrtarya 
+
+<div class="container home-stats text-center" *ngIf="appSec">
+  <div class="row">
+    <div class="col-md-3">
+      <a (click)="uploadFile(1)">
+        <div class="stat st-telecom">
+          <div class="info">
+            <span class="span2">رفع الملفات</span>
+          </div>
+          <div class="info">
+            <i class="icon1 fa fa-file-word"></i>
+          </div>
+        </div>
+      </a>
+    </div>
+    <div class="col-md-3">
+      <a [routerLink]="['/']">
+        <div class="stat st-sec">
+          <div class="info">
+            <span class="span2">الحضور</span>
+          </div>
+          <div class="info">
+            <i class="icon1 fa fa-arrow-circle-down"></i>
+          </div>
+        </div>
+      </a>
+    </div>
+    <div class="col-md-3">
+      <a (click)="orginaize(1)">
+        <div class="stat st-imp">
+          <div class="info">
+            <span class="span2">تنظيم دخول العملاء</span>
+          </div>
+          <div class="info">
+            <i class="icon1 fa fa-users"></i>
+          </div>
+        </div>
+      </a>
+    </div>
+    <div class="col-md-3">
+      <a [routerLink]="['/']">
+        <div class="stat st-imp">
+          <div class="info">
+            <span class="span2">بحث افادات</span>
+          </div>
+          <div class="info">
+            <i class="icon1 fa fa-search-plus"></i>
+          </div>
+        </div>
+      </a>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-3">
+      <a (click)="uploadFile(2)">
+        <div class="stat st-telecom">
+          <div class="info">
+            <span class="span2">ادخال السداد</span>
+          </div>
+          <div class="info">
+            <i class="icon1 fa fa-credit-card"></i>
+          </div>
+        </div>
+      </a>
+    </div>
+    <div class="col-md-3">
+      <a [routerLink]="['/']">
+        <div class="stat st-sec">
+          <div class="info">
+            <span class="span2">رفع ارقام هواتف</span>
+          </div>
+          <div class="info">
+            <i class="icon1 fa fa-address-book"></i>
+          </div>
+        </div>
+      </a>
+    </div>
+    <div class="col-md-3">
+      <a (click)="orginaize(2)">
+        <div class="stat st-imp">
+          <div class="info">
+            <span class="span2">انتظار العملاء</span>
+          </div>
+          <div class="info">
+            <i class="icon1 fa fa-clock"></i>
+          </div>
+        </div>
+      </a>
+    </div>
+    <div class="col-md-3">
+      <a (click)="openModal(selectOneOrExcel)">
+        <div class="stat st-imp">
+          <div class="info">
+            <span class="span2">تعديل اكواد للموظفين باكسيل</span>
+          </div>
+          <div class="info">
+            <i class="icon1 fa fa-list-ol"></i>
+          </div>
+        </div>
+      </a>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-3">
+      <a [routerLink]="['/']">
+        <div class="stat st-telecom">
+          <div class="info">
+            <span class="span2">تعديل اكواد للموظفين </span>
+          </div>
+          <div class="info">
+            <i class="icon1 fa fa-list-ol"></i>
+          </div>
+        </div>
+      </a>
+    </div>
+    <div class="col-sm-3">
+      <a [routerLink]="['/']">
+        <div class="stat st-sec">
+          <div class="info">
+            <span class="span2">تعديل الحالات باكسيل </span>
+          </div>
+          <div class="info">
+            <i class="icon1 fa fa-edit"></i>
+          </div>
+        </div>
+      </a>
+    </div>
+    <div class="col-sm-3">
+      <a [routerLink]="['/']">
+        <div class="stat st-imp">
+          <div class="info">
+            <span class="span2">مراجعة الاستمارات</span>
+          </div>
+          <div class="info">
+            <i class="icon1 fa fa-cogs"></i>
+          </div>
+        </div>
+      </a>
+    </div>
+    <div class="col-sm-3">
+      <a [routerLink]="['/']">
+        <div class="stat st-imp">
+          <div class="info">
+            <span class="span2">تحديث الحالات</span>
+          </div>
+          <div class="info">
+            <i class="icon1 fa fa-newspaper"></i>
+          </div>
+        </div>
+      </a>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-3">
+      <a [routerLink]="['/']">
+        <div class="stat st-telecom">
+          <div class="info">
+            <span class="span2">تعديل اكواد للمجموعات</span>
+          </div>
+          <div class="info">
+            <i class="icon1 fa fa-object-group"></i>
+          </div>
+        </div>
+      </a>
+    </div>
+    <div class="col-sm-3">
+      <a [routerLink]="['/']">
+        <div class="stat st-sec">
+          <div class="info">
+            <span class="span2">اضافة مجموعة للموظف</span>
+          </div>
+          <div class="info">
+            <i class="icon1 fa fa-object-ungroup"></i>
+          </div>
+        </div>
+      </a>
+    </div>
+    <div class="col-sm-3">
+      <a [routerLink]="['/']">
+        <div class="stat st-imp">
+          <div class="info">
+            <span class="span2">رفع ارقام الية</span>
+          </div>
+          <div class="info">
+            <i class="icon1 fa fa-sort-numeric-up"></i>
+          </div>
+        </div>
+      </a>
+    </div>
+    <div class="col-sm-3">
+      <a [routerLink]="['/']">
+        <div class="stat st-imp">
+          <div class="info">
+            <span class="span2">اضافة ملاحظات 4</span>
+          </div>
+          <div class="info">
+            <i class="icon1 fa fa-sticky-note"></i>
+          </div>
+        </div>
+      </a>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-3">
+      <a [routerLink]="['/']">
+        <div class="stat st-telecom">
+          <div class="info">
+            <span class="span2">الرقم الموحد</span>
+          </div>
+          <div class="info">
+            <i class="icon1 fa fa-bars"></i>
+          </div>
+        </div>
+      </a>
+    </div>
+    <div class="col-sm-3">
+      <a [routerLink]="['/']">
+        <div class="stat st-sec">
+          <div class="info">
+            <span class="span2">اغلاق الملفات</span>
+          </div>
+          <div class="info">
+            <i class="icon1 fa fa-window-close"></i>
+          </div>
+        </div>
+      </a>
+    </div>
+    <div class="col-sm-3">
+      <a [routerLink]="['/']">
+        <div class="stat st-imp">
+          <div class="info">
+            <span class="span2">ملاحظات الملفات</span>
+          </div>
+          <div class="info">
+            <i class="icon1 fa fa-sticky-note"></i>
+          </div>
+        </div>
+      </a>
+    </div>
+    <div class="col-sm-3">
+      <a [routerLink]="['/']">
+        <div class="stat st-imp">
+          <div class="info">
+            <span class="span2">رفع الاجراءات</span>
+          </div>
+          <div class="info">
+            <i class="icon1 fa fa-angle-up"></i>
+          </div>
+        </div>
+      </a>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-3">
+      <a [routerLink]="['/']">
+        <div class="stat st-telecom">
+          <div class="info">
+            <span class="span2">رفع ارقام الية 2</span>
+          </div>
+          <div class="info">
+            <i class="icon1 fa fa-sort-numeric-up"></i>
+          </div>
+        </div>
+      </a>
+    </div>
+    <div class="col-sm-3">
+      <a [routerLink]="['/']">
+        <div class="stat st-sec">
+          <div class="info">
+            <span class="span2">اضافة تصنيف جديد</span>
+          </div>
+          <div class="info">
+            <i class="icon1 fa fa-i-cursor"></i>
+          </div>
+        </div>
+      </a>
+    </div>
+    <div class="col-sm-3">
+      <a [routerLink]="['/']">
+        <div class="stat st-imp">
+          <div class="info">
+            <span class="span2">توزيع ملفات التنفيذ</span>
+          </div>
+          <div class="info">
+            <i class="icon1 fa fa-mouse-pointer"></i>
+          </div>
+        </div>
+      </a>
+    </div>
+    <div class="col-sm-3">
+      <a [routerLink]="['/']">
+        <div class="stat st-imp">
+          <div class="info">
+            <span class="span2">تاريخ البعثيات</span>
+          </div>
+          <div class="info">
+            <i class="icon1 fa fa-envelope-square"></i>
+          </div>
+        </div>
+      </a>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-3">
+      <a [routerLink]="['/']">
+        <div class="stat st-telecom">
+          <div class="info">
+            <span class="span2">اضافة محاكم</span>
+          </div>
+          <div class="info">
+            <i class="icon1 fa fa-flag"></i>
+          </div>
+        </div>
+      </a>
+    </div>
+    <div class="col-sm-3">
+      <a [routerLink]="['/']">
+        <div class="stat st-sec">
+          <div class="info">
+            <span class="span2">ملاحظات العمل</span>
+          </div>
+          <div class="info">
+            <i class="icon1 fa fa-building"></i>
+          </div>
+        </div>
+      </a>
+    </div>
+    <div class="col-sm-3">
+      <a [routerLink]="['/']">
+        <div class="stat st-imp">
+          <div class="info">
+            <span class="span2">تعديل الاسم والمدنى</span>
+          </div>
+          <div class="info">
+            <i class="icon1 fa fa-id-badge"></i>
+          </div>
+        </div>
+      </a>
+    </div>
+    <div class="col-sm-3">
+      <a [routerLink]="['/']">
+        <div class="stat st-imp">
+          <div class="info">
+            <span class="span2">بحث ارقام</span>
+          </div>
+          <div class="info">
+            <i class="icon1 fa fa-phone-square"></i>
+          </div>
+        </div>
+      </a>
+    </div>
+  </div>
+</div>
+
+<!-- Implemention 
+
+<div class="container home-stats text-center" *ngIf="appImp">
+  <div class="row">
+    <div class="col-sm-3">
+      <a [routerLink]="['/']">
+        <div class="stat st-telecom">
+          <div class="info">
+            <span class="span2">الصفحة الرئيسية</span>
+          </div>
+          <div class="info">
+            <i class="icon1 fa fa-flag"></i>
+          </div>
+        </div>
+      </a>
+    </div>
+    <div class="col-sm-3">
+      <a [routerLink]="['/']">
+        <div class="stat st-sec">
+          <div class="info">
+            <span class="span2">كشف الطعون</span>
+          </div>
+          <div class="info">
+            <i class="icon1 fa fa-building"></i>
+          </div>
+        </div>
+      </a>
+    </div>
+    <div class="col-sm-3">
+      <a [routerLink]="['/']">
+        <div class="stat st-imp">
+          <div class="info">
+            <span class="span2">ادخال العهدة</span>
+          </div>
+          <div class="info">
+            <i class="icon1 fa fa-id-badge"></i>
+          </div>
+        </div>
+      </a>
+    </div>
+    <div class="col-sm-3">
+      <a [routerLink]="['/']">
+        <div class="stat st-imp">
+          <div class="info">
+            <span class="span2">استلام واعلان الصيغ</span>
+          </div>
+          <div class="info">
+            <i class="icon1 fa fa-phone-square"></i>
+          </div>
+        </div>
+      </a>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-3">
+      <a [routerLink]="['/']">
+        <div class="stat st-telecom">
+          <div class="info">
+            <span class="span2">التوكيلات</span>
+          </div>
+          <div class="info">
+            <i class="icon1 fa fa-phone-square"></i>
+          </div>
+        </div>
+      </a>
+    </div>
+  </div>
+</div>
+
+<!-- Start Modal to select Betwwen 1 or exxel 
+<ng-template #selectOneOrExcel>
+  <div class="modal-header">
+    <h3 class="modal-title pull-left">
+      Select between one or excel.
+    </h3>
+    <button type="button" class="close" aria-label="Close" (click)="modalRef.hide()"><i class="fa fa-times"></i>
+    </button>
+  </div>
+  <div class="modal-body">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="vol-sm-12">
+          <ul>
+            <li (click)="openModal(editOneEmployee)">واحد فقط</li>
+            <li>اكسيل</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-template>
+<!-- Etart Modal to select Betwwen 1 or exxel -->
+
+<!-- Start Modal to select Betwwen 1 or exxel 
+<ng-template #editOneEmployee class="update-employ">
+  <div class="modal-header">
+    <h3 class="modal-title pull-left">
+      Select between one or excel.
+    </h3>
+    <button type="button" class="close" aria-label="Close" (click)="modalRef.hide()"><i class="fa fa-times"></i>
+    </button>
+  </div>
+  <div class="modal-body">
+    <div class="container-fluid">
+      <div class="row mb-2">
+        <div class="col-sm-2 mt-2">
+          <label>الكود</label>
+        </div>
+        <div class="col-sm-10">
+          <input type="number" class="form-control" [(ngModel)]="updateFile.code">
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-2 mt-2">
+          <label>الموظف</label>
+        </div>
+        <div class="col-sm-10">
+          <input type="number" class="form-control" [(ngModel)]="updateFile.emp">
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <div class="row">
+      <div class="col-sm-12">
+        <input type="button" value="Save" class="btn btn-primary" (click)="editEmploye()">
+      </div>
+    </div>
+  </div>
+</ng-template>
+<!-- Etart Modal to select Betwwen 1 or exxel -->
+<div class="containr">
+  <div class="navigation">
+    <ul>
+      <li>
+        <a [routerLink]="['/profile']" routerLinkActive="router-link-active">
+          <span class="icon"><i class="fa fa-id-badge"></i></span>
+          <span class="title">My Profile</span>
+        </a>
+      </li>
+      <li>
+        <a (click)="homeToggle(0)">
+          <span class="icon"><i class="fa fa-phone-volume"></i></span>
+          <span class="title">المفاوضات</span>
+        </a>
+      </li>
+      <li>
+        <a (click)="homeToggle(1)">
+          <span class="icon"><i class="fa fa-puzzle-piece"></i></span>
+          <span class="title">السكرتارية</span>
+        </a>
+      </li>
+      <li>
+        <a (click)="homeToggle(2)">
+          <span class="icon"><i class="fa fa-book-reader"></i></span>
+          <span class="title">التنفيذ</span>
+        </a>
+      </li>
+      <li>
+        <a (click)="homeToggle(3)">
+          <span class="icon"><i class="fa fa-clipboard"></i></span>
+          <span class="title">التقارير</span>
+        </a>
+      </li>
+      <li>
+        <a (click)="homeToggle(4)">
+          <span class="icon"><i class=" fa fa-money-check-alt"></i></span>
+          <span class="title">الادارة المالية</span>
+        </a>
+      </li>
+      <li>
+        <a (click)="homeToggle(5)">
+          <span class="icon"><i class="fa fa-wallet"></i></span>
+          <span class="title">المتداول</span>
+        </a>
+      </li>
+      <li>
+        <a (click)="homeToggle(6)">
+          <span class="icon"><i class="fa fa-file-contract"></i></span>
+          <span class="title">الشئون الادارية</span>
+        </a>
+      </li>
+      <li>
+        <a (click)="logout()">
+          <span class="icon"><i class="fa fa-sign-out-alt"></i></span>
+          <span class="title">Log out</span>
+        </a>
+      </li>
+    </ul>
+  </div>
+  <div class="main">
+    <div class="toggle" (click)="toggleMenu()"><i class="fa fa-bars fa-lg"></i></div>
+    <div class="card-box" *ngIf="appHome == 0">
+      <a [routerLink]="['/calls']">
+        <div class="card-style">
+          <div>
+            <div class="card-name">المفاوضات</div>
+          </div>
+          <div class="card-icon">
+            <i class="fa fa-phone-square fa-2x" aria-hidden="true"></i>
+          </div>
+        </div>
+      </a>
+      <div class="card-style">
+        <div>
+          <div class="card-name">بحث ارقام</div>
+        </div>
+        <div class="card-icon">
+          <i class="fa fa-mobile fa-2x" aria-hidden="true"></i>
+        </div>
+      </div>
+      <div class="card-style">
+        <div>
+          <div class="card-name">بحث اقارب</div>
+        </div>
+        <div class="card-icon">
+          <i class="fa fa-address-card fa-2x" aria-hidden="true"></i>
+        </div>
+      </div>
+      <div class="card-style">
+        <div>
+          <div class="card-name">الباتش الجديد</div>
+        </div>
+        <div class="card-icon">
+          <i class="fa fa-file-alt fa-2x" aria-hidden="true"></i>
+        </div>
+      </div>
+      <div class="card-style">
+        <div>
+          <div class="card-name">رابط المكتب</div>
+        </div>
+        <div class="card-icon">
+          <i class="fa fa-link fa-2x" aria-hidden="true"></i>
+        </div>
+      </div>
+      <div class="card-style">
+        <div>
+          <div class="card-name">مواقع ويب</div>
+        </div>
+        <div class="card-icon">
+          <i class="fa fa-sitemap fa-2x" aria-hidden="true"></i>
+        </div>
+      </div>
+      <div class="card-style">
+        <div>
+          <div class="card-name">ترجمة</div>
+        </div>
+        <div class="card-icon">
+          <i class="fa fa-sitemap fa-2x" aria-hidden="true"></i>
+        </div>
+      </div>
+      <div class="card-style">
+        <div>
+          <div class="card-name">فروع الشركات</div>
+        </div>
+        <div class="card-icon">
+          <i class="fa fa-sitemap fa-2x" aria-hidden="true"></i>
+        </div>
+      </div>
+      <div class="card-style" (click)="gotowhatsapp()">
+        <div>
+          <div class="card-name">WhatsApp</div>
+        </div>
+        <div class="card-icon">
+          <i class="fa-brands fa-square-whatsapp" aria-hidden="true"></i>
+        </div>
+      </div>
+    </div>
+
+    <!-- Secrtariy Container -->
+
+    <div class="card-box" *ngIf="appHome == 1">
+      <a (click)="uploadFile(1, roules.uploaD_FILE)">
+        <div class="card-style">
+          <div>
+            <div class="card-name">رفع الملفات</div>
+          </div>
+          <div class="card-icon">
+            <i class="fa fa-file-word fa-2x" aria-hidden="true"></i>
+          </div>
+        </div>
+      </a>
+      <a [routerLink]="['/']">
+        <div class="card-style">
+          <div>
+            <div class="card-name">الحضور</div>
+          </div>
+          <div class="card-icon">
+            <i class="fa fa-arrow-circle-down fa-2x" aria-hidden="true"></i>
+          </div>
+        </div>
+      </a>
+      <a (click)="orginaize(1, roules.arrange_customer_entry)">
+        <div class="card-style">
+          <div>
+            <div class="card-name">تنظيم دخول العملاء</div>
+          </div>
+          <div class="card-icon">
+            <i class="fa fa-users fa-2x" aria-hidden="true"></i>
+          </div>
+        </div>
+      </a>
+      <a [routerLink]="['/']">
+        <div class="card-style">
+          <div>
+            <div class="card-name">بحث افادات</div>
+          </div>
+          <div class="card-icon">
+            <i class="fa fa-search-plus fa-2x" aria-hidden="true"></i>
+          </div>
+        </div>
+      </a>
+      <a (click)="uploadFile(2, roules.adD_PAY )">
+        <div class="card-style">
+          <div>
+            <div class="card-name">ادخال السداد</div>
+          </div>
+          <div class="card-icon">
+            <i class="fa fa-credit-card fa-2x" aria-hidden="true"></i>
+          </div>
+        </div>
+      </a>
+      <a [routerLink]="['/']">
+        <div class="card-style">
+          <div>
+            <div class="card-name">رفع ارقام هواتف</div>
+          </div>
+          <div class="card-icon">
+            <i class="fa fa-address-book fa-2x" aria-hidden="true"></i>
+          </div>
+        </div>
+      </a>
+      <a (click)="orginaize(2, roules.waiting_customers)">
+        <div class="card-style">
+          <div>
+            <div class="card-name">انتظار العملاء</div>
+          </div>
+          <div class="card-icon">
+            <i class="fa fa-clock fa-2x" aria-hidden="true"></i>
+          </div>
+        </div>
+      </a>
+      <a (click)="openModal(selectOneOrExcel, 3, roules.ediT_CODE_EMPLOYEE_NONEXCEL)">
+        <div class="card-style">
+          <div>
+            <div class="card-name">تعديل اكواد للموظفين</div>
+          </div>
+          <div class="card-icon">
+            <i class="fa fa-list-ol fa-2x" aria-hidden="true"></i>
+          </div>
+        </div>
+      </a>
+      <a (click)="openModal(selectOneOrExcel, 4, roules.casE_)">
+        <div class="card-style">
+          <div>
+            <div class="card-name">تعديل الحالات</div>
+          </div>
+          <div class="card-icon">
+            <i class="fa fa-edit fa-2x" aria-hidden="true"></i>
+          </div>
+        </div>
+      </a>
+      <a [routerLink]="['/']">
+        <div class="card-style">
+          <div>
+            <div class="card-name">مراجعة الاستمارات</div>
+          </div>
+          <div class="card-icon">
+            <i class="fa fa-cogs fa-2x" aria-hidden="true"></i>
+          </div>
+        </div>
+      </a>
+      <a [routerLink]="['/']">
+        <div class="card-style">
+          <div>
+            <div class="card-name">تعديل اكواد للمجموعات</div>
+          </div>
+          <div class="card-icon">
+            <i class="fa fa-object-group fa-2x" aria-hidden="true"></i>
+          </div>
+        </div>
+      </a>
+      <a [routerLink]="['/']">
+        <div class="card-style">
+          <div>
+            <div class="card-name">اضافة مجموعة للموظف</div>
+          </div>
+          <div class="card-icon">
+            <i class="fa fa-object-group fa-2x" aria-hidden="true"></i>
+          </div>
+        </div>
+      </a>
+      <a (click)="openModal(selectOneOrExcel, 5, roules.autO_NUM)">
+        <div class="card-style">
+          <div>
+            <div class="card-name">رفع ارقام الية</div>
+          </div>
+          <div class="card-icon">
+            <i class="fa fa-sort-numeric-up fa-2x" aria-hidden="true"></i>
+          </div>
+        </div>
+      </a>
+      <a (click)="uploadFile(6, roules.adD_NOT4)">
+        <div class="card-style">
+          <div>
+            <div class="card-name">اضافة ملاحظات 4</div>
+          </div>
+          <div class="card-icon">
+            <i class="fa fa-sticky-note fa-2x" aria-hidden="true"></i>
+          </div>
+        </div>
+      </a>
+      <a (click)="uploadFile(7, roules.adD_NOT4)">
+        <div class="card-style">
+          <div>
+            <div class="card-name">الرقم الموحد</div>
+          </div>
+          <div class="card-icon">
+            <i class="fa fa-bars fa-2x" aria-hidden="true"></i>
+          </div>
+        </div>
+      </a>
+      <a (click)="uploadFile(8, roules.closed)">
+        <div class="card-style">
+          <div>
+            <div class="card-name">اغلاق الملفات</div>
+          </div>
+          <div class="card-icon">
+            <i class="fa fa-window-close fa-2x" aria-hidden="true"></i>
+          </div>
+        </div>
+      </a>
+      <a (click)="uploadFile(9, roules.notE_5)">
+        <div class="card-style">
+          <div>
+            <div class="card-name">ملاحظات الملفات</div>
+          </div>
+          <div class="card-icon">
+            <i class="fa fa-sticky-note fa-2x" aria-hidden="true"></i>
+          </div>
+        </div>
+      </a>
+      <a (click)="process()">
+        <div class="card-style">
+          <div>
+            <div class="card-name">رفع الاجراءات</div>
+          </div>
+          <div class="card-icon">
+            <i class="fa fa-angle-up fa-2x" aria-hidden="true"></i>
+          </div>
+        </div>
+      </a>
+      <a (click)="openModal(selectOneOrExcel, 10, roules.autO_NUM)">
+        <div class="card-style">
+          <div>
+            <div class="card-name">رفع ارقام الية 2</div>
+          </div>
+          <div class="card-icon">
+            <i class="fa fa-sort-numeric-up fa-2x" aria-hidden="true"></i>
+          </div>
+        </div>
+      </a>
+      <a [routerLink]="['/']">
+        <div class="card-style">
+          <div>
+            <div class="card-name">اضافة تصنيف جديد</div>
+          </div>
+          <div class="card-icon">
+            <i class="fa fa-i-cursor fa-2x" aria-hidden="true"></i>
+          </div>
+        </div>
+      </a>
+      <a [routerLink]="['/']">
+        <div class="card-style">
+          <div>
+            <div class="card-name">توزيع ملفات التنفيذ</div>
+          </div>
+          <div class="card-icon">
+            <i class="fa fa-mouse-pointer fa-2x" aria-hidden="true"></i>
+          </div>
+        </div>
+      </a>
+      <a [routerLink]="['/']">
+        <div class="card-style">
+          <div>
+            <div class="card-name">تاريخ البعثيات</div>
+          </div>
+          <div class="card-icon">
+            <i class="fa fa-envelope-square fa-2x" aria-hidden="true"></i>
+          </div>
+        </div>
+      </a>
+      <a [routerLink]="['/']">
+        <div class="card-style">
+          <div>
+            <div class="card-name">اضافة محاكم</div>
+          </div>
+          <div class="card-icon">
+            <i class="fa fa-flag fa-2x" aria-hidden="true"></i>
+          </div>
+        </div>
+      </a>
+      <a [routerLink]="['/']">
+        <div class="card-style">
+          <div>
+            <div class="card-name">ملاحظات العمل</div>
+          </div>
+          <div class="card-icon">
+            <i class="fa fa-building fa-2x" aria-hidden="true"></i>
+          </div>
+        </div>
+      </a>
+      <a [routerLink]="['/']">
+        <div class="card-style">
+          <div>
+            <div class="card-name">تعديل الاسم والمدنى</div>
+          </div>
+          <div class="card-icon">
+            <i class="fa fa-id-badge fa-2x" aria-hidden="true"></i>
+          </div>
+        </div>
+      </a>
+      <a [routerLink]="['/']">
+        <div class="card-style">
+          <div>
+            <div class="card-name">بحث ارقام</div>
+          </div>
+          <div class="card-icon">
+            <i class="fa fa-phone-square fa-2x" aria-hidden="true"></i>
+          </div>
+        </div>
+      </a>
+    </div>
+
+    <!-- End Sec -->
+
+    <!-- Start Imp -->
+    <div class="card-box" *ngIf="appHome == 2">
+      <a [routerLink]="['/imp']">
+        <div class="card-style">
+          <div>
+            <div class="card-name">الرئيسية</div>
+          </div>
+          <div class="card-icon">
+            <i class="fa fa-flag fa-2x" aria-hidden="true"></i>
+          </div>
+        </div>
+      </a>
+      <a [routerLink]="['/']">
+        <div class="card-style">
+          <div>
+            <div class="card-name">كشف الطعون</div>
+          </div>
+          <div class="card-icon">
+            <i class="fa fa-building fa-2x" aria-hidden="true"></i>
+          </div>
+        </div>
+      </a>
+      <a [routerLink]="['/']">
+        <div class="card-style">
+          <div>
+            <div class="card-name">ادخال العهدة</div>
+          </div>
+          <div class="card-icon">
+            <i class="fa fa-id-badge fa-2x" aria-hidden="true"></i>
+          </div>
+        </div>
+      </a>
+      <a [routerLink]="['/']">
+        <div class="card-style">
+          <div>
+            <div class="card-name">استلام واعلان الصيغ</div>
+          </div>
+          <div class="card-icon">
+            <i class="fa fa-phone-square fa-2x" aria-hidden="true"></i>
+          </div>
+        </div>
+      </a>
+      <a [routerLink]="['/']">
+        <div class="card-style">
+          <div>
+            <div class="card-name">التوكيلات</div>
+          </div>
+          <div class="card-icon">
+            <i class="fa fa-phone-square fa-2x" aria-hidden="true"></i>
+          </div>
+        </div>
+      </a>
+      <a [routerLink]="['/']">
+        <div class="card-style">
+          <div>
+            <div class="card-name">التوكيلات</div>
+          </div>
+          <div class="card-icon">
+            <i class="fa fa-phone-square fa-2x" aria-hidden="true"></i>
+          </div>
+        </div>
+      </a>
+    </div>
+    <!-- End imp -->
+
+    <!-- Start Report -->
+    <div class="card-box" *ngIf="appHome == 3">
+      <a (click)="reportForm('MainReprot', roules.report)">
+        <div class="card-style">
+          <div>
+            <div class="card-name">التقارير</div>
+          </div>
+          <div class="card-icon">
+            <i class="fa fa-flag fa-2x" aria-hidden="true"></i>
+          </div>
+        </div>
+      </a>
+      <a (click)="reportForm('BranchReport', roules.reporT_BRANCH)">
+        <div class="card-style">
+          <div>
+            <div class="card-name">تقارير الفروع</div>
+          </div>
+          <div class="card-icon">
+            <i class="fa fa-flag fa-2x" aria-hidden="true"></i>
+          </div>
+        </div>
+      </a>
+      <a (click)="reportForm('BatchPerformance', roules.batcheS_PRE)">
+        <div class="card-style">
+          <div>
+            <div class="card-name">تقرير اداء الباتشات</div>
+          </div>
+          <div class="card-icon">
+            <i class="fa fa-flag fa-2x" aria-hidden="true"></i>
+          </div>
+        </div>
+      </a>
+      <a (click)="reportForm('whatsAppDashbord', roules.batcheS_PRE)">
+        <div class="card-style">
+          <div>
+            <div class="card-name">Whatsapp Dashbord</div>
+          </div>
+          <div class="card-icon">
+            <i class="fa fa-flag fa-2x" aria-hidden="true"></i>
+          </div>
+        </div>
+      </a>
+    </div>
+    <!-- End Report -->
+  </div>
+</div>
+
+
+
+
+
+
+
+<!-- Start Modal to select Betwwen 1 or exxel  -->
+<ng-template #selectOneOrExcel>
+  <div class="modal-header">
+    <h3 class="modal-title pull-left">
+      Select between one or excel.
+    </h3>
+    <button type="button" class="close" aria-label="Close" (click)="modalRef.hide()"><i class="fa fa-times"></i>
+    </button>
+  </div>
+  <div class="modal-body">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-sm-12">
+          <ul>
+            <li (click)="openModal1(editOneEmployee,editAutoNum2)">واحد فقط</li>
+            <a (click)="goToUpdateOrSave()">
+              <li (click)="modalRef.hide()">اكسيل</li>
+            </a>
+            <a (click)="openModal1(editOneEmployee,editAutoNum2)" *ngIf="idEditOne == 10">
+              <li (click)="modalRef.hide()">تعديل الرقم الالى</li>
+            </a>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-template>
+<!-- Etart Modal to select Betwwen 1 or exxel -->
+
+
+
+<!-- Start Modal to select Betwwen 1 or exxel -->
+<ng-template #editOneEmployee>
+  <div class="modal-header">
+    <h3 class="modal-title pull-left">
+      Adjusting employee distribution .
+    </h3>
+    <button type="button" class="close" aria-label="Close" (click)="modalRef.hide()"><i class="fa fa-times"></i>
+    </button>
+  </div>
+  <div class="modal-body">
+    <div class="container-fluid" *ngIf="idEditOne == 3">
+      <div class="row mb-2">
+        <div class="col-sm-2 mt-2">
+          <label>الكود</label>
+        </div>
+        <div class="col-sm-10">
+          <input type="number" class="form-control" [(ngModel)]="updateFile.code">
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-2 mt-2">
+          <label>الموظف</label>
+        </div>
+        <div class="col-sm-10">
+          <input type="number" class="form-control" [(ngModel)]="updateFile.emp">
+        </div>
+      </div>
+    </div>
+    <!-- ======================================================== -->
+    <div class="container-fluid" *ngIf="idEditOne == 4">
+      <div class="row mb-2">
+        <div class="col-sm-2 mt-2">
+          <label>الكود</label>
+        </div>
+        <div class="col-sm-10">
+          <input type="number" class="form-control" [(ngModel)]="updateFile.code">
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-2 mt-2">
+          <label>الحالة</label>
+        </div>
+        <div class="col-sm-10">
+          <input type="number" class="form-control" [(ngModel)]="updateFile.cases">
+        </div>
+      </div>
+    </div>
+    <!-- ======================================================== -->
+    <div class="container-fluid" *ngIf="idEditOne == 5">
+      <div class="row mb-2">
+        <div class="col-sm-2 mt-2">
+          <label>الكود</label>
+        </div>
+        <div class="col-sm-10">
+          <input type="number" class="form-control" [(ngModel)]="updateFile.code">
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-2 mt-2">
+          <label>الالى</label>
+        </div>
+        <div class="col-sm-10">
+          <input type="number" class="form-control" [(ngModel)]="updateFile.cases">
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-sm-12">
+          <input type="button" value="Update" class="btn btn-outline-primary btn-block">
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-template>
+<!-- Start Modal to select Betwwen 1 or exxel -->
+
+<!-- Start Modal to select Betwwen 1 or exxel -->
+<ng-template #editAutoNum2>
+  <div class="modal-header">
+    <h3 class="modal-title pull-left">
+      Adjusting employee distribution .
+    </h3>
+    <button type="button" class="close" aria-label="Close" (click)="modalRef.hide()"><i class="fa fa-times"></i>
+    </button>
+  </div>
+  <div class="modal-body">
+
+    <!-- ======================================================== -->
+    <div class="container-fluid" *ngIf="idEditOne == 10">
+      <div class="row mb-2">
+        <div class="col-sm-2 mt-2">
+          <label>الكود</label>
+        </div>
+        <div class="col-sm-10">
+          <input type="number" class="form-control" [(ngModel)]="updateFile.code">
+        </div>
+      </div>
+      <div class="row mb-2">
+        <div class="col-sm-2 mt-2">
+          <label>الالى</label>
+        </div>
+        <div class="col-sm-4">
+          <input type="number" class="form-control" [(ngModel)]="updateFile.autonum">
+        </div>
+        <div class="col-sm-2 mt-2">
+          <label>مرتبط بـ</label>
+        </div>
+        <div class="col-sm-4">
+          <input type="number" class="form-control" [(ngModel)]="updateFile.mortabet">
+        </div>
+      </div>
+      <div class="row mb-2">
+        <div class="col-sm-2 mt-2">
+          <label>النوع</label>
+        </div>
+        <div class="col-sm-4">
+          <select class="custom-select" [(ngModel)]="autoNumberTypeValue">
+            <option *ngFor="let item of autoNumberType" [value]="item.code">{{ item.name }}</option>
+          </select>
+        </div>
+        <div class="col-sm-2 mt-2">
+          <label>الادعاء</label>
+        </div>
+        <div class="col-sm-4">
+          <select class="custom-select" [(ngModel)]="autoNumberClimatValue">
+            <option *ngFor="let item of autoNumberClimat" [value]="item.code">{{ item.name }}</option>
+          </select>
+        </div>
+      </div>
+      <div class="row mb-2">
+        <div class="col-sm-2 mt-2">
+          <label>الحالة</label>
+        </div>
+        <div class="col-sm-10">
+          <select class="custom-select" [(ngModel)]="autoNumberCasesValue">
+            <option *ngFor="let item of autoNumberCases" [value]="item.code">{{ item.name }}</option>
+          </select>
+        </div>
+      </div>
+      <div class="row mb-2">
+        <div class="col-sm-2 mt-2">
+          <label>ملاحظات</label>
+        </div>
+        <div class="col-sm-10">
+          <textarea class="form-control" [(ngModel)]="updateFile.note"></textarea>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-sm-4">
+          <input type="button" value="Save" class="btn btn-outline-primary btn-block" (click)="saveAutoNumber()">
+        </div>
+        <div class="col-sm-4">
+          <input type="button" value="Empty All" class="btn btn-outline-warning btn-block">
+        </div>
+        <div class="col-sm-4">
+          <input type="button" value="Cancel" class="btn btn-outline-danger btn-block">
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-template>

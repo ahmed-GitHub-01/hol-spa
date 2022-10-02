@@ -1,0 +1,1499 @@
+<div class="container-fluid mt-2">
+  <app-settingbox [main]="main"></app-settingbox>
+  <!-- Start main row -->
+  <tabset #staticTabs>
+    <tab heading="العملاء">
+      <h4>العملاء</h4>
+      <!-- <button (click)="exportexcel()" class="btn btn-primary mb-2"><i class="fa fa-download"></i></button> -->
+      <!-- <div class="scroll-view-table">
+        <table id="dtHorizontalExample" class="table table-striped table-bordered table-sm">
+          <tr>
+            <td class="col">الكود</td>
+            <td class="col">الاسم</td>
+            <td class="col">الحالة</td>
+            <td class="col">المديونية</td>
+            <td class="col">الباتش</td>
+            <td class="col">العقد</td>
+            <td class="col">الجنسية</td>
+            <td class="col">المدنى</td>
+            <td class="col">المطالبة</td>
+            <td class="col">المدفوع</td>
+            <td class="col">المتبقى</td>
+            <td class="col">الموكل</td>
+            <td class="col">المتابعة</td>
+            <td class="col">حالة العميل</td>
+            <td class="col">التواصل</td>
+            <td class="col">المدنية</td>
+            <td class="col">الداخلية</td>
+            <td class="col">اخر سداد</td>
+            <td class="col">تاريخ السداد</td>
+            <td class="col">اخر افادة</td>
+            <td class="col">الافادة</td>
+            <td class="col">المراجعة</td>
+          </tr>
+          <tbody>
+            <tr *ngFor="let item of customers">
+              <td>{{ item.code }}</td>
+              <td>{{ item.name }}</td>
+              <td>{{ item.caseCust }}</td>
+              <td>{{ item.reasonDue }}</td>
+              <td>{{ item.batchNo }}</td>
+              <td>{{ item.contractNum }}</td>
+              <td>{{ item.national }}</td>
+              <td>{{ item.civilId }}</td>
+              <td>{{ item.totalDue }}</td>
+              <td>{{ item.totalPay + item.waiver}}</td>
+              <td>{{ item.remain }}</td>
+              <td>{{ item.clint }}</td>
+              <td>{{ item.motabaa }}</td>
+              <td>{{ item.khesmCase }}</td>
+              <td>{{ item.twasol }}</td>
+              <td>{{ item.caseCivilID }}</td>
+              <td>{{ item.dkhlia }}</td>
+              <td>{{ item.lastPay }}</td>
+              <td>{{ item.lastPayDate }}</td>
+              <td>{{ item.lastStatmentDate }}</td>
+              <td>{{ item.lastStatmentEvent }}</td>
+              <td>{{ item.lastReviewDate }}</td>
+            </tr>
+          </tbody>
+        </table>
+        <pagination class="pagination-statment" [boundaryLinks]="true" [totalItems]="paginationCustomer.totalItems"
+          [itemsPerPage]="paginationCustomer.itemsPerPage" (pageChanged)="pageChangedCustomer($event)"
+          [(ngModel)]="paginationCustomer.currentPage" previousText="&lsaquo;" nextText="&rsaquo;" firstText="&laquo;"
+          lastText="&raquo;" [maxSize]="maxSize2">
+        </pagination>
+      </div> -->
+      <div class="outof-rtl">
+        <dx-data-grid [dataSource]="customers" [rowAlternationEnabled]="true" [allowColumnReordering]="true"
+          [columnAutoWidth]="true" [showBorders]="true" (onRowDblClick)="searchBycode($event.data.code)">
+          <dxo-paging [pageSize]="10"></dxo-paging>
+          <dxo-pager [showPageSizeSelector]="true" [allowedPageSizes]="[10,20,30,50,80,100]" [showInfo]="true">
+          </dxo-pager>
+          <dxo-column-chooser [enabled]="true"></dxo-column-chooser>
+          <dxo-group-panel [visible]="true"></dxo-group-panel>
+          <dxo-filter-row [visible]="true" [applyFilter]="true"></dxo-filter-row>
+          <dxo-header-filter [visible]="true"></dxo-header-filter>
+          <dxo-export [enabled]="true"></dxo-export>
+          <dxo-search-panel [visible]="true" [width]="300" placeholder="Search..."></dxo-search-panel>
+          <dxi-column dataField="code" caption="الكود"></dxi-column>
+          <dxi-column dataField="name" caption="الاسم"></dxi-column>
+          <dxi-column dataField="reasonDue" caption="المديونية"></dxi-column>
+          <dxi-column dataField="batchNo" caption="رقم الباتش"></dxi-column>
+          <dxi-column dataField="civilId" caption="المدنى"></dxi-column>
+          <dxi-column dataField="codeClint" caption="كود الموكل"></dxi-column>
+          <dxi-column dataField="clint" caption="الموكل"></dxi-column>
+          <dxi-column dataField="caseCust" caption="الحالة"></dxi-column>
+          <dxi-column dataField="national" caption="الجنسية"></dxi-column>
+          <dxi-column dataField="autoNum" caption="الالى"></dxi-column>
+          <dxi-column dataField="contractNum" caption="رقم العقد"></dxi-column>
+          <dxi-column dataField="totalDue" caption="المطالبة"></dxi-column>
+          <dxi-column dataField="totalPay" caption="المدفوع"></dxi-column>
+          <dxi-column dataField="waiver" caption="التخفيض"></dxi-column>
+          <dxi-column dataField="remain" caption="المتبقى"></dxi-column>
+          <dxi-column dataField="note" caption="الملاحظات"></dxi-column>
+          <dxi-column dataField="dateLogin" caption="تاريخ الورود"></dxi-column>
+          <dxi-column dataField="lastPayDate" caption="تاريخ اخر سداد"></dxi-column>
+          <dxi-column dataField="lastPay" caption="اخر سداد"></dxi-column>
+          <dxi-column dataField="lastStatmentDate" caption="تاريخ الاجراء"></dxi-column>
+          <dxi-column dataField="lastStatmentEvent" caption="الافادة"></dxi-column>
+          <dxi-column dataField="lastReviewDate" caption="تاريخ المراجعة"></dxi-column>
+          <dxi-column dataField="caseCivilID" caption="المدنية"></dxi-column>
+          <dxi-column dataField="motabaa" caption="المتابعة"></dxi-column>
+          <dxi-column dataField="dkhlia" caption="الداخلية"></dxi-column>
+          <dxi-column dataField="khesmCase" caption="حالة العميل"></dxi-column>
+          <dxi-column dataField="twasol" caption="التواصل"></dxi-column>
+        </dx-data-grid>
+      </div>
+    </tab>
+    <tab heading="الرئيسية">
+      <div class="row">
+        <!-- Start first column -->
+        <div class="col-xl-4 col-reduce-padding">
+          <div class="pay-color">
+            <div class="row">
+              <label class="col-sm-1 mt-2 label-write">الكود</label>
+              <div class="col-xl-6">
+                <input type="number" name="code" class="form-control btn-sm" [(ngModel)]="Code" placeholder="Code"
+                  (keyup.enter)="getMain()">
+              </div>
+              <div class="col-xl-5">
+                <input type="submit" (click)='getMain()' value="Search" class="btn btn-primary btn-block btn-sm">
+              </div>
+            </div>
+            <div class="row">
+              <label class="col-sm-1 mt-2 label-write">الموكل</label>
+              <div class="col-xl-11">
+                <input type="text" name="djdjd" class="form-control btn-sm" [(ngModel)]="main.clint"
+                  placeholder="الموكل">
+              </div>
+            </div>
+            <div class="row">
+              <label class="col-sm-1 mt-2 label-write">الخصم</label>
+              <div class="col-xl-11">
+                <input type="text" name="djdjd" #name class="form-control btn-sm" [(ngModel)]="main.name"
+                  placeholder="الخصم" (keyup.enter)="searchByCivilId(name.value,'name')">
+              </div>
+            </div>
+            <div class="row">
+              <label class="col-sm-1 mt-2 label-write">المدنى</label>
+              <div class="col-xl-5">
+                <input type="text" #civilID name="djdjd" class="form-control btn-sm" [(ngModel)]="main.civiL_ID"
+                  placeholder="المدني" (keyup.enter)="searchByCivilId(civilID.value,'civilID')">
+              </div>
+              <label class="col-sm-1 mt-2 label-write">الحالة</label>
+              <div class="col-xl-5">
+                <input type="text" name="djdjd" class="form-control btn-sm" [(ngModel)]="main.caseCust"
+                  placeholder="الحالة">
+              </div>
+            </div>
+            <div class="row">
+              <label class="col-sm-1 mt-2 label-write">الجنسية</label>
+              <div class="col-xl-5">
+                <input type="text" name="djdjd" class="form-control btn-sm" [(ngModel)]="main.nationaL_"
+                  placeholder="الجنسيه">
+              </div>
+              <label class="col-sm-1 mt-2 label-write">الالى</label>
+              <div class="col-xl-5">
+                <input type="number" name="djdjd" class="form-control btn-sm" [(ngModel)]="main.autO_NUM"
+                  placeholder="الرقم الالي">
+              </div>
+            </div>
+            <div class="row">
+              <label class="col-sm-1 mt-2 label-write">العقد</label>
+              <div class="col-xl-5">
+                <input type="text" name="djdjd" #contract class="form-control btn-sm" [(ngModel)]="main.contracT_NUM"
+                  placeholder="رقم العقد" (keyup.enter)="searchByCivilId(contract.value,'contract')">
+              </div>
+              <label class="col-sm-1 mt-2 label-write">المديونية</label>
+              <div class="col-xl-5">
+                <input type="text" name="djdjd" #reasonDue class="form-control btn-sm" [(ngModel)]="main.reson_due"
+                  placeholder="سبب المدبونية" (keyup.enter)="searchByCivilId(reasonDue.value,'reasonDue')">
+              </div>
+            </div>
+            <div class="row">
+              <label class="col-sm-1 mt-2 label-write">الموحد</label>
+              <div class="col-xl-5">
+                <input type="number" name="djdjd" class="form-control btn-sm" placeholder="الرقم الموحد"
+                  [(ngModel)]="main.mohad">
+              </div>
+              <label class="col-sm-1 mt-2 label-write">الباتش</label>
+              <div class="col-xl-5">
+                <input type="text" name="djdjd" class="form-control btn-sm" [(ngModel)]="main.batcH_NO"
+                  placeholder="رقم الباتش">
+              </div>
+            </div>
+            <div class="row">
+              <label class="col-sm-1 mt-2 label-write">العنوان</label>
+              <div class="col-sm-11">
+                <textarea type="text" name="djdjd" class="form-control btn-sm" [(ngModel)]="main.address"
+                  placeholder="العنوان"></textarea>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- End first column -->
+        <!-- Start second column -->
+        <div class="col-xl-5 col-reduce-padding">
+          <div class="pay-color">
+            <div class="row">
+              <div class="col-xl-12">
+                <tabset>
+                  <tab heading="الرئيسية">
+                    <div class="row">
+                      <div class="col-xl-6">
+                        <div class="row">
+                          <div class="col-xl-2">
+                            <div class="mt-2 label-write">القطاع</div>
+                          </div>
+                          <div class="col-xl-10">
+                            <input type="text" class="form-control btn-sm" [(ngModel)]="main.sector">
+                          </div>
+                        </div>
+                        <div class="row mt-1">
+                          <div class="col-xl-2">
+                            <div class="label-write">المدعى</div>
+                          </div>
+                          <div class="col-xl-10">
+                            <input type="text" class="form-control btn-sm" [(ngModel)]="main.draft">
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-xl-6">
+                        <div class="row">
+                          <div class="col-xl-12">
+                            <div class="input-group input-group-sm">
+                              <input type="text" class="form-control" [(ngModel)]="main.court">
+                              <div class="input-group-append">
+                                <label class="input-group-text" placeholder="المحكمة">المحكمة</label>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-xl-12">
+                            <div class="input-group input-group-sm">
+                              <input type="text" class="form-control" [(ngModel)]="main.caseDkhliaSec">
+                              <div class="input-group-append">
+                                <label class="input-group-text" placeholder="حالة الداخلية">
+                                  الداخلية</label>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <div class=" row">
+                          <div class="col-xl-12">
+                            <div class="input-group input-group-sm">
+                              <input type="text" class="form-control" [(ngModel)]="main.caseCivilIdSec">
+                              <div class="input-group-append">
+                                <label class="input-group-text" placeholder="حالة المدنية">
+                                  المدنية</label>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-xl-12">
+                        <tabset>
+                          <tab heading='ملاحظات'>
+                            <textarea class="form-control btn-sm" [(ngModel)]="main.note"
+                              placeholder="ملاحظات"></textarea>
+                          </tab>
+                          <tab heading='ملاحظات 2'>
+                            <textarea class="form-control btn-sm" [(ngModel)]="main.notE_2"></textarea>
+                          </tab>
+                          <tab heading='ملاحظات 3'>
+                            <textarea class="form-control btn-sm" [(ngModel)]="main.notE_3"></textarea>
+                          </tab>
+                          <tab heading='ملاحظات 4'>
+                            <textarea class="form-control btn-sm" [(ngModel)]="main.notE_4"></textarea>
+                          </tab>
+                          <tab heading='ملاحظات 5'>
+                            <textarea class="form-control btn-sm" [(ngModel)]="main.notE_5"></textarea>
+                          </tab>
+                          <tab heading='ملاحظات 6'>
+                            <textarea class="form-control btn-sm" [(ngModel)]="main.notE_6"></textarea>
+                          </tab>
+                        </tabset>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-xl-4">
+                        <div class="input-group input-group-sm">
+                          <input type="text" placeholder="Datepicker" class="form-control" bsDatepicker
+                            value="{{ main.datE_LOGIN | date:'dd-MM-yyyy'  }}" disabled>
+                          <div class="input-group-append">
+                            <label class="input-group-text">الورود</label>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-xl-4">
+                        <div class="input-group input-group-sm">
+                          <input type="text" placeholder="Datepicker" class="form-control" bsDatepicker
+                            value="{{ main.datE_Receive | date:'dd-MM-yyyy' }}" disabled>
+                          <div class="input-group-append">
+                            <label class="input-group-text">الاستلام</label>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-xl-4">
+                        <div class="input-group input-group-sm">
+                          <input type="text" placeholder="Datepicker" class="form-control" bsDatepicker
+                            value="{{ main.datE_Withdrawal | date:'dd-MM-yyyy' }}" disabled>
+                          <div class="input-group-append">
+                            <label class="input-group-text">السحب</label>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </tab>
+                  <tab heading="التصنيف">
+                    <div class="row">
+                      <div class="col-xl-4">
+                        <div class="input-group input-group-sm">
+                          <select class="custom-select" [(ngModel)]="valueCaseCustomers">
+                            <option *ngFor="let item of caseCustomer" [value]="item.code">
+                              {{ item.name }}</option>
+                          </select>
+                          <div class="input-group-append">
+                            <label class="input-group-text">العميل</label>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-xl-4">
+                        <div class="input-group input-group-sm">
+                          <select class="custom-select" [(ngModel)]="valueCaseTwasol">
+                            <option *ngFor="let item of caseTwasol" [value]="item.code">
+                              {{ item.name }}</option>
+                          </select>
+                          <div class="input-group-append">
+                            <label class="input-group-text">التواصل</label>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-xl-4">
+                        <div class="input-group input-group-sm">
+                          <select class="custom-select" [(ngModel)]="valueCaseDkhlia">
+                            <option *ngFor="let item of caseDkhlia" [value]="item.code">
+                              {{ item.name }}</option>
+                          </select>
+                          <div class="input-group-append">
+                            <label class="input-group-text">الداخلية</label>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-xl-4">
+                        <div class="input-group input-group-sm">
+                          <input type="text" value="{{ main.autO_NUM > 0 ? 'قضائى' : 'ودى' }}" class="custom-select">
+                          <div class="input-group-append">
+                            <label class="input-group-text">الملف</label>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-xl-4">
+                        <div class="input-group input-group-sm">
+                          <select class="custom-select" [(ngModel)]="valueCaseTawon">
+                            <option *ngFor="let item of caseTawon" [value]="item.code">
+                              {{ item.name }}</option>
+                          </select>
+                          <div class="input-group-append">
+                            <label class="input-group-text">التعاون</label>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-xl-4">
+                        <div class="input-group input-group-sm">
+                          <select class="custom-select" [(ngModel)]="valueCaseCivilId">
+                            <option *ngFor="let item of caseCivilId" [value]="item.code">
+                              {{ item.name }}</option>
+                          </select>
+                          <div class="input-group-append">
+                            <label class="input-group-text">المدنية</label>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-xl-4">
+                        <div class="input-group input-group-sm">
+                          <select class="custom-select" [(ngModel)]="valueCaseMotabaa">
+                            <option *ngFor="let item of caseMotabaa" [value]="item.code">
+                              {{ item.name }}</option>
+                          </select>
+                          <div class="input-group-append">
+                            <label class="input-group-text">المتابعة</label>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-xl-4">
+                        <input type="submit" value="Save" class="btn btn-primary btn-block btn-sm"
+                          (click)="saveClassifications()">
+                      </div>
+                    </div>
+                    <div class="row mt-1">
+                      <div class="col-xl-6">
+                        <div class="row">
+                          <div class="col-xl-12">
+                            <div class="input-group input-group-sm">
+                              <input type="text" class="custom-select"
+                                value="{{ main.discount > 0 ? 'يوجد خصم' : 'لا يوجد خصم' }}">
+                              <div class="input-group-append">
+                                <label class="input-group-text">{{ main.discount }}%</label>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="row mt-1">
+                          <div class="col-xl-12">
+                            <div class="input-group input-group-sm">
+                              <select class="custom-select" id="inputGroupSelect09" [(ngModel)]='valuecustomerApproved'>
+                                <option value='لم يتم القبول'>لم يتم القبول</option>
+                                <option value="تم القبول">تم القبول</option>
+                              </select>
+                              <div class="input-group-append">
+                                <label class="input-group-text" for="inputGroupSelect09">القبول</label>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="row mt-1">
+                          <div class="col-xl-12">
+                            <input type="submit" value="Save" class="btn btn-primary btn-block btn-sm">
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-xl-6">
+                        <div class="row">
+                          <div class="col-xl-12">
+                            <div class="input-group input-group-sm">
+                              <select class="custom-select" id="inputGroupSelect10" [(ngModel)]="valuesalaryWork">
+                                <option *ngFor="let value of salaryWork" [value]="value.name">{{ value.name }}</option>
+                              </select>
+                              <div class="input-group-append">
+                                <label class="input-group-text" for="inputGroupSelect11">الدوام</label>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="row mt-1">
+                          <div class="col-xl-12">
+                            <div class="input-group input-group-sm">
+                              <input type="text" class="form-control" [(ngModel)]="main.salaryNote">
+                              <div class="input-group-append">
+                                <label class="input-group-text" for="inputGroupSelect12">ملاحظات</label>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="row mt-1">
+                          <div class="col-xl-12">
+                            <div class="input-group input-group-sm">
+                              <input type="text" placeholder="Datepicker" class="form-control" bsDatepicker
+                                value="{{ main.salaryDate | date:'dd-MM-yyyy'  }}">
+                              <div class="input-group-append">
+                                <label class="input-group-text" for="inputGroupSelect13">تاريخ الراتب</label>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="row mt-1">
+                          <div class="col-xl-12">
+                            <input type="submit" value="Save" class="btn btn-primary btn-block btn-sm">
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </tab>
+                  <tab heading="اجمالي الملفات"></tab>
+                  <tab heading="رابط الشركة">
+                    <div class="row mt-5">
+                      <div class="col-xl-12">
+                        <div class="input-group input-group-sm">
+                          <input type="text" class="form-control" [(ngModel)]="linkCompanyZain" #inputValue>
+                          <div class="input-group-append">
+                            <label class="input-group-text" for="inputGroupSelect14">رابط الشركة للدفع</label>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row mt-1">
+                      <div class="col-xl-4">
+                        <input type="submit" value="رابط المكتب" class="btn btn-primary btn-block btn-sm mt-1">
+                      </div>
+                      <div class="col-xl-4">
+                        <input type="submit" value="رابط الشركة" class="btn btn-primary btn-block btn-sm mt-1">
+                      </div>
+                      <div class="col-xl-4">
+                        <input type="submit" value="Copy" class="btn btn-primary btn-block btn-sm mt-1"
+                          (click)="copyInputMessage(inputValue)">
+                      </div>
+                    </div>
+                  </tab>
+                  <tab heading="الرسوم">
+                    <div class="row">
+                      <!-- <table class="table tab-statment table-striped table-bordered table-sm">
+                        <thead>
+                          <tr>
+                            <th scope="col">المصروف</th>
+                            <th scope="col">المبلغ</th>
+                            <th scope="col">رقم الكشف</th>
+                            <th scope="col">رقم العهدة</th>
+                            <th scope="col">Open</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr *ngFor="let item of resom">
+                            <td>{{ item.exp}}</td>
+                            <td>{{ item.amount }}</td>
+                            <td>{{ item.numK }}</td>
+                            <td>{{ item.numOhda }}</td>
+                            <td (click)="goToPdf(item.id)">Open</td>
+                          </tr>
+                        </tbody>  (onRowDblClick)="goToPdf($event.data.id)"
+                      </table> -->
+                      <div class="outof-rtl">
+                        <dx-data-grid [dataSource]="resom" [rowAlternationEnabled]="true" [allowColumnReordering]="true"
+                          [columnAutoWidth]="true" [showBorders]="true">
+                          <dxo-paging [pageSize]="5"></dxo-paging>
+                          <dxo-pager [showPageSizeSelector]="true" [allowedPageSizes]="[10,20,30,50,80,100]"
+                            [showInfo]="true">
+                          </dxo-pager>
+                          <dxi-column type="buttons" caption="PDF" cellTemplate="celTemp">
+                            <div *dxTemplate="let data of 'celTemp'">
+                              <div (click)="goToPdf(data.row.data.id)"><i class="fa fa-envelope-open-text"></i>515151515
+                              </div>
+                            </div>
+                          </dxi-column>
+                          <dxi-column dataField="numOhda" caption="العهدة"></dxi-column>
+                          <dxi-column dataField="numK" caption="الكشف"></dxi-column>
+                          <dxi-column dataField="amount" caption="المبلغ"></dxi-column>
+                          <dxi-column dataField="exp" caption="المصروف"></dxi-column>
+                        </dx-data-grid>
+                      </div>
+                    </div>
+                    <!-- <pagination class="pagination-statment" [boundaryLinks]="true"
+                      [totalItems]="paginationResom.totalItems" [itemsPerPage]="paginationResom.itemsPerPage"
+                      (pageChanged)="pageChangedResom($event)" [(ngModel)]="paginationResom.currentPage"
+                      previousText="&lsaquo;" nextText="&rsaquo;" firstText="&laquo;" lastText="&raquo;"
+                      [maxSize]="maxSize">
+                    </pagination> -->
+                  </tab>
+                  <tab heading="تفاصيل المطالبة">
+                    <div class="row">
+                      <table class="table table-striped table-bordered table-sm">
+                        <thead>
+                          <tr>
+                            <th scope="col">المبلغ</th>
+                            <th scope="col">التاريخ</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr>
+                            <td>Mark</td>
+                            <td>Otto</td>
+                          </tr>
+                          <tr>
+                            <td>Jacob</td>
+                            <td>Thornton</td>
+                          </tr>
+                          <tr>
+                            <td>Larry</td>
+                            <td>the Bird</td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                  </tab>
+                </tabset>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- End second column -->
+        <!-- Start third column pay -->
+        <div class="col-xl-3 col-reduce-padding">
+          <div class="pay-color">
+            <div class="row">
+              <div class="col-xl-2">
+                <label class="mt-2">المطالبة</label>
+              </div>
+              <div class="col-xl-10">
+                <input type="text" class="form-control form-control-sm" [(ngModel)]="main.totalDue">
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-xl-2">
+                <label class="mt-2">الرسوم</label>
+              </div>
+              <div class="col-xl-4">
+                <input type="text" class="form-control form-control-sm" value="0" [(ngModel)]="main.totalResom">
+              </div>
+              <div class="col-xl-2">
+                <label class="mt-2">الاتعاب</label>
+              </div>
+              <div class="col-xl-4">
+                <input type="text" class="form-control form-control-sm" value="0">
+              </div>
+            </div>
+            <div class="row">
+              <table class="table table-striped table-bordered table-sm">
+                <thead>
+                  <tr>
+                    <th scope="col">المبلغ</th>
+                    <th scope="col">التاريخ</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let paymnent of pay let i = index;" [ngClass]="paymnent.emp == 3 ? 'rong-number' : ''">
+                    <td>{{ paymnent.company }}</td>
+                    <td>{{ paymnent.datePay | date:'dd-MM-yyyy' }}</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="row pagination">
+              <div class="col-xs-12 col-12">
+                <pagination class="" [boundaryLinks]="true" [totalItems]="paginationPay.totalItems"
+                  [itemsPerPage]="paginationPay.itemsPerPage" (pageChanged)="pageChanged($event)"
+                  [(ngModel)]="paginationPay.currentPage" previousText="&lsaquo;" nextText="&rsaquo;"
+                  firstText="&laquo;" lastText="&raquo;" [maxSize]="maxSize">
+                </pagination>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-xl-2">
+                <label class="mt-2">المدفوع</label>
+              </div>
+              <div class="col-xl-4">
+                <input type="text" class="form-control form-control-sm" [(ngModel)]="main.totalPay">
+              </div>
+              <div class="col-xl-2">
+                <label class="mt-2">التخفيض</label>
+              </div>
+              <div class="col-xl-4">
+                <input type="text" class="form-control form-control-sm" [(ngModel)]="main.waiver">
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-xl-2">
+                <label class="mt-2">المتبقي</label>
+              </div>
+              <div class="col-xl-10">
+                <input type="text" class="form-control form-control-sm" [(ngModel)]="main.remain">
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- End third column -->
+      </div>
+      <!-- End main row -->
+      <!-- Start scound row -->
+      <div class="row mt-1">
+        <!-- Start number column -->
+        <div class="col-xl-4">
+          <div class="row">
+            <div class="col-sm-12">
+              <table class="table tab-statment table-striped table-bordered table-sm">
+                <thead>
+                  <tr>
+                    <th>الرقم</th>
+                    <th>المستخدم</th>
+                    <th>الحالة</th>
+                    <th>Edit</th>
+                    <th (click)="openModal(addUpdateSaveNumberPhone)">Note <i class="fa fa-plus"></i></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr style='cursor:pointer' *ngFor="let item of numbers; let i = index"
+                    [ngClass]="item.is_voke == 'رقم صحيح' ? 'right-number' : item.is_voke  == 'رقم خطأ'? 'rong-number' : item.is_voke  == 'ممنوع الاتصال'? 'rong-number' : ''"
+                    (click)="selectedRow = i; numberSelected(item.phone, item.owner)">
+                    <td>{{ item.phone }}</td>
+                    <td>{{ item.owner }}</td>
+                    <td>{{ item.is_voke }}
+                      <!-- {{ [item.is_voke == 'رقم خطأ'? 'رقم خطا':'', item.is_voke == 'غير مصنف'? 'غير مصنف':'',
+                      item.is_voke == 'رقم صحيح'?
+                      'رقم صحيح':'', item.is_voke == 'ممنوع الاتصال'? 'ممنوع الاتصال':''] }} -->
+                    </td>
+                    <td (click)="openModal(addUpdateSaveNumberPhone);getNumberToSaveOrUpdate(item.id)"><i
+                        class="fa fa-edit fa-lg"></i>
+                    </td>
+                    <td>
+                      <div class="btn-group" dropdown>
+                        <button id="button-split" type="button" dropdownToggle class="btn btn-danger btn-small"
+                          aria-controls="dropdown-split">
+                        </button>
+                        <ul id="dropdown-split" *dropdownMenu class="dropdown-menu" role="menu"
+                          aria-labelledby="button-split">
+                          <li role="menuitem" (click)="updateNumber(item.id, 'رقم صحيح')"><a class="dropdown-item">رقم
+                              صحيح</a>
+                          </li>
+                          <li role="menuitem" (click)="updateNumber(item.id, 'رقم خطأ')"><a class="dropdown-item">رقم
+                              خطا</a>
+                          </li>
+                          <li role="menuitem" (click)="updateNumber(item.id, 'ممنوع الاتصال')"><a
+                              class="dropdown-item">ممنوع
+                              الاتصال</a>
+                          </li>
+                        </ul>
+                      </div>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+              <!-- modal start -->
+              <ng-template #addUpdateSaveNumberPhone>
+                <div class="modal-header">
+                  <h4 class="modal-title pull-left">
+                    Save Or Edit New Number.
+                  </h4>
+                  <button type="button" class="close" aria-label="Close" (click)="modalRef.hide()"><i
+                      class="fa fa-times"></i>
+                  </button>
+                </div>
+                <div class="modal-body">
+                  <div class="container-fluid">
+                    <div class="row">
+                      <div class="col-xl-12">
+                        <table class="table table-striped table-bordered table-sm">
+                          <thead>
+                            <tr>
+                              <td>الهاتف</td>
+                              <td>المدني للمستخدم</td>
+                              <td>المستخدم</td>
+                              <td>المصدر</td>
+                              <td>نوع الخط</td>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr>
+                              <td>{{ numbersForUpdateOrSave.phone }}</td>
+                              <td>{{ numbersForUpdateOrSave.civilIDUse }}</td>
+                              <td>{{ numbersForUpdateOrSave.owner }}</td>
+                              <td>{{ numbersForUpdateOrSave.resourse }}</td>
+                              <td>{{ numbersForUpdateOrSave.note }}</td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-xl-3">
+                        <label>الرقم</label>
+                      </div>
+                      <div class="col-xl-9">
+                        <input type="number" class="form-control" [(ngModel)]="numbersForUpdateOrSave.phone">
+                      </div>
+                    </div>
+                    <div class="row mt-1">
+                      <div class="col-xl-3">
+                        <label>المدني للمستخدم</label>
+                      </div>
+                      <div class="col-xl-9">
+                        <input type="number" class="form-control" [(ngModel)]="numbersForUpdateOrSave.civilIDUse">
+                      </div>
+                    </div>
+                    <div class="row mt-1">
+                      <div class="col-xl-3">
+                        <label>المستخدم</label>
+                      </div>
+                      <div class="col-xl-9">
+                        <select class="custom-select" [(ngModel)]="customerUserNumberValue">
+                          <option *ngFor="let item of customerUserNumber" [value]="item.value">
+                            {{ item.value }}</option>
+                        </select>
+                      </div>
+                    </div>
+                    <div class=" row mt-1">
+                      <div class="col-xl-3">
+                        <label>المصدر</label>
+                      </div>
+                      <div class="col-xl-9">
+                        <select class="custom-select" [(ngModel)]="numberResourcesValue">
+                          <option *ngFor="let item of numberResources" [value]="item.value">
+                            {{ item.value }}</option>
+                        </select>
+                      </div>
+                    </div>
+                    <div class="row mt-1">
+                      <div class="col-xl-3">
+                        <label>نوع الخط</label>
+                      </div>
+                      <div class="col-xl-9">
+                        <select class="custom-select" [(ngModel)]="typeNumberValue">
+                          <option [value]=" item.value" *ngFor="let item of typeNumber">
+                            {{ item.value }}</option>
+                        </select>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="row mb-2 mr-2 ml-2">
+                  <div class="col-xl-6">
+                    <button type="button" class="btn btn-secondary btn-block"
+                      (click)="EditNumber();modalRef.hide()">Edit</button>
+                  </div>
+                  <div class="col-xl-6">
+                    <button type="button" class="btn btn-primary btn-block"
+                      (click)="saveNewNumber();modalRef.hide()">Save</button>
+                  </div>
+                </div>
+              </ng-template>
+            </div>
+            <!-- modeal end -->
+          </div>
+          <div class="row pagination mb-5 mt-2">
+            <div class="col-sm-12">
+              <pagination class="pagination-statment" [boundaryLinks]="true" [totalItems]="paginationNumber.totalItems"
+                [itemsPerPage]="paginationNumber.itemsPerPage" (pageChanged)="pageChangedNumber($event)"
+                [(ngModel)]="paginationNumber.currentPage" previousText="&lsaquo;" nextText="&rsaquo;"
+                firstText="&laquo;" lastText="&raquo;" [maxSize]="maxSize">
+              </pagination>
+            </div>
+          </div>
+        </div>
+        <!-- End number column -->
+        <!-- Start way column -->
+        <div class="col-xl-4 ">
+          <div class="pay-color">
+            <div class="row">
+              <div class="col-xl-12">
+                <div class="input-group input-group-sm">
+                  <select class="custom-select" [(ngModel)]="value1" (ngModelChange)="wayChanged($event.name)">
+                    <option *ngFor="let ways of way" [ngValue]="ways">
+                      {{ways.name}}</option>
+                  </select>
+                  <div class="input-group-append">
+                    <label class="input-group-text">وسيلة التفاوض</label>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-xl-12">
+                <div class="input-group input-group-sm">
+                  <select class="custom-select" [(ngModel)]="value2"
+                    (ngModelChange)="resultChanged($event.name, installment)">
+                    <option *ngFor="let status of result" [ngValue]="status">
+                      {{status.name}}</option>
+                  </select>
+                  <div class="input-group-append">
+                    <label class="input-group-text">نتيجة التفاوض</label>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-xl-12">
+                <input type="text" class="form-control btn-sm" [(ngModel)]="statment" disabled>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-xl-12">
+                <textarea class="form-control btn-sm" [(ngModel)]="noteStatment"></textarea>
+              </div>
+            </div>
+            <div class="row mt-1">
+              <div class="col-xl-4 col-padding">
+                <input type="text" placeholder="Date Review" class="form-control btn-sm" bsDatepicker
+                  [(ngModel)]="dateReview" value="{{ dateReview | date:'dd-MM-yyyy' }}">
+              </div>
+              <div class="col-xl-4 col-padding">
+                <input type="text" class="form-control btn-sm" [(ngModel)]="main.towasolNum">
+              </div>
+              <div class="col-xl-4 col-padding">
+                <input type="submit" value="Save" class="btn btn-info btn-block btn-sm"
+                  (click)="openModalNextProces(modalNextProcess)">
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- End way column -->
+      </div>
+      <!-- End scound row -->
+      <!-- star-modal-next-process -->
+      <ng-template #modalNextProcess>
+        <div class="modal-header">
+          <h4 class="modal-title pull-left">Select Next Process</h4>
+          <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <table class="table table-striped table-bordered table-sm">
+            <tbody>
+              <tr *ngFor="let item of nextProcess" (dblclick)="saveStatement(item.code);modalRef.hide()">
+                <td>{{ item.name }}</td>
+                <td>{{ item.code }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </ng-template>
+      <!-- end-modal-next-process -->
+      <!-- Start model to recourd installment -->
+      <ng-template #installment>
+        <div class="modal-header">
+          <h4 class="modal-title pull-left">Enter Amount</h4>
+          <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <tbody>
+            <div class="container-fluid" *ngIf="installmentShow">
+              <div class="row">
+                <div class="col-sm-2">
+                  <h4>المبلغ</h4>
+                </div>
+                <div class="col-sm-10">
+                  <input type="number" class="form-control" [(ngModel)]="installmentAmount" value="0">
+                </div>
+              </div>
+              <div class="row mt-1">
+                <div class="col-sm-2">
+                  <h3>التاريخ</h3>
+                </div>
+                <div class="col-sm-10">
+                  <input type="text" bsDatepicker class="form-control mb-2" [(ngModel)]="installmentDate"
+                    value="{{ installmentDate | date:'dd-MM-yyyy' }}">
+                </div>
+              </div>
+            </div>
+            <div class="container-fluid" *ngIf="!installmentShow">
+              <div class="row">
+                <div class="col-sm-6">
+                  <div class="form-check">
+                    <input class="form-control" type="radio" name="exampleRadios" id="exampleRadios1" value="option1"
+                      checked>
+                    <label class="form-check-label" for="exampleRadios1">سداد كلى</label>
+                  </div>
+                </div>
+                <div class="col-sm-6">
+                  <div class="form-check">
+                    <input class="form-control" type="radio" name="exampleRadios" id="exampleRadios2" value="option2">
+                    <label class="form-check-label" for="exampleRadios2">سداد جزئى</label>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-sm-2">
+                  <h4>المبلغ</h4>
+                </div>
+                <div class="col-sm-10">
+                  <input type="number" class="form-control mb-2" [(ngModel)]="installmentAmount" value="0">
+                </div>
+              </div>
+            </div>
+          </tbody>
+          <div class="modal-footer modal-installment">
+            <div class="row">
+              <div class="col-sm-6">
+                <input type="button" value="Cancel" class="btn btn-block btn-danger" (click)="modalRef.hide()">
+              </div>
+              <div class="col-sm-6">
+                <input type="submit" value="Save" (click)="modalRef.hide();collectStatment()"
+                  class="btn btn-block btn-success">
+              </div>
+            </div>
+          </div>
+        </div>
+      </ng-template>
+      <!-- End model to recourd installment -->
+      <!-- Start Third Row -->
+      <div class="row">
+        <div class="col-sm-12">
+          <tabset>
+            <tab heading="الافادات">
+              <!-- <div class="scroll-view-table">
+                <table class="table tab-statment table-striped table-bordered table-sm">
+                  <thead>
+                    <tr>
+                      <th scope="col">#</th>
+                      <th scope="col">التاريخ</th>
+                      <th scope="col">الافادة</th>
+                      <th scope="col">المراجعة</th>
+                      <th scope="col">الاجراء القادم</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let item of allstatement; let i = index">
+                      <td>{{ i + 1 }}</td>
+                      <td>{{ item.dataEvent | date:'dd-MM-yyyy || hh:mm:ss a' }}</td>
+                      <td>
+                        <div class="wrap-word">{{ item.eventt }}</div>
+                      </td>
+                      <td>{{ item.dataReveiw | date:'dd-MM-yyyy' }}</td>
+                      <td>{{ item.nextProces }}</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div> -->
+              <div class="outof-rtl">
+                <dx-data-grid [dataSource]="allstatement" [rowAlternationEnabled]="true" [allowColumnReordering]="true"
+                  [columnAutoWidth]="true" [showBorders]="true">
+                  <dxo-paging [pageSize]="5"></dxo-paging>
+                  <dxo-pager [showPageSizeSelector]="true" [allowedPageSizes]="[10,20,30,50,80,100]" [showInfo]="true">
+                  </dxo-pager>
+                  <dxi-column dataField="nextProces" caption="الاجراء القادم"></dxi-column>
+                  <dxi-column dataField="dataReveiw" dataType="date" format="dd-MM-yyyy" caption="تاريخ المراجعة">
+                  </dxi-column>
+                  <dxi-column dataField="eventt" caption="الافادة"></dxi-column>
+                  <dxi-column dataField="dataEvent" dataType="date" format="dd-MM-yyyy hh:mm:ss a" caption="التاريخ">
+                  </dxi-column>
+                </dx-data-grid>
+              </div>
+              <!-- <div class="row">
+                <div class="col-xl-12">
+                   <pagination class="pagination-statment" [boundaryLinks]="true"
+                    [totalItems]="paginationStatment.totalItems" [itemsPerPage]="paginationStatment.itemsPerPage"
+                    (pageChanged)="pageChangedStatment($event)" [(ngModel)]="paginationStatment.currentPage"
+                    previousText="&lsaquo;" nextText="&rsaquo;" firstText="&laquo;" lastText="&raquo;"
+                    [maxSize]="maxSize">
+                  </pagination>
+                </div>
+              </div> -->
+            </tab>
+            <tab heading="السجل">
+              <!-- <table class="table tab-statment table-striped table-bordered table-sm">
+                <thead>
+                  <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">التاريخ</th>
+                    <th scope="col">الافادة</th>
+                    <th scope="col">الموظف</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let item of oldStatment; let i = index">
+                    <td>{{ i + 1 }}</td>
+                    <td>{{ item.date_Event | date:'dd-MM-yyyy' }}</td>
+                    <td>{{ item.common }}</td>
+                    <td>{{ item.review_Date | date:'dd-MM-yyyy' }}</td>
+                  </tr>
+                </tbody>
+              </table> -->
+              <div class="outof-rtl">
+                <dx-data-grid [dataSource]="oldStatment" [rowAlternationEnabled]="true" [allowColumnReordering]="true"
+                  [columnAutoWidth]="true" [showBorders]="true">
+                  <dxo-paging [pageSize]="5"></dxo-paging>
+                  <dxo-pager [showPageSizeSelector]="true" [allowedPageSizes]="[10,20,30,50,80,100]" [showInfo]="true">
+                  </dxo-pager>
+                  <dxi-column dataField="review_Date" dataType="date" format="dd-MM-yyyy" caption="تاريخ المراجعة">
+                  </dxi-column>
+                  <dxi-column dataField="common" caption="الافادة"></dxi-column>
+                  <dxi-column dataField="date_Event" dataType="date" format="dd-MM-yyyy hh:mm:ss a" caption="التاريخ">
+                  </dxi-column>
+                </dx-data-grid>
+              </div>
+              <!-- <pagination class="pagination-statment" [boundaryLinks]="true"
+                [totalItems]="paginationsOldStatment.totalItems" [itemsPerPage]="paginationsOldStatment.itemsPerPage"
+                (pageChanged)="pageChangedOldStatment($event)" [(ngModel)]="paginationsOldStatment.currentPage"
+                previousText="&lsaquo;" nextText="&rsaquo;" firstText="&laquo;" lastText="&raquo;" [maxSize]="maxSize">
+              </pagination> -->
+            </tab>
+            <tab heading="ملفات اخري">
+              <!-- <table class="table tab-statment table-striped table-bordered table-sm">
+                <thead>
+                  <tr>
+                    <th scope="col">الكود</th>
+                    <th scope="col">المديونية</th>
+                    <th scope="col">المدني</th>
+                    <th scope="col">حالة الملف</th>
+                    <th scope="col">الموكل</th>
+                    <th scope="col">العقد</th>
+                    <th scope="col">المطالبة</th>
+                    <th scope="col">المدفوع</th>
+                    <th scope="col">المتبقي</th>
+                    <th scope="col">الموظف</th>
+                    <th scope="col">الباتش</th>
+                    <th scope="col">الحالة</th>
+                    <th scope="col">كود الموكل</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let item of anotherFile" (dblclick)="searchBycode(item.code)">
+                    <td>{{ item.code }}</td>
+                    <td>{{ item.resonDue }}</td>
+                    <td>{{ item.civilid }}</td>
+                    <td>{{ item.cases }}</td>
+                    <td>{{ item.clint }}</td>
+                    <td>{{ item.contractNum }}</td>
+                    <td>{{ item.totalDue }}</td>
+                    <td>{{ item.totalPay }}</td>
+                    <td>{{ item.remain }}</td>
+                    <td>{{ item.emp | titlecase}}</td>
+                    <td>{{ item.batchNum }}</td>
+                    <td>{{ item.caseNumber }}</td>
+                    <td>{{ item.clintNumber }}</td>
+                  </tr>
+                </tbody>
+              </table> -->
+              <div class="outof-rtl">
+                <dx-data-grid [dataSource]="anotherFile" [rowAlternationEnabled]="true" [allowColumnReordering]="true"
+                  [columnAutoWidth]="true" [showBorders]="true" (onRowDblClick)="searchBycode($event.data.code)">
+                  <dxo-paging [pageSize]="5"></dxo-paging>
+                  <dxo-pager [showPageSizeSelector]="true" [allowedPageSizes]="[10,20,30,50,80,100]" [showInfo]="true">
+                  </dxo-pager>
+                  <dxi-column dataField="batchNum" caption="الباتش"></dxi-column>
+                  <dxi-column dataField="remain" caption="المتبقى"></dxi-column>
+                  <dxi-column dataField="totalPay" caption="المدفوع"></dxi-column>
+                  <dxi-column dataField="totalDue" caption="قيمة المطالبة"></dxi-column>
+                  <dxi-column dataField="contractNum" caption="رقم العقد"></dxi-column>
+                  <dxi-column dataField="clint" caption="الموكل"></dxi-column>
+                  <dxi-column dataField="cases" caption="الحالة"></dxi-column>
+                  <dxi-column dataField="civilid" caption="المدنى"></dxi-column>
+                  <dxi-column dataField="resonDue" caption="سبب المديونية"></dxi-column>
+                  <dxi-column dataField="code" caption="الكود"></dxi-column>
+                </dx-data-grid>
+              </div>
+              <!-- <pagination class="pagination-statment" [boundaryLinks]="true"
+                [totalItems]="paginationAnotherFile.totalItems" [itemsPerPage]="paginationAnotherFile.itemsPerPage"
+                (pageChanged)="pageChangedAnotherFile($event)" [(ngModel)]="paginationAnotherFile.currentPage"
+                previousText="&lsaquo;" nextText="&rsaquo;" firstText="&laquo;" lastText="&raquo;" [maxSize]="maxSize">
+              </pagination> -->
+            </tab>
+            <tab heading="نتائج البحث">
+              <!-- <table class="table tab-statment table-striped table-bordered table-sm">
+                <thead>
+                  <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">الكود</th>
+                    <th scope="col">الاسم</th>
+                    <th scope="col">سبب المديونية</th>
+                    <th scope="col">الحالة</th>
+                    <th scope="col">الموكل</th>
+                    <th scope="col">رقم العقد</th>
+                    <th scope="col">قيمة المطالبة</th>
+                    <th scope="col">اجمالي المدفوع</th>
+                    <th scope="col">المتبقي</th>
+                    <th scope="col">الموظف</th>
+                    <th scope="col">الباتش</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let item of searchByCivil; let i = index;" (dblclick)="searchBycode(item.code)">
+                    <td>{{ i + 1 }}</td>
+                    <td>{{ item.code }}</td>
+                    <td>{{ item.name }}</td>
+                    <td>{{ item.resonDue }}</td>
+                    <td>{{ item.cases }}</td>
+                    <td>{{ item.clint }}</td>
+                    <td>{{ item.contractNum }}</td>
+                    <td>{{ item.totalDue }}</td>
+                    <td>{{ item.totalPay }}</td>
+                    <td>{{ item.remain }}</td>
+                    <td>{{ item.emp }}</td>
+                    <td>{{ item.batchNum }}</td>
+                  </tr>
+                </tbody>
+              </table> -->
+              <div class="outof-rtl">
+                <dx-data-grid [dataSource]="searchByCivil" [rowAlternationEnabled]="true" [allowColumnReordering]="true"
+                  [columnAutoWidth]="true" [showBorders]="true" (onRowDblClick)="searchBycode($event.data.code)">
+                  <dxo-paging [pageSize]="5"></dxo-paging>
+                  <dxo-pager [showPageSizeSelector]="true" [allowedPageSizes]="[10,20,30,50,80,100]" [showInfo]="true">
+                  </dxo-pager>
+                  <dxi-column dataField="batchNum" caption="الباتش"></dxi-column>
+                  <dxi-column dataField="remain" caption="المتبقى"></dxi-column>
+                  <dxi-column dataField="totalPay" caption="المدفوع"></dxi-column>
+                  <dxi-column dataField="totalDue" caption="قيمة المطالبة"></dxi-column>
+                  <dxi-column dataField="contractNum" caption="رقم العقد"></dxi-column>
+                  <dxi-column dataField="clint" caption="الموكل"></dxi-column>
+                  <dxi-column dataField="cases" caption="الحالة"></dxi-column>
+                  <dxi-column dataField="resonDue" caption="سبب المديونية"></dxi-column>
+                  <dxi-column dataField="name" caption="الاسم"></dxi-column>
+                  <dxi-column dataField="code" caption="الكود"></dxi-column>
+                </dx-data-grid>
+              </div>
+              <!-- <pagination class="pagination-statment" [boundaryLinks]="true"
+                [totalItems]="paginationsearchByCivil.totalItems" [itemsPerPage]="paginationsearchByCivil.itemsPerPage"
+                (pageChanged)="pageChangedSearchByCivilId($event)" [(ngModel)]="paginationsearchByCivil.currentPage"
+                previousText="&lsaquo;" nextText="&rsaquo;" firstText="&laquo;" lastText="&raquo;" [maxSize]="maxSize">
+              </pagination> -->
+            </tab>
+            <tab heading="الارقام الالية">
+              <!-- <table class="table tab-statment table-striped table-bordered table-sm">
+                <thead>
+                  <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">الرقم الالي الرئيسي</th>
+                    <th scope="col">الرقم الالي المرتبط</th>
+                    <th scope="col">نوع الرقم الالي</th>
+                    <th scope="col">حالة الرقم الالي</th>
+                    <th scope="col">الادعاء</th>
+                    <th scope="col">ملاحظات</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let item of autoNumberToView; let i = index">
+                    <td>{{ i+1 }}</td>
+                    <td>{{ item.mainAutoNum }}</td>
+                    <td>{{ item.subAutoNumber }}</td>
+                    <td>{{ item.type }}</td>
+                    <td>{{ item.caseAuto }}</td>
+                    <td>{{ item.climent }}</td>
+                    <td>{{ item.note }}</td>
+                  </tr>
+                </tbody>
+              </table> -->
+              <div class="outof-rtl">
+                <dx-data-grid [dataSource]="autoNumberToView" [rowAlternationEnabled]="true"
+                  [allowColumnReordering]="true" [columnAutoWidth]="true" [showBorders]="true">
+                  <dxo-paging [pageSize]="5"></dxo-paging>
+                  <dxo-pager [showPageSizeSelector]="true" [allowedPageSizes]="[10,20,30,50,80,100]" [showInfo]="true">
+                  </dxo-pager>
+                  <dxi-column dataField="note" caption="الملاحظات"></dxi-column>
+                  <dxi-column dataField="climent" caption="الادعاء"></dxi-column>
+                  <dxi-column dataField="caseAuto" caption="حالة الرقم الالى"></dxi-column>
+                  <dxi-column dataField="type" caption="نوع الرقم الالي"></dxi-column>
+                  <dxi-column dataField="subAutoNumber" caption="الرقم الالي المرتبط"></dxi-column>
+                  <dxi-column dataField="mainAutoNum" caption="الرقم الالي الرئيسي"></dxi-column>
+                </dx-data-grid>
+              </div>
+              <!-- <pagination class="pagination-statment" [boundaryLinks]="true"
+                [totalItems]="paginationAutoNumber.totalItems" [itemsPerPage]="paginationAutoNumber.itemsPerPage"
+                (pageChanged)="pageChangedAutoNumber($event)" [(ngModel)]="paginationAutoNumber.currentPage"
+                previousText="&lsaquo;" nextText="&rsaquo;" firstText="&laquo;" lastText="&raquo;" [maxSize]="maxSize">
+              </pagination> -->
+            </tab>
+            <tab heading="السكرتارية">
+              <!-- <table class="table tab-statment table-striped table-bordered table-sm">
+                <thead>
+                  <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">التاريخ</th>
+                    <th scope="col">الافادة</th>
+                    <th scope="col">المراجعة</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let item of statmentSec; let i = index">
+                    <td>{{ i + 1 }}</td>
+                    <td>{{ item.date | date:'dd-MM-yyyy || hh:mm:ss a' }}</td>
+                    <td>{{ item.stat }}</td>
+                    <td>{{ item.emp }}</td>
+                  </tr>
+                </tbody>
+              </table> -->
+              <div class="outof-rtl">
+                <dx-data-grid [dataSource]="statmentSec" [rowAlternationEnabled]="true" [allowColumnReordering]="true"
+                  [columnAutoWidth]="true" [showBorders]="true">
+                  <dxo-paging [pageSize]="5"></dxo-paging>
+                  <dxo-pager [showPageSizeSelector]="true" [allowedPageSizes]="[10,20,30,50,80,100]" [showInfo]="true">
+                  </dxo-pager>
+                  <dxi-column dataField="emp" caption="الموظف"></dxi-column>
+                  <dxi-column dataField="stat" caption="الافادة"></dxi-column>
+                  <dxi-column dataField="date" datatype="date" format="dd-MM-yyyy" caption="التاريخ"></dxi-column>
+                </dx-data-grid>
+              </div>
+              <!-- <pagination class="pagination-statment" [boundaryLinks]="true"
+                [totalItems]="paginationStatmentSec.totalItems" [itemsPerPage]="paginationStatmentSec.itemsPerPage"
+                (pageChanged)="paginationChangedStatmentSec($event)" [(ngModel)]="paginationStatmentSec.currentPage"
+                previousText="&lsaquo;" nextText="&rsaquo;" firstText="&laquo;" lastText="&raquo;" [maxSize]="maxSize">
+              </pagination> -->
+            </tab>
+          </tabset>
+        </div>
+      </div>
+    </tab>
+    <!-- End Third Row -->
+
+    <!-- Start Tab Searching -->
+    <tab heading="قائمة البحث">
+      <div class="container-fluid">
+        <div class="row mt-2">
+          <div class="col-sm-7">
+            <div class="row mb-2">
+              <div class="col-sm-2 mt-2">
+                <label>الاسم بالكامل</label>
+              </div>
+              <div class="col-sm-10">
+                <input type="text" class="form-control" placeholder="الاسم بالكامل" [(ngModel)]="searchData.name">
+              </div>
+            </div>
+            <div class="row mb-1">
+              <div class="col-sm-2 mt-2"><label>الاسم</label></div>
+              <div class="col-sm-2">
+                <input type="text" class="form-control" placeholder="الاول" [(ngModel)]="searchData.first">
+              </div>
+              <div class="col-sm-3">
+                <input type="text" class="form-control" placeholder="الثانى" [(ngModel)]="searchData.second">
+              </div>
+              <div class="col-sm-2">
+                <input type="text" class="form-control" placeholder="الثالث" [(ngModel)]="searchData.third">
+              </div>
+              <div class="col-sm-3">
+                <input type="text" class="form-control" placeholder="الرابع" [(ngModel)]="searchData.four">
+              </div>
+            </div>
+            <div class="row mb-1">
+              <div class="col-sm-2 mt-2">
+                <label>العائلة</label>
+              </div>
+              <div class="col-sm-4">
+                <input type="text" class="form-control" placeholder="العائلة" [(ngModel)]="searchData.family">
+              </div>
+              <div class="col-sm-2 mt-2">
+                <label>المدنى</label>
+              </div>
+              <div class="col-sm-4">
+                <input type="number" class="form-control" placeholder="المدنى" [(ngModel)]="searchData.civilID"
+                  value="0">
+              </div>
+            </div>
+            <div class="row mb-1">
+              <div class="col-sm-2 mt-2">
+                <label>الموحد</label>
+              </div>
+              <div class="col-sm-4">
+                <input type="number" class="form-control" placeholder="الموحد" [(ngModel)]="searchData._internal"
+                  value="0">
+              </div>
+              <div class="col-sm-2 mt-2">
+                <label>الرقم</label>
+              </div>
+              <div class="col-sm-4">
+                <input type="text" class="form-control" placeholder="الرقم" [(ngModel)]="searchData.phoneNumber">
+              </div>
+            </div>
+            <div class="row mb-1">
+              <div class="col-sm-2 mt-2">
+                <label>العنوان</label>
+              </div>
+              <div class="col-sm-10">
+                <input type="text" class="form-control" placeholder="العنوان" [(ngModel)]="searchData.Address">
+              </div>
+            </div>
+            <div class="row mb-1">
+              <div class="col-sm-2 mt-2">
+              </div>
+              <div class="col-sm-5">
+                <input type="submit" class="btn btn-success btn-block" value="Search" (click)="searchInElections()">
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-5">
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-12">
+            <div class="outof-rtl">
+              <dx-data-grid [dataSource]="reseltSearchData" [rowAlternationEnabled]="true"
+                [allowColumnReordering]="true" [columnAutoWidth]="true" [showBorders]="true">
+                <dxo-paging [pageSize]="10"></dxo-paging>
+                <dxo-pager [showPageSizeSelector]="true" [allowedPageSizes]="[10,20,30,50,80,100]" [showInfo]="true">
+                </dxo-pager>
+                <dxo-filter-row [visible]="true" [applyFilter]="true"></dxo-filter-row>
+                <dxo-header-filter [visible]="true"></dxo-header-filter>
+                <dxi-column dataField="serial" caption="Serial"></dxi-column>
+                <dxi-column dataField="name" caption="الاسم بالكامل"></dxi-column>
+                <dxi-column dataField="internal_" caption="الرقم الموحد"></dxi-column>
+                <dxi-column dataField="type" caption="النوع"></dxi-column>
+                <dxi-column dataField="dateBirth" caption="تاريخ الميلاد"></dxi-column>
+                <dxi-column dataField="carrer" caption="المهنة"></dxi-column>
+                <dxi-column dataField="country" caption="المنطقة"></dxi-column>
+                <dxi-column dataField="addres" caption="العنوان"></dxi-column>
+                <dxi-column dataField="civilId" caption="المدنى"></dxi-column>
+                <dxi-column dataField="note" caption="الارقام"></dxi-column>
+              </dx-data-grid>
+            </div>
+          </div>
+        </div>
+      </div>
+    </tab>
+    <!-- End Tab Searching -->
+
+    <!-- Start Tab Statment -->
+    <tab heading="الافادات">
+      <div class="container-fluid">
+        <div class="row mt-2">
+          <div class="col-sm-2">
+            <div class="input-group input-group-sm">
+              <input type="text" placeholder="Datepicker" class="form-control" bsDatepicker
+                [(ngModel)]="searchStatmentAndPay.dtp1">
+              <div class="input-group-append">
+                <label class="input-group-text">من تاريخ</label>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-2">
+            <div class="input-group input-group-sm">
+              <input type="text" placeholder="DatePicker" class="form-control" bsDatepicker
+                [(ngModel)]="searchStatmentAndPay.dtp2">
+              <div class="input-group-append">
+                <label class="input-group-text" for="inputGroupSelect">الى تاريخ</label>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row mt-2">
+          <div class="col-sm-2">
+            <input type="button" class="btn btn-block btn-outline-dark" value="افادات" (click)="searchInStatment()">
+          </div>
+          <div class="col-sm-2">
+            <input type="button" class="btn btn-block btn-outline-dark" value="مراجعة" (click)="searchInReview()">
+          </div>
+          <div class="col-sm-2">
+            <input type="button" class="btn btn-block btn-outline-dark" value="السداد" (click)="searchInMyPay()">
+          </div>
+        </div>
+        <div class="row mt-2">
+          <div class="col-sm-12" *ngIf="idPay == 0">
+            <div class="outof-rtl">
+              <dx-data-grid [dataSource]="searchStatmentAndPayResult" [rowAlternationEnabled]="true"
+                [allowColumnReordering]="true" [columnAutoWidth]="true" [showBorders]="true"
+                (onRowDblClick)="searchBycode($event.data.code)">
+                <dxo-paging [pageSize]="10"></dxo-paging>
+                <dxo-pager [showPageSizeSelector]="true" [allowedPageSizes]="[10,20,30,50,80,100]" [showInfo]="true">
+                </dxo-pager>
+                <dxo-filter-row [visible]="true" [applyFilter]="true"></dxo-filter-row>
+                <dxo-header-filter [visible]="true"></dxo-header-filter>
+                <dxo-export [enabled]="true"></dxo-export>
+                <dxo-search-panel [visible]="true" [width]="300" placeholder="Search..."></dxo-search-panel>
+                <dxi-column dataField="code" caption="الكود"></dxi-column>
+                <dxi-column dataField="name" caption="الاسم"></dxi-column>
+                <dxi-column dataField="dtpEvent" caption="تاريخ الاجراء"></dxi-column>
+                <dxi-column dataField="dtpReview" caption="تاريخ المراجعة"></dxi-column>
+                <dxi-column dataField="note" caption="الافادة"></dxi-column>
+                <dxi-column dataField="twasol" caption="التواصل"></dxi-column>
+                <dxi-column dataField="resultTowasol" caption="نتيجة التواصل"></dxi-column>
+                <dxi-column dataField="number" caption="الرقم"></dxi-column>
+                <dxi-column dataField="numberUser" caption="مستخدم الرقم"></dxi-column>
+              </dx-data-grid>
+            </div>
+          </div>
+          <div class="col-sm-12" *ngIf="idPay == 1">
+            <div class="outof-rtl">
+              <dx-data-grid [dataSource]="searchStatmentAndPayResult" [rowAlternationEnabled]="true"
+                [allowColumnReordering]="true" [columnAutoWidth]="true" [showBorders]="true"
+                (onRowDblClick)="searchBycode($event.data.code)">
+                <dxo-paging [pageSize]="10"></dxo-paging>
+                <dxo-pager [showPageSizeSelector]="true" [allowedPageSizes]="[10,20,30,50,80,100]" [showInfo]="true">
+                </dxo-pager>
+                <dxo-filter-row [visible]="true" [applyFilter]="true"></dxo-filter-row>
+                <dxo-header-filter [visible]="true"></dxo-header-filter>
+                <dxo-export [enabled]="true"></dxo-export>
+                <dxo-search-panel [visible]="true" [width]="300" placeholder="Search..."></dxo-search-panel>
+                <dxi-column dataField="code" caption="الكود"></dxi-column>
+                <dxi-column dataField="name" caption="الاسم"></dxi-column>
+                <dxi-column dataField="datePay" caption="تاريخ الدفع"></dxi-column>
+                <dxi-column dataField="totalDue" caption="قيمة المطالبة"></dxi-column>
+                <dxi-column dataField="totalPay" caption="اجمالى المدفوع"></dxi-column>
+                <dxi-column dataField="remain" caption="المتبقى"></dxi-column>
+                <dxi-column dataField="clint" caption="الموكل"></dxi-column>
+                <dxi-column dataField="batchNo" caption="رقم الباتش"></dxi-column>
+                <dxi-column dataField="empCode" caption="رقم الموظف"></dxi-column>
+                <dxi-column dataField="empName" caption="اسم الموظف"></dxi-column>
+              </dx-data-grid>
+            </div>
+          </div>
+        </div>
+      </div>
+    </tab>
+    <!-- End Tab Statment -->
+
+    <!-- Start search in Statment -->
+    <tab heading="بحث برقم الهاتف">
+      <div class="container-fluid">
+        <div class="row mt-2">
+          <div class="col-sm-3">
+            <input type="text" class="form-control" #phoneNumber placeholder="Phone Number">
+          </div>
+          <div class="col-sm-2 mt-1">
+            <input type="button" class="btn btn-block btn-dark" value="Search"
+              (click)="searchInStatement(phoneNumber.value)" (keypress)="onlyNumberAllowed($event)">
+          </div>
+        </div>
+        <div class="row mt-3">
+          <div class="col-sm-12">
+            <div class="outof-rtl">
+              <dx-data-grid [dataSource]="searchInStatemnt" [rowAlternationEnabled]="true"
+                [allowColumnReordering]="true" [columnAutoWidth]="true" [showBorders]="true"
+                (onRowDblClick)="searchBycode($event.data.code)">
+                <dxo-paging [pageSize]="10"></dxo-paging>
+                <dxo-pager [showPageSizeSelector]="true" [allowedPageSizes]="[10,20,30,50,80,100]" [showInfo]="true">
+                </dxo-pager>
+                <dxo-filter-row [visible]="true" [applyFilter]="true"></dxo-filter-row>
+                <dxi-column dataField="code" caption="الكود"></dxi-column>
+                <dxi-column dataField="name" caption="الاسم"></dxi-column>
+                <dxi-column dataField="civilId" caption="المدنى"></dxi-column>
+                <dxi-column dataField="client" caption="الموكل"></dxi-column>
+                <dxi-column dataField="cases" caption="الحالة"></dxi-column>
+                <dxi-column dataField="nationality" caption="الجنسية"></dxi-column>
+                <dxi-column dataField="reasonDue" caption="المديونية"></dxi-column>
+                <dxi-column dataField="contract" caption="العقد"></dxi-column>
+                <dxi-column dataField="note" caption="الملاحظات"></dxi-column>
+              </dx-data-grid>
+            </div>
+          </div>
+        </div>
+      </div>
+    </tab>
+    <!-- End search in Statment -->
+
+  </tabset>
+</div>

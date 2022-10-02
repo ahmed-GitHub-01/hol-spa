@@ -1,0 +1,37 @@
+form {
+  width: 300px;
+  margin: 200px auto;
+}
+form input {
+  margin-bottom: 20px;
+}
+
+form p {
+  font-size: 26px;
+  /* font-weight: bold; */
+  color: #777;
+}
+form .line-client:after {
+  content: "";
+  display: inline-block;
+  overflow: hidden;
+  background-color: #ccc;
+  height: 27px;
+  width: 1px;
+}
+.between-login {
+  width: 1px;
+  height: 35%;
+  background-color: #777;
+  margin-top: 205px;
+  margin-left: 75px;
+}
+@media screen and (max-width: 1000px) {
+  .between-logindiv {
+    display: none;
+  }
+  form {
+    width: 300px;
+    margin: 50px auto;
+  }
+}

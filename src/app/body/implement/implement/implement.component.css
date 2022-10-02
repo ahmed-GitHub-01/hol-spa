@@ -1,0 +1,25 @@
+section {
+  direction: rtl;
+}
+
+section .input-group .input-group-text {
+  background-color: #007bff;
+  color: #fff;
+  border-radius: 5px 0 0 5px;
+  margin-right: -1px;
+}
+
+section .input-group input {
+  border-radius: 0 5px 5px 0;
+}
+
+section .border-reduce {
+  border-radius: 5px;
+  border: 1px solid #000;
+  padding: 10px;
+}
+
+section .outof-rtl {
+  direction: ltr;
+}
+/*# sourceMappingURL=implement.component.css.map */

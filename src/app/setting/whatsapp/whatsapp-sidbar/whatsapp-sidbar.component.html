@@ -1,0 +1,86 @@
+<div id="sidebar">
+    <div id="row1">
+        <div id="sidebarHeader">
+            <div class="avatarContainer">
+                <img src="../../assets/images/noPic.svg" />
+            </div>
+            <div class="actionsContainer">
+                <img src="../../assets/images/statusIcon.svg" />
+                <img src="../../assets/images/chatIcon.svg" />
+                <img src="../../assets/images/moreVertIcon.svg" />
+            </div>
+        </div>
+        <div id="searchBox">
+            <img width="19" src="../../assets/images/searchIcon.svg" />
+            <input [(ngModel)]="searchText" type="text" placeholder="Search or start the new chat" />
+        </div>
+    </div>
+
+    <!-- <div id="sidebarContent">
+        <div class="chatNumberEmpty" *ngIf="(message.messageNumberThread$ | async)?.length === 0">
+            No number yet...
+        </div>
+        <div *ngIf="(message.messageNumberThread$ | async)?.length != 0">
+            <div class="conversation" *ngFor="let msg of (message.messageNumberThread$ | async)"
+                (click)="getMessageForConversion(msg);this.conversationClicked.emit(msg)">
+                <div class="picture">
+                    <img src="../../assets/images/noPic.svg" />
+                </div>
+                <div class="content">
+                    <div class="conversationHeader">
+
+                        <div class="name">{{ msg.phoneNumber }}
+                            <div *ngIf="msg.counterNonRead !== 0">
+                                <div class="notification">
+                                    <span class="badge">
+                                        {{ (msg.counterNonRead) }}</span>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="time">{{ msg.dateSent | timeago }}</div>
+                    </div>
+                    <div class="message">
+                        {{ msg.lastMessage }}
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div> -->
+    <div class="container-fluid mt-2">
+        <div class="chatNumberEmpty" *ngIf="(message.messageNumberThread$ | async)?.length === 0">
+            No number yet...
+        </div>
+        <div *ngIf="(message.messageNumberThread$ | async)?.length !== 0">
+            <div class="mt-2" *ngFor="let msg of (message.messageNumberThread$ | async)"
+                (click)="getMessageForConversion(msg);this.conversationClicked.emit(msg)">
+                <div class="row">
+                    <div class="col-xl-3">
+                        <img src="../../assets/images/noPic.svg" width="50px" height="50px" />
+                    </div>
+                    <div class="col-xl-7 mt-1">
+                        <div class="row phone-number">{{ msg.phoneNumber }}</div>
+                        <div class="row last-message">
+                            <p>lastest: {{ msg.lastMessage }}</p>
+                        </div>
+                    </div>
+                    <div class="col-xl-2">
+                        <div class="row time">{{ msg.dateSent | timeago }}</div>
+                        <div class="row">
+                            <div *ngIf="msg.counterNonRead !== 0">
+                                <div class="notification">
+                                    {{ (msg.counterNonRead) }}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="line"></div>
+            </div>
+        </div>
+
+    </div>
+
+</div>

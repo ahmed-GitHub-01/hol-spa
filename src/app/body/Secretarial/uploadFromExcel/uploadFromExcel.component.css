@@ -1,0 +1,11 @@
+.container-fluid .row .header {
+  text-align: center;
+  font-size: 30px;
+  color: #464545;
+}
+
+.container-fluid .row dx-data-grid {
+  -webkit-box-shadow: 1px 1px 5px #0084ff;
+          box-shadow: 1px 1px 5px #0084ff;
+}
+/*# sourceMappingURL=uploadFromExcel.component.css.map */

@@ -1,0 +1,25 @@
+section div.container-fluid {
+  direction: rtl;
+  margin-top: 20px;
+}
+
+section div.container-fluid label {
+  font-weight: bold;
+}
+
+section div.container-fluid .data-table {
+  direction: ltr;
+  -webkit-box-shadow: 1px 1px 10px #000;
+          box-shadow: 1px 1px 10px #000;
+}
+
+section h4 {
+  font-weight: bold;
+}
+
+section .refresh-button {
+  width: 20px;
+  height: 15px;
+  color: #157915;
+}
+/*# sourceMappingURL=orginizeCustomer.component.css.map */

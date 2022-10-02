@@ -1,0 +1,9 @@
+{
+    "version": 3,
+    "mappings": "",
+    "sources": [
+        "showPdf.component.scss"
+    ],
+    "names": [],
+    "file": "showPdf.component.css"
+}

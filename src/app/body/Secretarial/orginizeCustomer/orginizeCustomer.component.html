@@ -1,0 +1,334 @@
+<section *ngIf="id == 1">
+  <div class="container-fluid">
+    <div class="row mb-5  ">
+      <div class="col-sm-1 mt-2">
+        <label>الكود</label>
+      </div>
+      <div class="col-sm-2">
+        <input type="number" class="form-control" #code (keyup.enter)="getSearchByCode(code.value)">
+      </div>
+      <div class="col-sm-0.5 mt-2">
+        <label>الاسم</label>
+      </div>
+      <div class="col-sm-3">
+        <input type="text" class="form-control" #name (keyup.enter)="getSearchByName(name.value)">
+      </div>
+      <div class="col-sm-0.5 mt-2">
+        <label>المدنى</label>
+      </div>
+      <div class="col-sm-2">
+        <input type="number" class="form-control" #civilID (keyup.enter)="getSearchByCivilId(civilID.value)">
+      </div>
+      <div class="col-sm-0.5 mt-2">
+        <label>المديونية</label>
+      </div>
+      <div class="col-sm-2">
+        <input type="text" class="form-control" #due (keyup.enter)="getSearchByDue(due.value)">
+      </div>
+    </div>
+    <!-- Data table Search -->
+    <div class="row">
+      <div class="col-sm-12">
+        <dx-data-grid [dataSource]="dataFromSearch" class="data-table" [rowAlternationEnabled]="true"
+          [allowColumnReordering]="false" [columnAutoWidth]="true" [showBorders]="true"
+          (onRowDblClick)="selectRow($event.data);openModal(saveCustomer)">
+          <dxo-paging [pageSize]="10"></dxo-paging>
+          <dxo-pager [showPageSizeSelector]="true" [allowedPageSizes]="[10,20,30,50,80,100]" [showInfo]="true">
+          </dxo-pager>
+          <dxo-filter-row [visible]="true" [applyFilter]="true"></dxo-filter-row>
+          <dxo-header-filter [visible]="true"></dxo-header-filter>
+          <dxi-column dataField="code" caption="الكود"></dxi-column>
+          <dxi-column dataField="name" caption="الاسم"></dxi-column>
+          <dxi-column dataField="civilID" caption="المدنى"></dxi-column>
+          <dxi-column dataField="case" caption="الحالة"></dxi-column>
+          <dxi-column dataField="reasonDue" caption="سبب المديونية"></dxi-column>
+          <dxi-column dataField="contract" caption="العقد"></dxi-column>
+          <dxi-column dataField="totalAmount" caption="المطالبة"></dxi-column>
+          <dxi-column dataField="totalPay" caption="اجمالى المدفوع"></dxi-column>
+          <dxi-column dataField="remain" caption="المتبقى"></dxi-column>
+          <dxi-column dataField="nationality" caption="الجنسية"></dxi-column>
+          <dxi-column dataField="employee" caption="الموظف"></dxi-column>
+          <dxi-column dataField="batch" caption="الباتش"></dxi-column>
+          <dxi-column dataField="draft" caption="المدعى القانونى"></dxi-column>
+        </dx-data-grid>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal Start -->
+  <ng-template #saveCustomer>
+    <div class="modal-header">
+      <h3 class="modal-title pull-left">
+        Adding the customer to the waiting list.
+      </h3>
+      <button type="button" class="close" aria-label="Close" (click)="modalRef.hide()"><i class="fa fa-times"></i>
+      </button>
+    </div>
+    <div class="modal-body">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-1">
+            <h4>الكود : </h4>
+          </div>
+          <div class="col-sm-3 text-center">
+            <h4>{{ dataDbClick.code }}</h4>
+          </div>
+          <div class="col-sm-1">
+            <h4 class="">الاسم:</h4>
+          </div>
+          <div class="col-sm-3 text-center">
+            <h4>{{ dataDbClick.name }}</h4>
+          </div>
+          <div class="col-sm-1">
+            <h4 class="">المدنى:</h4>
+          </div>
+          <div class="col-sm-3 text-center">
+            <h4>{{ dataDbClick.civilID }}</h4>
+          </div>
+        </div>
+        <div class="row mb-2">
+          <div class="col-sm-1">
+            <h4>الحالة:</h4>
+          </div>
+          <div class="col-sm-3 text-center">
+            <h4>{{ dataDbClick.case }}</h4>
+          </div>
+          <div class="col-sm-1">
+            <h4 class="">المديونية:</h4>
+          </div>
+          <div class="col-sm-3 text-center">
+            <h4>{{ dataDbClick.reasonDue }}</h4>
+          </div>
+          <div class="col-sm-1">
+            <h4 class="">العقد:</h4>
+          </div>
+          <div class="col-sm-3 text-center">
+            <h4>{{ dataDbClick.contract }}</h4>
+          </div>
+        </div>
+        <div class="row mb-2">
+          <div class="col-sm-1">
+            <h4 class="">المطالبة:</h4>
+          </div>
+          <div class="col-sm-3 text-center">
+            <h4>{{ dataDbClick.totalAmount }}</h4>
+          </div>
+          <div class="col-sm-1">
+            <h4 class="">المدفوع:</h4>
+          </div>
+          <div class="col-sm-3 text-center">
+            <h4>{{ dataDbClick.totalPay }}</h4>
+          </div>
+          <div class="col-sm-1">
+            <h4 class="">المتبقى:</h4>
+          </div>
+          <div class="col-sm-3 text-center">
+            <h4>{{ dataDbClick.remain }}</h4>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <div class="row">
+        <div class="col-sm-12">
+          <input type="button" value="Save" class="btn btn-primary" (click)="addToWaitList()">
+        </div>
+      </div>
+    </div>
+  </ng-template>
+  <!-- Modeal End -->
+</section>
+
+<section *ngIf="id == 2">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-sm-4"></div>
+      <div class="col-sm-4 text-center">
+        <h2>انتظار العملاء</h2>
+      </div>
+      <div class="col-sm-4 text-center">
+        <div class="refresh-button" (click)="waitListInfo()">
+          <i class="fa fa-sync-alt fa-lg"></i>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-12">
+        <dx-data-grid [dataSource]="waitList" class="data-table" [rowAlternationEnabled]="true"
+          [allowColumnReordering]="false" [columnAutoWidth]="true" [showBorders]="true"
+          (onRowDblClick)="istemara();visitorNote($event.data)">
+          <dxo-paging [pageSize]="10"></dxo-paging>
+          <dxo-pager [showPageSizeSelector]="true" [allowedPageSizes]="[10,20,30,50,80,100]" [showInfo]="true">
+          </dxo-pager>
+          <dxo-filter-row [visible]="true" [applyFilter]="true"></dxo-filter-row>
+          <dxo-header-filter [visible]="true"></dxo-header-filter>
+          <dxi-column dataField="code" caption="الكود"></dxi-column>
+          <dxi-column dataField="name" caption="الاسم"></dxi-column>
+          <dxi-column dataField="batch" caption="الباتش"></dxi-column>
+          <dxi-column dataField="reason" caption="المديونية"></dxi-column>
+          <dxi-column dataField="clint" caption="الموكل"></dxi-column>
+          <dxi-column dataField="emp" caption="الموظف"></dxi-column>
+          <dxi-column dataField="case" caption="الحالة"></dxi-column>
+          <dxi-column dataField="totalDue" caption="المطالبة"></dxi-column>
+          <dxi-column dataField="totalPay" caption="المدفوع"></dxi-column>
+          <dxi-column dataField="remain" caption="المتبقى"></dxi-column>
+          <dxi-column dataField="nationality" caption="الجنسية"></dxi-column>
+          <dxi-column dataField="civilID" caption="الرقم المدنى"></dxi-column>
+          <dxi-column dataField="draft" caption="المدعى القانونى"></dxi-column>
+        </dx-data-grid>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section *ngIf="id == 3">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-sm-6">
+        <div class="row mb-2">
+          <div class="col-sm-1 mt-2">
+            <label>الكود</label>
+          </div>
+          <div class="col-sm-2">
+            <input type="number" class="form-control">
+          </div>
+          <div class="col-sm-1 mt-2">
+            <label>الاسم</label>
+          </div>
+          <div class="col-sm-4">
+            <input type="text" class="form-control">
+          </div>
+          <div class="col-sm-1 mt-2">
+            <label>المدنى</label>
+          </div>
+          <div class="col-sm-3">
+            <input type="text" class="form-control">
+          </div>
+        </div>
+        <div class="row mb-2">
+          <div class="col-sm-1 mt-2">
+            <label>المديونية</label>
+          </div>
+          <div class="col-sm-3">
+            <input type="text" class="form-control">
+          </div>
+          <div class="col-sm-1 mt-2">
+            <label>المطالبة</label>
+          </div>
+          <div class="col-sm-3">
+            <input type="text" class="form-control">
+          </div>
+          <div class="col-sm-1 mt-2">
+            <label>المدفوع</label>
+          </div>
+          <div class="col-sm-3">
+            <input type="text" class="form-control">
+          </div>
+        </div>
+        <div class="row mb-2">
+          <div class="col-sm-1 mt-2">
+            <label>المتبقى</label>
+          </div>
+          <div class="col-sm-3">
+            <input type="text" class="form-control">
+          </div>
+          <div class="col-sm-1 mt-2">
+            <label>الباتش</label>
+          </div>
+          <div class="col-sm-3">
+            <input type="text" class="form-control">
+          </div>
+          <div class="col-sm-1 mt-2">
+            <label>الحالة</label>
+          </div>
+          <div class="col-sm-3">
+            <input type="text" class="form-control">
+          </div>
+        </div>
+        <div class="row mb-2">
+          <div class="col-sm-2 mt-2">
+            <label>المدعى القانونى</label>
+          </div>
+          <div class="col-sm-4">
+            <input type="text" class="form-control">
+          </div>
+          <div class="col-sm-2 mt-2">
+            <label>الرقم الالى</label>
+          </div>
+          <div class="col-sm-4">
+            <input type="text" class="form-control">
+          </div>
+        </div>
+        <div class="row mb-2">
+          <div class="col-sm-1 mt-2">
+            <label>الافادة</label>
+          </div>
+          <div class="col-sm-11">
+            <textarea cols="30" rows="10" class="form-control"></textarea>
+          </div>
+        </div>
+        <div class="row mb-2">
+          <div class="col-sm-1"></div>
+          <div class="col-sm-2">
+            <input type="button" value="الاستمارة" class="btn btn-primary btn-block">
+          </div>
+          <div class="col-sm-2">
+            <input type="button" value="سند قبض" class="btn btn-success btn-block">
+          </div>
+          <div class="col-sm-2">
+            <input type="button" value="ازالة من الانتظار" class="btn btn-success btn-block">
+          </div>
+          <div class="col-sm-2">
+            <input type="button" value="حفظ" class="btn btn-success btn-block">
+          </div>
+          <div class="col-sm-3">
+            <input type="button" value="تم مراجعة الاستمارة" class="btn btn-success btn-block">
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-6">
+        <div class="row mb-3">
+          <div class="col-sm-12">
+            <dx-data-grid [dataSource]="istemaraNote" class="data-table" [rowAlternationEnabled]="true"
+              [allowColumnReordering]="false" [columnAutoWidth]="true" [showBorders]="true">
+              <dxo-paging [pageSize]="10"></dxo-paging>
+              <dxo-pager [showPageSizeSelector]="true" [allowedPageSizes]="[10,20,30,50,80,100]" [showInfo]="true">
+              </dxo-pager>
+              <dxo-filter-row [visible]="true" [applyFilter]="true"></dxo-filter-row>
+              <dxo-header-filter [visible]="true"></dxo-header-filter>
+              <dxi-column dataField="emp" caption="اسم الموظف"></dxi-column>
+              <dxi-column dataField="note" caption="الافادة"></dxi-column>
+              <dxi-column dataField="dateNote" caption="التاريخ"></dxi-column>
+            </dx-data-grid>
+          </div>
+        </div>
+        <div class="row mb-3">
+          <div class="col-sm-12">
+            <dx-data-grid [dataSource]="" class="data-table" [rowAlternationEnabled]="true"
+              [allowColumnReordering]="false" [columnAutoWidth]="true" [showBorders]="true"
+              (onRowDblClick)=" selectRow($event.data);openModal(saveCustomer)">
+              <dxo-paging [pageSize]="10"></dxo-paging>
+              <dxo-pager [showPageSizeSelector]="true" [allowedPageSizes]="[10,20,30,50,80,100]" [showInfo]="true">
+              </dxo-pager>
+              <dxo-filter-row [visible]="true" [applyFilter]="true"></dxo-filter-row>
+              <dxo-header-filter [visible]="true"></dxo-header-filter>
+              <dxi-column dataField="code" caption="الكود"></dxi-column>
+              <dxi-column dataField="name" caption="الاسم"></dxi-column>
+              <dxi-column dataField="batch" caption="الباتش"></dxi-column>
+              <dxi-column dataField="reason" caption="المديونية"></dxi-column>
+              <dxi-column dataField="clint" caption="الموكل"></dxi-column>
+              <dxi-column dataField="emp" caption="الموظف"></dxi-column>
+              <dxi-column dataField="case" caption="الحالة"></dxi-column>
+              <dxi-column dataField="totalDue" caption="المطالبة"></dxi-column>
+              <dxi-column dataField="totalPay" caption="المدفوع"></dxi-column>
+              <dxi-column dataField="remain" caption="المتبقى"></dxi-column>
+              <dxi-column dataField="nationality" caption="الجنسية"></dxi-column>
+              <dxi-column dataField="civilID" caption="الرقم المدنى"></dxi-column>
+              <dxi-column dataField="draft" caption="المدعى القانونى"></dxi-column>
+            </dx-data-grid>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

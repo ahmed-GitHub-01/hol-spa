@@ -1,0 +1,9 @@
+.taklef {
+  padding: 15px;
+  background: #080;
+  color: #fff;
+  font-size: 50px;
+  text-align: center;
+  -webkit-box-shadow: 5px 5px 5px #004700;
+  box-shadow: 5px 5px 5px #004700;
+}

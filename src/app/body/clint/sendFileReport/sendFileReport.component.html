@@ -1,0 +1,697 @@
+<div class="container-fluid">
+  <div class="row mt-2 text-center">
+    <div class="col-sm-12">
+      <h3>العملاء المرسلين الى بيت القانون</h3>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-6">
+      <!-- <div class="row mt-2">
+        <label class="col-sm-1">المدنى</label>
+        <div class="col-sm-5">
+          <input type="number" class="form-control" #civilid (keyup.enter)="searchByCivilID(civilid.value)">
+        </div>
+        <label class="col-sm-1">الاسم</label>
+        <div class="col-sm-5">
+          <input type="text" class="form-control" #name (keyup.enter)="searchByName(name.value)">
+        </div>
+      </div> -->
+      <div class="row mt-2">
+        <label class="col-sm-1"></label>
+        <div class="col-sm-2">
+          <input type="button" class="btn btn-block btn-dark" value="بحث" (click)="search()">
+        </div>
+        <div class="col-sm-3">
+          <input type="button" class="btn btn-block btn-dark" value="الملفات القابلة للتعديل" (click)="showAll()">
+        </div>
+        <div class="col-sm-2">
+          <input type="button" class="btn btn-block btn-dark" value="المرفوض" (click)="refusedFlie()">
+        </div>
+      </div>
+    </div>
+  </div>
+  <div *ngIf="showRowsInContainer == 1" class="mt-2">
+    <div class="row">
+      <div class="col-sm-2 mb-1">
+        <input type="text" class="form-control" placeholder="First Date" value="{{ dtpFormat1 | date: 'dd-MM-yyyy' }}"
+          bsDatepicker [(ngModel)]="dtpFormat1">
+      </div>
+      <div class="col-sm-2 mb-1">
+        <input type="text" class="form-control" placeholder="First Date" bsDatepicker [(ngModel)]="dtpFormat2"
+          value="{{ dtpFormat2 | date: 'dd-MM-yyyy' }}">
+      </div>
+      <div class="col-sm-1 mb-1">
+        <input type="submit" class="btn btn-success btn-block" value="Search" (click)="searchByDate()">
+      </div>
+    </div>
+    <div class="row mt-2">
+      <div class="col-sm-12">
+        <div class="outof-rtl">
+          <dx-data-grid [dataSource]="searchByTowDate" [rowAlternationEnabled]="true" [allowColumnReordering]="true"
+            [columnAutoWidth]="true" [showBorders]="true">
+            <dxo-paging [pageSize]="10"></dxo-paging>
+            <dxo-pager [showPageSizeSelector]="true" [allowedPageSizes]="[10,20,30,50,80,100]" [showInfo]="true">
+            </dxo-pager>
+            <dxo-filter-row [visible]="true" [applyFilter]="true"></dxo-filter-row>
+            <dxo-header-filter [visible]="true"></dxo-header-filter>
+            <dxi-column dataField="civilID" caption="المدنى"></dxi-column>
+            <dxi-column dataField="name" caption="الاسم"></dxi-column>
+            <dxi-column dataField="contract" caption="العقد"></dxi-column>
+            <dxi-column dataField="nationality" caption="الجنسية"></dxi-column>
+            <dxi-column dataField="plarform" caption="رقم اللوحة"></dxi-column>
+            <dxi-column dataField="dateR" caption="تاريخ الارسال"></dxi-column>
+            <dxi-column dataField="fileAgree" caption="حالة الملف"></dxi-column>
+            <dxi-column type="buttons" caption="Show Files" cellTemplate="myCellTemplate1">
+              <div *dxTemplate="let data of 'myCellTemplate1'">
+                <div (click)="showModal(modalEditPDF, data,0)"><i class="fa fa-file"></i></div>
+              </div>
+            </dxi-column>
+          </dx-data-grid>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row mt-2" *ngIf="showRowsInContainer == 2">
+    <div class="col-sm-12">
+      <div class="outof-rtl">
+        <dx-data-grid [dataSource]="dataFile" [rowAlternationEnabled]="true" [allowColumnReordering]="true"
+          [columnAutoWidth]="true" [showBorders]="true">
+          <dxo-paging [pageSize]="10"></dxo-paging>
+          <dxo-pager [showPageSizeSelector]="true" [allowedPageSizes]="[10,20,30,50,80,100]" [showInfo]="true">
+          </dxo-pager>
+          <dxo-filter-row [visible]="true" [applyFilter]="true"></dxo-filter-row>
+          <dxo-header-filter [visible]="true"></dxo-header-filter>
+          <dxi-column dataField="civilid" caption="المدنى"></dxi-column>
+          <dxi-column dataField="name" caption="الاسم"></dxi-column>
+          <dxi-column dataField="contractNum" caption="العقد"></dxi-column>
+          <dxi-column dataField="nationality" caption="الجنسية"></dxi-column>
+          <dxi-column dataField="plateNumber" caption="رقم اللوحة"></dxi-column>
+          <dxi-column type="buttons" caption="Edit" cellTemplate="myCellTemplate">
+            <div *dxTemplate="let data of 'myCellTemplate'">
+              <div (click)="updateFile(data)"><i class="fa fa-edit"></i></div>
+            </div>
+          </dxi-column>
+          <dxi-column type="buttons" caption="Show Files" cellTemplate="myCellTemplate1">
+            <div *dxTemplate="let data of 'myCellTemplate1'">
+              <div (click)="showModal(modalEditPDF, data,1)"><i class="fa fa-file"></i></div>
+            </div>
+          </dxi-column>
+          <dxi-column type="buttons" caption="Delete" cellTemplate="myCellTemplate2">
+            <div *dxTemplate="let data of 'myCellTemplate2'">
+              <div (click)="showModal(modalConfirmDelete, data,1)"><i class="fa fa-trash"></i></div>
+            </div>
+          </dxi-column>
+        </dx-data-grid>
+      </div>
+    </div>
+  </div>
+  <div class="row mt-2 send-file" *ngIf="showRowsInContainer == 3">
+    <div class="col-sm-12">
+      <div class="outof-rtl">
+        <dx-data-grid [dataSource]="refusedFile" [rowAlternationEnabled]="true" [allowColumnReordering]="true"
+          [columnAutoWidth]="true" [showBorders]="true">
+          <dxo-paging [pageSize]="10"></dxo-paging>
+          <dxo-pager [showPageSizeSelector]="true" [allowedPageSizes]="[10,20,30,50,80,100]" [showInfo]="true">
+          </dxo-pager>
+          <dxo-filter-row [visible]="true" [applyFilter]="true"></dxo-filter-row>
+          <dxo-header-filter [visible]="true"></dxo-header-filter>
+          <dxi-column dataField="civilid" caption="المدنى"></dxi-column>
+          <dxi-column dataField="name" caption="الاسم"></dxi-column>
+          <dxi-column dataField="contractNum" caption="العقد"></dxi-column>
+          <dxi-column dataField="nationality" caption="الجنسية"></dxi-column>
+          <dxi-column dataField="plateNumber" caption="رقم اللوحة"></dxi-column>
+          <dxi-column type="buttons" caption="Edit" cellTemplate="myCellTemplate">
+            <div *dxTemplate="let data of 'myCellTemplate'">
+              <div (click)="updateFile(data)"><i class="fa fa-edit"></i></div>
+            </div>
+          </dxi-column>
+          <dxi-column type="buttons" caption="Show Files" cellTemplate="myCellTemplate1">
+            <div *dxTemplate="let data of 'myCellTemplate1'">
+              <div (click)="showModal(modalEditPDF, data,1)"><i class="fa fa-file"></i></div>
+            </div>
+          </dxi-column>
+          <dxi-column type="buttons" caption="Delete" cellTemplate="myCellTemplate2">
+            <div *dxTemplate="let data of 'myCellTemplate2'">
+              <div (click)="showModal(modalConfirmDelete, data,1)"><i class="fa fa-trash"></i></div>
+            </div>
+          </dxi-column>
+        </dx-data-grid>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- Start edit file -->
+
+
+  <div class="container send-file mt-5" *ngIf="appEdit == 1">
+    <div class="row mt-1 mb-3">
+      <div class="col-sm-1" (click)="disAppearEdit()"><span><i class="fas fa-window-close fa-3x"></i></span></div>
+    </div>
+    <div class="row mb-2">
+      <div class="col-sm-6">
+        <div class="row-renatal-date">
+          <div class="row mb-1">
+            <label class="col-sm-1">الاسم</label>
+            <div class="col-sm-11">
+              <input type="text" class="form-control form-control-sm" placeholder="Name"
+                [(ngModel)]="sendFileForm.name">
+            </div>
+          </div>
+          <div class="row mb-1">
+            <label class="col-sm-1">المدنى</label>
+            <div class="col-sm-11">
+              <input type="number" class="form-control form-control-sm" placeholder="Civil Id"
+                (keypress)="onlyNumberAllowed($event)" [(ngModel)]="sendFileForm.civilId">
+            </div>
+          </div>
+          <div class="row mb-1">
+            <label class="col-sm-1">العقد</label>
+            <div class="col-sm-11">
+              <input type="number" class="form-control form-control-sm" placeholder="Contract number"
+                [(ngModel)]="sendFileForm.contractNum">
+            </div>
+          </div>
+          <div class="row mb-1">
+            <label class="col-sm-1">الجنسية</label>
+            <div class="col-sm-11">
+              <input type="text" class="form-control form-control-sm" placeholder="Nationality"
+                [(ngModel)]="sendFileForm.nationality">
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-6">
+        <div class="row-renatal-date">
+          <div class="row mb-1">
+            <label class="col-sm-2">رقم اللوحة</label>
+            <div class="col-sm-10">
+              <input type="text" class="form-control form-control-sm" placeholder="plate number"
+                [(ngModel)]="sendFileForm.plateNumber">
+            </div>
+          </div>
+          <div class="row mb-1">
+            <label class="col-sm-2">موديل</label>
+            <div class="col-sm-10">
+              <input type="number" class="form-control form-control-sm" (keypress)="onlyNumberAllowed($event)"
+                [(ngModel)]="sendFileForm.model" placeholder="Model">
+            </div>
+          </div>
+          <div class="row mb-1">
+            <label class="col-sm-2">نوع السياره</label>
+            <div class="col-sm-10">
+              <input type="text" class="form-control form-control-sm" placeholder="Type"
+                [(ngModel)]="sendFileForm.typeCar">
+            </div>
+          </div>
+          <div class="row mb-1">
+            <label class="col-sm-2">الشكل</label>
+            <div class="col-sm-10">
+              <input type="text" class="form-control form-control-sm" placeholder="Shape"
+                [(ngModel)]="sendFileForm.shape">
+            </div>
+          </div>
+          <div class="row mb-1">
+            <label class="col-sm-2">اللون</label>
+            <div class="col-sm-10">
+              <input type="text" class="form-control form-control-sm" placeholder="Color"
+                [(ngModel)]="sendFileForm.color">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ========================================================================= -->
+
+    <h4>الايجار اليومى وقراءة العداد</h4>
+    <hr />
+    <div class="row mb-2 mt-3">
+      <div class="col-sm-6">
+        <div class="row-renatal-date">
+          <div class="row mb-sm-1">
+            <label class="col-sm-2 form-control-sm">تاريخ التأجير</label>
+            <div class="col-sm-10">
+              <input type="text" class="form-control form-control-sm" placeholder="Rental date" bsDatepicker
+                value="{{ sendFileForm.dateRentalCar | date: 'dd-MM-yyyy'}}">
+            </div>
+          </div>
+          <div class="row mb-sm-1">
+            <label class="col-sm-2 form-control-sm">تاريخ العودة</label>
+            <div class="col-sm-10">
+              <input type="text" class="form-control form-control-sm" placeholder="Return date" bsDatepicker
+                value="{{ sendFileForm.dateReturnCar | date: 'dd-MM-yyyy' }}">
+            </div>
+          </div>
+          <div class="row mb-sm-1">
+            <label class="col-sm-2">ايجار اليوم</label>
+            <div class="col-sm-10">
+              <input type="number" class="form-control form-control-sm" placeholder="Rent today" value="0"
+                (input)="calcCounter();clacAgance()" [(ngModel)]="sendFileForm.rentToday">
+            </div>
+          </div>
+          <label class="col-sm-2">قيمة الايجار</label>
+          <label class="col-sm-10 mb-2 mt-2 text-center">{{ fileCounter.countDay }} يوم × {{ sendFileForm.rentToday }}
+            دينار = {{ this.sendFileForm.totalRenatl }} دينار</label>
+        </div>
+      </div>
+      <div class="col-sm-6">
+        <div class="row-renatal-date">
+          <div class="row">
+            <label class="col-sm-2">قراءة عداد الخروج</label>
+            <div class="col-sm-6">
+              <input type="number" class="form-control form-control-sm" (keypress)="onlyNumberAllowed($event)"
+                placeholder="Read exit counter" (input)="calcCounter()" [(ngModel)]="sendFileForm.readExitCounter">
+            </div>
+          </div>
+          <div class="row mb-1">
+            <label class="col-sm-2">قراءة عداد الدخول</label>
+            <div class="col-sm-6">
+              <input type="number" class="form-control form-control-sm" placeholder="Read enter counter"
+                (input)="calcCounter()" (keypress)="onlyNumberAllowed($event)"
+                [(ngModel)]="sendFileForm.readEnterCounter">
+            </div>
+            <label class="col-sm-4 text-center"> الفرق = {{ this.fileCounter.difCounter }} كيلو </label>
+          </div>
+          <div class="row mb-1">
+            <label class="col-sm-2">الحد اليومى المسموح به</label>
+            <div class="col-sm-6">
+              <input type="number" class="form-control form-control-sm" placeholder="Allowed daily limit"
+                (input)="calcCounter()" (keypress)="onlyNumberAllowed($event)"
+                [(ngModel)]="sendFileForm.allowDailyLimit">
+            </div>
+            <label class="col-sm-4 text-center"> الزيادة = {{ this.fileCounter.encreaseCounter }} كيلو </label>
+          </div>
+          <div class="row mb-1">
+            <label class="col-sm-2">قيمة الوحدة الزيادة</label>
+            <div class="col-sm-6">
+              <input type="number" class="form-control form-control-sm" placeholder="Unit value increment" value="0"
+                (input)="calcCounter()" [(ngModel)]="sendFileForm.unitValueIncrement">
+            </div>
+            <label class="col-sm-4 text-center">المبلغ = {{ sendFileForm.incrementAmount }}
+              دينار</label>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ========================================================================= -->
+
+    <h4>الدخول والخروج من الوكالة</h4>
+    <hr />
+    <div class="row mb-2 mt-3">
+      <div class="col-sm-6">
+        <div class="row-renatal-date">
+          <div class="row mb-1">
+            <label class="col-sm-12 text-center">ايجار دخول الوكالة</label>
+          </div>
+          <div class="row mb-1">
+            <label class="col-sm-3">تاريخ دخول الوكالة</label>
+            <div class="col-sm-9">
+              <input type="text" class="form-control form-control-sm" bsDatepicker
+                placeholder="Date of entry into the agency" (ngModelChange)="clacAgance()"
+                value="{{ sendFileForm.dateEnterAgancy | date: 'dd-MM-yyyy' }}">
+            </div>
+          </div>
+          <div class="row mb-3">
+            <label class="col-sm-3">تاريخ الخروج من الوكالة</label>
+            <div class="col-sm-9">
+              <input type="text" class="form-control form-control-sm" bsDatepicker
+                placeholder="Date of exit from the agency" (ngModelChange)="clacAgance()"
+                value="{{ sendFileForm.dateExitAgancy | date: 'dd-MM-yyyy'}}">
+              <!-- <div class="invalid-feedback"
+                *ngIf="sendFileForm.get('DateExitAgancy').hasError('required') && sendFileForm.get('DateExitAgancy').touched">
+                Password is required
+              </div> -->
+            </div>
+          </div>
+          <div class="row mb-1">
+            <label class="col-sm-3">قيمة الايجار</label>
+            <label class="col-sm-9 text-center">{{ fileCounter.aganceDays }} يوم ×
+              {{ sendFileForm.rentToday }}
+              دينار
+              = {{ sendFileForm.totalAgancyRent }} دينار
+            </label>
+          </div>
+          <div class="row mt-1">
+            <label class="col-sm-3"></label>
+            <div class="col-sm-4">
+              <input type="button" class="btn btn-block btn-success" value="تعديل / حذف مرفق">
+            </div>
+            <div class="col-sm-4">
+              <input type="button" class="btn btn-block btn-success" value="اضافة مرفق">
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- <div class="col-sm-6">
+        <div class="row-renatal-date">
+          <div class="row mb-2">
+            <div class="col-sm-12">
+              <table class="table table-pdf">
+                <thead>
+                  <tr>
+                    <th>Id</th>
+                    <th>Name</th>
+                    <th>Size</th>
+                    <th>Show</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let item of repairsPDF;let i = index">
+                    <th>{{ i + 1 }}</th>
+                    <th>{{ item.FileName }}</th>
+                    <th>{{ item.FileSize }}</th>
+                    <th (click)="deletePDf2(item.FileName)"><i class="fa fa-trash"></i></th>
+                    <th (click)="showPdf2(item.Pdf)"><i class="fa fa-eye"></i></th>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div> -->
+    </div>
+
+    <!-- ========================================================================= -->
+
+    <h4>التــأمين</h4>
+    <hr />
+    <div class="row mb2 mt-3">
+      <div class="col-sm-6">
+        <div class="row-renatal-date">
+          <div class="row mb-1">
+            <label class="col-sm-3">مبلغ وثيقة التأمين</label>
+            <div class="col-sm-9">
+              <input type="number" class="form-control form-control-sm" placeholder="Insurance amount"
+                (keypress)="onlyNumberAllowed($event)" [(ngModel)]="sendFileForm.insuranceAmount">
+            </div>
+          </div>
+          <div class="row mb-1">
+            <label class="col-sm-3">تاريخ بدأ الوثيقة</label>
+            <div class="col-sm-9">
+              <input type="text" class="form-control form-control-sm" placeholder="Document start date" bsDatepicker
+                value="{{ sendFileForm.insuranceStartDate | date: 'dd-MM-yyyy' }}">
+            </div>
+          </div>
+          <div class="row mb-1">
+            <label class="col-sm-3">تاريخ انتهاء الوثيقة</label>
+            <div class="col-sm-9">
+              <input type="text" class="form-control form-control-sm" placeholder="Document end date" bsDatepicker
+                value="{{ sendFileForm.insuranceEndDate | date: 'dd-MM-yyyy' }}">
+            </div>
+          </div>
+          <div class="row mb-1">
+            <label class="col-sm-3">شركة التأمين</label>
+            <div class="col-sm-9">
+              <input type="text" class="form-control form-control-sm" placeholder="Insurance company"
+                [(ngModel)]="sendFileForm.insuranceCompany">
+            </div>
+          </div>
+          <div class="row mt-1">
+            <label class="col-sm-3"></label>
+            <div class="col-sm-4">
+              <input type="button" class="btn btn-block btn-success" value="تعديل / حذف مرفق">
+            </div>
+            <div class="col-sm-4">
+              <input type="button" class="btn btn-block btn-success" value="اضافة مرفق">
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- <div class="col-sm-6">
+        <div class="row-renatal-date">
+          <div class="row mb-1">
+            <div class="col-sm-12">
+              <table class="table table-pdf">
+                <thead>
+                  <tr>
+                    <th>Id</th>
+                    <th>Name</th>
+                    <th>Size</th>
+                    <th>Show</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let item of InsurancePdf;let i = index">
+                    <th>{{ i + 1 }}</th>
+                    <th>{{ item.FileName }}</th>
+                    <th>{{ item.FileSize }}</th>
+                    <th (click)="deletePDf3(item.FileName)"><i class="fa fa-trash"></i></th>
+                    <th (click)="showPdf(item.pdf)"><i class="fa fa-eye"></i></th>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div> -->
+    </div>
+
+    <!-- ========================================================================= -->
+
+    <h4>الحــادث</h4>
+    <hr />
+    <div class="row mb2 mt-3">
+      <div class="col-sm-6">
+        <div class="row-renatal-date">
+          <div class="row mb-1">
+            <label class="col-sm-3">تاريخ الحادث</label>
+            <div class="col-sm-9">
+              <input type="text" class="form-control form-control-sm" placeholder="Accident Date" bsDatepicker
+                value="{{ sendFileForm.accidentDate | date: 'dd-MM-yyyy' }}">
+            </div>
+          </div>
+          <div class="row mb-1">
+            <label class="col-sm-3">نوع الحادث</label>
+            <div class="col-sm-9">
+              <select class="custom-select custom-select-sm" [(ngModel)]="sendFileForm.damageType">
+                <option *ngFor="let item of typeAccident" value="{{ item.value }}">
+                  {{ item.value }}</option>
+              </select>
+            </div>
+          </div>
+          <div class="row mb-1">
+            <label class="col-sm-3">نوع الاضرار</label>
+            <div class="col-sm-9">
+              <select class="custom-select custom-select-sm" [(ngModel)]="sendFileForm.harmType">
+                <option *ngFor="let item of typeDamage" value="{{ item.value }}">
+                  {{ item.value }}</option>
+              </select>
+            </div>
+          </div>
+          <div class="row mb-1">
+            <label class="col-sm-3">قيمة التحمل</label>
+            <div class="col-sm-9">
+              <input type="number" class="form-control form-control-sm" placeholder="Endurance value"
+                (keypress)="onlyNumberAllowed($event)" [(ngModel)]="sendFileForm.enduranceValue">
+            </div>
+          </div>
+          <div class="row mb-1">
+            <label class="col-sm-3">رسوم فتح الملف بالوكالة</label>
+            <div class="col-sm-9">
+              <input type="number" class="form-control form-control-sm" placeholder="Fee open file in agancy"
+                (keypress)="onlyNumberAllowed($event)" [(ngModel)]="sendFileForm.feeOpenFileAgancy">
+            </div>
+          </div>
+          <div class="row mb-1">
+            <label class="col-sm-3">قيمة المقايسة</label>
+            <div class="col-sm-9">
+              <input type="number" class="form-control form-control-sm" placeholder="Measurement amount"
+                (keypress)="onlyNumberAllowed($event)" [(ngModel)]="sendFileForm.measurementValue">
+            </div>
+          </div>
+          <div class="row mb-1">
+            <label class="col-sm-3">رقم شيك التعويض</label>
+            <div class="col-sm-9">
+              <input type="number" class="form-control form-control-sm" placeholder="Check number"
+                (keypress)="onlyNumberAllowed($event)" [(ngModel)]="sendFileForm.checkNumber">
+            </div>
+          </div>
+          <div class="row mb-1">
+            <label class="col-sm-3">قيمة شيك التعويض</label>
+            <div class="col-sm-9">
+              <input type="number" class="form-control form-control-sm" placeholder="Check amount"
+                (keypress)="onlyNumberAllowed($event)" [(ngModel)]="sendFileForm.checkAmount">
+            </div>
+          </div>
+          <div class="row mb-1">
+            <label class="col-sm-3">تاريخ شيك التعويض</label>
+            <div class="col-sm-9">
+              <input type="text" class="form-control form-control-sm" placeholder="Check date" bsDatepicker
+                value="{{ sendFileForm.checkDate | date: 'dd-MM-yyyy' }}">
+            </div>
+          </div>
+          <div class="row mt-1">
+            <label class="col-sm-3"></label>
+            <div class="col-sm-4">
+              <input type="button" class="btn btn-block btn-success" value="تعديل / حذف مرفق">
+            </div>
+            <div class="col-sm-4">
+              <input type="button" class="btn btn-block btn-success" value="اضافة مرفق">
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- <div class="col-sm-6">
+        <div class="row-renatal-date">
+          <div class="row mb-1">
+            <div class="col-sm-12">
+              <table class="table table-pdf">
+                <thead>
+                  <tr>
+                    <th>Id</th>
+                    <th>Name</th>
+                    <th>Size</th>
+                    <th>Show</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let item of damagePdf;let i = index">
+                    <th>{{ i + 1 }}</th>
+                    <th>{{ item.FileName }}</th>
+                    <th>{{ item.FileSize }}</th>
+                    <th (click)="deletePDf4(item.FileName)"><i class="fa fa-trash"></i></th>
+                    <th (click)="showPdf(item.pdf)"><i class="fa fa-eye"></i></th>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div> -->
+    </div>
+
+    <!-- ========================================================================= -->
+
+    <h4>المرفقات</h4>
+    <hr />
+    <div class="col-sm-12">
+      <div class="row-renatal-date">
+        <div class="row mb-1">
+          <div class="col-sm-12">
+            <table class="table table-pdf">
+              <thead>
+                <tr>
+                  <th>Id</th>
+                  <th>Name</th>
+                  <th>Attachment</th>
+                  <th>Note</th>
+                  <th>Amount</th>
+                  <th>Size</th>
+                  <th>Show</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let item of repairsPDF;let i = index">
+                  <th>{{ i + 1 }}</th>
+                  <th>{{ item.name }}</th>
+                  <th>{{ item.note }}</th>
+                  <th>{{ item.amount }}</th>
+                  <th>{{ item.attachName }}</th>
+                  <th>{{ item.size }}</th>
+                  <th (click)="showPdf(item.id)"><i class="fa fa-eye"></i></th>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row mb-2 mt-2">
+      <div class="col-sm-3">
+        <input type="button" value="Update File" class="btn btn-primary btn-block" (click)="editFile()">
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- End Edit File -->
+
+<ng-template #modalConfirmDelete>
+  <div class="modal-header">
+    <h3 class="modal-title pull-left">Confirmed Delete</h3>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+      <!-- <span aria-hidden="true">&times;</span> -->
+      <i></i>
+    </button>
+  </div>
+  <div class="modal-body">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-sm-12">
+          <h3 class="text-center">هل تريد الحذف؟</h3>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-6">
+          <input type="button" value="Yes" class="btn btn-block btn-danger" (click)="deleteFile();modalRef.hide()">
+        </div>
+        <div class="col-sm-6">
+          <input type="button" value="NO" class="btn btn-block btn-primary" (click)="modalRef.hide()">
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-template>
+
+<ng-template #modalConfirmDeletePdf>
+  <div class="modal-header">
+    <h3 class="modal-title pull-left">Confirmed Delete</h3>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-sm-12">
+          <h3 class="text-center">هل تريد الحذف؟</h3>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-6">
+          <input type="button" value="Yes" class="btn btn-block btn-danger" (click)="deletePDF();modalRef.hide()">
+        </div>
+        <div class="col-sm-6">
+          <input type="button" value="NO" class="btn btn-block btn-primary" (click)="modalRef.hide()">
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-template>
+
+<ng-template #modalEditPDF>
+  <div class="modal-header">
+    <h3 class="modal-title pull-left">{{ nameCustomer }}</h3>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-sm-12">
+          <div class="outof-rtl">
+            <dx-data-grid [dataSource]="dataPdf" [rowAlternationEnabled]="true" [allowColumnReordering]="true"
+              [columnAutoWidth]="true" [showBorders]="true">
+              <dxo-paging [pageSize]="10"></dxo-paging>
+              <dxo-pager [showPageSizeSelector]="true" [allowedPageSizes]="[10,20,30,50,80,100]" [showInfo]="true">
+              </dxo-pager>
+              <dxo-filter-row [visible]="true" [applyFilter]="true"></dxo-filter-row>
+              <dxo-header-filter [visible]="true"></dxo-header-filter>
+              <dxi-column dataField="fileName" caption="اسم الملف"></dxi-column>
+              <dxi-column dataField="fileSize" caption="الحجم"></dxi-column>
+              <dxi-column dataField="isVoke" caption="الملف"></dxi-column>
+              <dxi-column type="buttons" caption="Show" cellTemplate="celTemp1">
+                <div *dxTemplate="let data of 'celTemp1'">
+                  <div (click)="showPdf(data)"><i class="fa fa-eye"></i></div>
+                </div>
+              </dxi-column>
+            </dx-data-grid>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-template>

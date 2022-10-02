@@ -1,0 +1,9 @@
+{
+    "version": 3,
+    "mappings": "AAAA,AAAA,gBAAgB,CAAC;EACf,SAAS,EAAE,GAAG;CACf",
+    "sources": [
+        "uploadProcess.component.scss"
+    ],
+    "names": [],
+    "file": "uploadProcess.component.css"
+}

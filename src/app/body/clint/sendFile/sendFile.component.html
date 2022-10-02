@@ -1,0 +1,783 @@
+<form (ngSubmit)="uploadFile()" [formGroup]="sendFileForm">
+  <div class="row mb-2">
+    <div class="col-sm-6">
+      <div class="row-renatal-date">
+        <div class="row mb-1">
+          <label class="col-sm-1">الاسم</label>
+          <div class="col-sm-11">
+            <input type="text" class="form-control form-control-sm"
+              [ngClass]="{'is-invalid': sendFileForm.get('Name').errors && sendFileForm.get('Name').touched}"
+              placeholder="Name" formControlName="Name">
+          </div>
+        </div>
+        <div class="row mb-1">
+          <label class="col-sm-1">المدنى</label>
+          <div class="col-sm-11">
+            <input type="number" class="form-control form-control-sm"
+              [ngClass]="{'is-invalid': sendFileForm.get('CivilId').errors && sendFileForm.get('CivilId').touched}"
+              placeholder="Civil Id" (keypress)="onlyNumberAllowed($event)" formControlName="CivilId">
+          </div>
+        </div>
+        <div class="row mb-1">
+          <label class="col-sm-1">العقد</label>
+          <div class="col-sm-11">
+            <input type="number" class="form-control form-control-sm"
+              [ngClass]="{'is-invalid': sendFileForm.get('ContractNum').errors && sendFileForm.get('ContractNum').touched}"
+              placeholder="Contract number" formControlName="ContractNum">
+          </div>
+        </div>
+        <div class="row mb-1">
+          <label class="col-sm-1">الجنسية</label>
+          <div class="col-sm-11">
+            <input type="text" class="form-control form-control-sm"
+              [ngClass]="{'is-invalid': sendFileForm.get('Nationality').errors && sendFileForm.get('Nationality').touched}"
+              placeholder="Nationality" formControlName="Nationality">
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-6">
+      <div class="row-renatal-date">
+        <div class="row mb-1">
+          <label class="col-sm-2">رقم اللوحة</label>
+          <div class="col-sm-10">
+            <input type="text" class="form-control form-control-sm"
+              [ngClass]="{'is-invalid': sendFileForm.get('PlateNumber').errors && sendFileForm.get('PlateNumber').touched}"
+              placeholder="plate number" formControlName="PlateNumber">
+          </div>
+        </div>
+        <div class="row mb-1">
+          <label class="col-sm-2">موديل</label>
+          <div class="col-sm-10">
+            <input type="number" class="form-control form-control-sm" (keypress)="onlyNumberAllowed($event)"
+              [ngClass]="{'is-invalid': sendFileForm.get('Model').errors && sendFileForm.get('Model').touched}"
+              placeholder="Model" formControlName="Model">
+          </div>
+        </div>
+        <div class="row mb-1">
+          <label class="col-sm-2">نوع السياره</label>
+          <div class="col-sm-10">
+            <input type="text" class="form-control form-control-sm" placeholder="Type"
+              [ngClass]="{'is-invalid': sendFileForm.get('TypeCar').errors && sendFileForm.get('TypeCar').touched}"
+              formControlName="TypeCar">
+          </div>
+        </div>
+        <div class="row mb-1">
+          <label class="col-sm-2">الشكل</label>
+          <div class="col-sm-10">
+            <input type="text" class="form-control form-control-sm" placeholder="Shape"
+              [ngClass]="{'is-invalid': sendFileForm.get('Shape').errors && sendFileForm.get('Shape').touched}"
+              formControlName="Shape">
+          </div>
+        </div>
+        <div class="row mb-1">
+          <label class="col-sm-2">اللون</label>
+          <div class="col-sm-10">
+            <input type="text" class="form-control form-control-sm" placeholder="Color"
+              [ngClass]="{'is-invalid': sendFileForm.get('Color').errors && sendFileForm.get('Color').touched}"
+              formControlName="Color">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========================================================================= -->
+
+  <h3>الايجار اليومى وقراءة العداد</h3>
+  <hr />
+  <div class="row mb-2 mt-3">
+    <div class="col-sm-6">
+      <div class="row-renatal-date">
+        <div class="row mb-sm-1">
+          <label class="col-sm-2 form-control-sm">تاريخ التأجير</label>
+          <div class="col-sm-10">
+            <input type="text" class="form-control form-control-sm" placeholder="Rental date" bsDatepicker
+              (ngModelChange)="calcCounter()" value="{{ sendFileForm.get('DateRentalCar').value | date:'dd-MM-yyyy' }}"
+              [ngClass]="{'is-invalid': sendFileForm.get('DateRentalCar').errors && sendFileForm.get('DateRentalCar').touched}"
+              formControlName="DateRentalCar">
+          </div>
+        </div>
+        <div class="row mb-sm-1">
+          <label class="col-sm-2 form-control-sm">تاريخ العودة الفعلى</label>
+          <div class="col-sm-10">
+            <input type="text" class="form-control form-control-sm" placeholder="Return date" bsDatepicker
+              (ngModelChange)="calcCounter()" value="{{ sendFileForm.get('DateReturnCar').value | date:'dd-MM-yyyy' }}"
+              [ngClass]="{'is-invalid': sendFileForm.get('DateReturnCar').errors && sendFileForm.get('DateReturnCar').touched}"
+              formControlName="DateReturnCar">
+          </div>
+        </div>
+        <div class="row mb-sm-1">
+          <label class="col-sm-2">ايجار اليوم</label>
+          <div class="col-sm-10">
+            <input type="number" class="form-control form-control-sm" placeholder="Rent today" value="0"
+              [ngClass]="{'is-invalid': sendFileForm.get('RentToday').errors && sendFileForm.get('RentToday').touched}"
+              (input)="calcCounter();clacAgance()" formControlName="RentToday">
+          </div>
+        </div>
+        <label class="col-sm-2">قيمة الايجار</label>
+        <label class="col-sm-10 mb-2 mt-2 text-center"> {{ saveSendFile.countDay }} يوم × {{
+          sendFileForm.get('RentToday').value }} دينار =
+          {{ sendFileForm.get('TotalRenatl').value }} دينار </label>
+      </div>
+    </div>
+    <div class="col-sm-6">
+      <div class="row-renatal-date">
+        <div class="row">
+          <label class="col-sm-2">قراءة عداد الخروج</label>
+          <div class="col-sm-6">
+            <input type="number" class="form-control form-control-sm" (keypress)="onlyNumberAllowed($event)"
+              placeholder="Read exit counter"
+              [ngClass]="{'is-invalid': sendFileForm.get('ReadExitCounter').errors && sendFileForm.get('ReadExitCounter').touched}"
+              (input)="calcCounter()" formControlName="ReadExitCounter">
+          </div>
+        </div>
+        <div class="row mb-1">
+          <label class="col-sm-2">قراءة عداد الدخول</label>
+          <div class="col-sm-6">
+            <input type="number" class="form-control form-control-sm" placeholder="Read enter counter"
+              [ngClass]="{'is-invalid': sendFileForm.get('ReadEnterCounter').errors && sendFileForm.get('ReadEnterCounter').touched}"
+              (input)="calcCounter()" formControlName="ReadEnterCounter" (keypress)="onlyNumberAllowed($event)">
+          </div>
+          <label class="col-sm-4 text-center"> الفرق = {{ this.saveSendFile.difCounter }} كيلو </label>
+        </div>
+        <div class="row mb-1">
+          <label class="col-sm-2">الحد اليومى المسموح به</label>
+          <div class="col-sm-6">
+            <input type="number" class="form-control form-control-sm" placeholder="Allowed daily limit"
+              [ngClass]="{'is-invalid': sendFileForm.get('AllowDailyLimit').errors && sendFileForm.get('AllowDailyLimit').touched}"
+              (input)="calcCounter()" formControlName="AllowDailyLimit" (keypress)="onlyNumberAllowed($event)">
+          </div>
+          <label class="col-sm-4 text-center"> الزيادة = {{ this.saveSendFile.encreaseCounter }} كيلو </label>
+        </div>
+        <div class="row mb-1">
+          <label class="col-sm-2">قيمة الوحدة الزيادة</label>
+          <div class="col-sm-6">
+            <input type="number" class="form-control form-control-sm" placeholder="Unit value increment" value="0"
+              [ngClass]="{'is-invalid': sendFileForm.get('UnitValueIncrement').errors && sendFileForm.get('UnitValueIncrement').touched}"
+              (input)="calcCounter()" formControlName="UnitValueIncrement">
+          </div>
+          <label class="col-sm-4 text-center">المبلغ = {{ sendFileForm.get('IncrementAmount').value }}
+            دينار</label>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========================================================================= -->
+
+  <h3>الدخول والخروج من الوكالة</h3>
+  <hr />
+  <div class="row mb-2 mt-3">
+    <div class="col-sm-6">
+      <div class="row-renatal-date">
+        <div class="row mb-1">
+          <label class="col-sm-12 text-center">ايجار دخول الوكالة</label>
+        </div>
+        <div class="row mb-1">
+          <label class="col-sm-3">تاريخ دخول الوكالة</label>
+          <div class="col-sm-9">
+            <input type="text" class="form-control form-control-sm" bsDatepicker
+              placeholder="Date of entry into the agency" (ngModelChange)="clacAgance();agancyChanged()"
+              value="{{ sendFileForm.get('DateEnterAgancy').value | date:'dd-MM-yyyy' }}"
+              formControlName="DateEnterAgancy">
+          </div>
+        </div>
+        <div class="row mb-3">
+          <label class="col-sm-3">تاريخ الخروج من الوكالة</label>
+          <div class="col-sm-9">
+            <input type="text" class="form-control form-control-sm" bsDatepicker
+              placeholder="Date of exit from the agency" (ngModelChange)="clacAgance()"
+              [ngClass]="{'is-invalid': sendFileForm.get('DateExitAgancy').errors && sendFileForm.get('DateExitAgancy').touched}"
+              value="{{ sendFileForm.get('DateExitAgancy').value | date:'dd-MM-yyyy' }}"
+              formControlName="DateExitAgancy">
+            <!-- <div class="invalid-feedback"
+              *ngIf="sendFileForm.get('DateExitAgancy').hasError('required') && sendFileForm.get('DateExitAgancy').touched">
+              Password is required
+            </div> -->
+          </div>
+        </div>
+        <div class="row mb-1">
+          <label class="col-sm-3">قيمة الايجار</label>
+          <label class="col-sm-9 text-center">{{ saveSendFile.aganceDays }} يوم ×
+            {{ sendFileForm.get('RentToday').value }}
+            دينار
+            = {{ sendFileForm.get('TotalAgancyRent').value }} دينار
+          </label>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-6">
+      <div class="row-renatal-date">
+        <div class="row mb-1">
+          <div class="col-sm-10">
+            <div class="input-group mb-1">
+              <div class="custom-file">
+                <input type="file" (change)='onFileChange2($event)' class="custom-file-input" id="inputFile"
+                  aria-describedby="inputGroupFileAddon01" name="inputFile">
+                <label class="custom-file-label" for="inputGroupFile01"> .... Choose file</label>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row mb-2">
+          <div class="col-sm-12">
+            <table class="table table-pdf">
+              <thead>
+                <tr>
+                  <th>Id</th>
+                  <th>Name</th>
+                  <th>Size</th>
+                  <th>Delete</th>
+                  <th>Show</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let item of repairsPDF;let i = index">
+                  <th>{{ i + 1 }}</th>
+                  <th>{{ item.FileName }}</th>
+                  <th>{{ item.FileSize }}</th>
+                  <th (click)="deletePDf2(item.FileName)"><i class="fa fa-trash"></i></th>
+                  <th (click)="showPdf2(item.Pdf)"><i class="fa fa-eye"></i></th>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========================================================================= -->
+
+  <h3>التــأمين</h3>
+  <hr />
+  <div class="row mb2 mt-3">
+    <div class="col-sm-6">
+      <div class="row-renatal-date">
+        <div class="row mb-1">
+          <label class="col-sm-3">مبلغ وثيقة التأمين</label>
+          <div class="col-sm-9">
+            <input type="number" class="form-control form-control-sm" placeholder="Insurance amount"
+              formControlName="InsuranceAmount" (keypress)="onlyNumberAllowed($event)"
+              (ngModelChange)="insuranceChanged()">
+          </div>
+        </div>
+        <div class="row mb-1">
+          <label class="col-sm-3">تاريخ بدأ الوثيقة</label>
+          <div class="col-sm-9">
+            <input type="text" class="form-control form-control-sm" placeholder="Document start date" bsDatepicker
+              [ngClass]="{'is-invalid': sendFileForm.get('InsuranceStartDate').errors && sendFileForm.get('InsuranceStartDate').touched}"
+              formControlName="InsuranceStartDate"
+              value="{{ sendFileForm.get('InsuranceStartDate').value | date: 'dd-MM-yyyy' }}">
+          </div>
+        </div>
+        <div class="row mb-1">
+          <label class="col-sm-3">تاريخ انتهاء الوثيقة</label>
+          <div class="col-sm-9">
+            <input type="text" class="form-control form-control-sm" placeholder="Document end date" bsDatepicker
+              [ngClass]="{'is-invalid': sendFileForm.get('InsuranceEndDate').errors && sendFileForm.get('InsuranceEndDate').touched}"
+              formControlName="InsuranceEndDate"
+              value="{{ sendFileForm.get('InsuranceEndDate').value | date: 'dd-MM-yyyy' }}">
+          </div>
+        </div>
+        <div class="row mb-1">
+          <label class="col-sm-3">شركة التأمين</label>
+          <div class="col-sm-9">
+            <input type="text" class="form-control form-control-sm" placeholder="Insurance company"
+              [ngClass]="{'is-invalid': sendFileForm.get('InsuranceCompany').errors && sendFileForm.get('InsuranceCompany').touched}"
+              formControlName="InsuranceCompany">
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-6">
+      <div class="row-renatal-date">
+        <div class="row mb-1">
+          <div class="col-sm-10">
+            <div class="input-group mb-1">
+              <div class="custom-file">
+                <input type="file" (change)='onFileChange3($event)' class="custom-file-input" id="inputFile"
+                  aria-describedby="inputGroupFileAddon01" name="inputFile1">
+                <label class="custom-file-label" for="inputGroupFile01"> .... Choose file</label>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row mb-2">
+          <div class="col-sm-12">
+            <table class="table table-pdf">
+              <thead>
+                <tr>
+                  <th>Id</th>
+                  <th>Name</th>
+                  <th>Size</th>
+                  <th>Delete</th>
+                  <th>Show</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let item of InsurancePdf;let i = index">
+                  <th>{{ i + 1 }}</th>
+                  <th>{{ item.FileName }}</th>
+                  <th>{{ item.FileSize }}</th>
+                  <th (click)="deletePDf3(item.FileName)"><i class="fa fa-trash"></i></th>
+                  <th (click)="showPdf(item.Pdf)"><i class="fa fa-eye"></i></th>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========================================================================= -->
+
+  <h3>الحــادث</h3>
+  <hr />
+  <!-- <div class="row-renatal-date">
+    <div class="row mb2 mt-3">
+      <div class="col-sm-6">
+        <div class="row mb-1">
+          <label class="col-sm-3">تاريخ الحادث</label>
+          <div class="col-sm-9">
+            <input type="text" class="form-control form-control-sm" placeholder="Accident Date" bsDatepicker
+              (ngModelChange)="accidentChange()" formControlName="AccidentDate"
+              value="{{ sendFileForm.get('AccidentDate').value | date: 'dd-MM-yyyy' }}">
+          </div>
+        </div>
+        <div class="row mb-1">
+          <label class="col-sm-3">نوع الحادث</label>
+          <div class="col-sm-9">
+            <select class="custom-select custom-select-sm" formControlName="DamageType"
+              [ngClass]="{'is-invalid': sendFileForm.get('DamageType').errors && sendFileForm.get('DamageType').touched}">
+              <option *ngFor="let item of typeAccident" value="{{ item.value }}">
+                {{ item.value }}</option>
+            </select>
+          </div>
+        </div>
+        <div class="row mb-1">
+          <label class="col-sm-3">نوع الاضرار</label>
+          <div class="col-sm-9">
+            <select class="custom-select custom-select-sm" formControlName="HarmType"
+              [ngClass]="{'is-invalid': sendFileForm.get('HarmType').errors && sendFileForm.get('HarmType').touched}">
+              <option *ngFor="let item of typeDamage" value="{{ item.value }}">
+                {{ item.value }}</option>
+            </select>
+          </div>
+        </div>
+        <div class="row mb-1">
+          <label class="col-sm-3">تواجد السيارة</label>
+          <div class="col-sm-9">
+            <select class="custom-select custom-select-sm" formControlName="PlcaeCar"
+              [ngClass]="{'is-invalid': sendFileForm.get('PlcaeCar').errors && sendFileForm.get('PlcaeCar').touched}">
+              <option *ngFor="let item of plcaeCarr" value="{{ item.value }}">
+                {{ item.value }}</option>
+            </select>
+          </div>
+        </div>
+        <div class="row mb-1">
+          <label class="col-sm-3">قيمة التحمل</label>
+          <div class="col-sm-9">
+            <input type="number" class="form-control form-control-sm" placeholder="Endurance value"
+              [ngClass]="{'is-invalid': sendFileForm.get('EnduranceValue').errors && sendFileForm.get('EnduranceValue').touched}"
+              formControlName="EnduranceValue" (keypress)="onlyNumberAllowed($event)">
+          </div>
+        </div>
+        <div class="row mb-1">
+          <label class="col-sm-3">رسوم فتح الملف بالوكالة</label>
+          <div class="col-sm-9">
+            <input type="number" class="form-control form-control-sm" placeholder="Fee open file in agancy"
+              [ngClass]="{'is-invalid': sendFileForm.get('FeeOpenFileAgancy').errors && sendFileForm.get('FeeOpenFileAgancy').touched}"
+              formControlName="FeeOpenFileAgancy" (keypress)="onlyNumberAllowed($event)">
+          </div>
+        </div>
+        <div class="row mb-1">
+          <label class="col-sm-3">قيمة المقايسة</label>
+          <div class="col-sm-9">
+            <input type="number" class="form-control form-control-sm" placeholder="Measurement amount"
+              [ngClass]="{'is-invalid': sendFileForm.get('MeasurementValue').errors && sendFileForm.get('MeasurementValue').touched}"
+              formControlName="MeasurementValue" (keypress)="onlyNumberAllowed($event)">
+          </div>
+        </div>
+        <div class="row mb-1">
+          <label class="col-sm-3">رقم شيك التعويض</label>
+          <div class="col-sm-9">
+            <input type="number" class="form-control form-control-sm" placeholder="Check number"
+              [ngClass]="{'is-invalid': sendFileForm.get('CheckNumber').errors && sendFileForm.get('CheckNumber').touched}"
+              formControlName="CheckNumber" (keypress)="onlyNumberAllowed($event)">
+          </div>
+        </div>
+        <div class="row mb-1">
+          <label class="col-sm-3">قيمة شيك التعويض</label>
+          <div class="col-sm-9">
+            <input type="number" class="form-control form-control-sm" placeholder="Check amount"
+              [ngClass]="{'is-invalid': sendFileForm.get('CheckAmount').errors && sendFileForm.get('CheckAmount').touched}"
+              formControlName="CheckAmount" (keypress)="onlyNumberAllowed($event)">
+          </div>
+        </div>
+        <div class="row mb-1">
+          <label class="col-sm-3">تاريخ شيك التعويض</label>
+          <div class="col-sm-9">
+            <input type="text" class="form-control form-control-sm" placeholder="Check date" bsDatepicker
+              [ngClass]="{'is-invalid': sendFileForm.get('CheckDate').errors && sendFileForm.get('CheckDate').touched}"
+              formControlName="CheckDate" value="{{ sendFileForm.get('CheckDate').value | date: 'dd-MM-yyyy' }}">
+          </div>
+        </div>
+
+      </div>
+      <div class="col-sm-6">
+        <div class="row mb-1">
+          <div class="col-sm-12">
+            <label for="0">dlfsgpijrgompaejid</label>
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-sm-10">
+            <div class="input-group mb-1">
+              <div class="custom-file">
+                <input type="file" (change)='onFileChange4($event)' class="custom-file-input" id="inputFile"
+                  aria-describedby="inputGroupFileAddon01" name="inputFile2">
+                <label class="custom-file-label" for="inputGroupFile01"> .... Choose file</label>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-sm-6">
+      <div class="row-renatal-date">
+        <div class="row mb-1">
+          <div class="col-sm-10">
+            <div class="input-group mb-1">
+              <div class="custom-file">
+                <input type="file" (change)='onFileChange4($event)' class="custom-file-input" id="inputFile"
+                  aria-describedby="inputGroupFileAddon01" name="inputFile2">
+                <label class="custom-file-label" for="inputGroupFile01"> .... Choose file</label>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row mb-2">
+          <div class="col-sm-12">
+            <table class="table table-pdf">
+              <thead>
+                <tr>
+                  <th>Id</th>
+                  <th>Name</th>
+                  <th>Size</th>
+                  <th>Delete</th>
+                  <th>Show</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let item of damagePdf;let i = index">
+                  <th>{{ i + 1 }}</th>
+                  <th>{{ item.FileName }}</th>
+                  <th>{{ item.FileSize }}</th>
+                  <th (click)="deletePDf4(item.FileName)"><i class="fa fa-trash"></i></th>
+                  <th (click)="showPdf(item.Pdf)"><i class="fa fa-eye"></i></th>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
+  </div> -->
+  <div class="row-renatal-date">
+    <div class="row mt-1">
+      <label class="col-sm-1">تاريخ الحادث</label>
+      <div class="col-sm-5">
+        <input type="text" class="form-control form-control-sm" placeholder="Accident Date" bsDatepicker
+          (ngModelChange)="accidentChange()" formControlName="AccidentDate"
+          value="{{ sendFileForm.get('AccidentDate').value | date: 'dd-MM-yyyy' }}">
+      </div>
+    </div>
+    <div class="row mt-1">
+      <label class="col-sm-1">نوع الحادث</label>
+      <div class="col-sm-5">
+        <select class="custom-select custom-select-sm" formControlName="DamageType"
+          [ngClass]="{'is-invalid': sendFileForm.get('DamageType').errors && sendFileForm.get('DamageType').touched}">
+          <option *ngFor="let item of typeAccident" value="{{ item.value }}">
+            {{ item.value }}</option>
+        </select>
+      </div>
+      <label class="col-sm-1">المرفقات</label>
+      <div class="col-sm-2">
+        <div class="custom-file">
+          <input type="file" (change)='onFileChange4($event, "نوع الحادث")' class="custom-file-input" id="inputFile2"
+            aria-describedby="inputGroupFile01" name="inputFile2">
+          <label class="custom-file-label" for="inputGroupFile01"> .... Choose file</label>
+        </div>
+      </div>
+      <label class="col-sm-3">
+        <ng-container *ngFor="let item of damagePdf;let i = index">
+          <div *ngIf="item.IsVoke === 'نوع الحادث'">{{ item.FileName }} | <span
+              (click)="deletePDf4(item.FileName, 'نوع الحادث')"><i class="fa fa-trash"></i></span> |
+            <span (click)="showPdf(item.Pdf)"><i class="fa fa-eye"></i></span>
+          </div>
+        </ng-container>
+      </label>
+    </div>
+    <div class="row mt-1">
+      <label class="col-sm-1">نوع الاضرار</label>
+      <div class="col-sm-5">
+        <select class="custom-select custom-select-sm" formControlName="HarmType"
+          [ngClass]="{'is-invalid': sendFileForm.get('HarmType').errors && sendFileForm.get('HarmType').touched}">
+          <option *ngFor="let item of typeDamage" value="{{ item.value }}">
+            {{ item.value }}</option>
+        </select>
+      </div>
+    </div>
+    <div class="row mt-1">
+      <label class="col-sm-1">تواجد السيارة</label>
+      <div class="col-sm-5">
+        <select class="custom-select custom-select-sm" formControlName="PlcaeCar"
+          [ngClass]="{'is-invalid': sendFileForm.get('PlcaeCar').errors && sendFileForm.get('PlcaeCar').touched}">
+          <option *ngFor="let item of plcaeCarr" value="{{ item.value }}">
+            {{ item.value }}</option>
+        </select>
+      </div>
+    </div>
+    <div class="row mt-1">
+      <label class="col-sm-1">قيمة التحمل</label>
+      <div class="col-sm-5">
+        <input type="number" class="form-control form-control-sm" placeholder="Endurance value"
+          [ngClass]="{'is-invalid': sendFileForm.get('EnduranceValue').errors && sendFileForm.get('EnduranceValue').touched}"
+          formControlName="EnduranceValue" (keypress)="onlyNumberAllowed($event)">
+      </div>
+    </div>
+    <div class="row mt-1">
+      <label class="col-sm-1">رسوم فتح الملف بالوكالة</label>
+      <div class="col-sm-5">
+        <input type="number" class="form-control form-control-sm" placeholder="Fee open file in agancy"
+          [ngClass]="{'is-invalid': sendFileForm.get('FeeOpenFileAgancy').errors && sendFileForm.get('FeeOpenFileAgancy').touched}"
+          formControlName="FeeOpenFileAgancy" (keypress)="onlyNumberAllowed($event)">
+      </div>
+      <label class="col-sm-1">المرفقات</label>
+      <div class="col-sm-2">
+        <div class="custom-file">
+          <input type="file" (change)='onFileChange4($event, "فتح الملف")' class="custom-file-input" id="inputFile2"
+            aria-describedby="inputGroupFile01" name="inputFile2">
+          <label class="custom-file-label" for="inputGroupFile01"> .... Choose file</label>
+        </div>
+      </div>
+      <label class="col-sm-3">
+        <ng-container *ngFor="let item of damagePdf;let i = index">
+          <div *ngIf="item.IsVoke === 'فتح الملف'">{{ item.FileName }} | <span (click)="deletePDf4(item.FileName)"><i
+                class="fa fa-trash"></i></span> | <span (click)="showPdf(item.Pdf)"><i class="fa fa-eye"></i></span>
+          </div>
+        </ng-container>
+      </label>
+    </div>
+    <div class="row mt-1">
+      <label class="col-sm-1">قيمة المقايسة</label>
+      <div class="col-sm-5">
+        <input type="number" class="form-control form-control-sm" placeholder="Measurement amount"
+          [ngClass]="{'is-invalid': sendFileForm.get('MeasurementValue').errors && sendFileForm.get('MeasurementValue').touched}"
+          formControlName="MeasurementValue" (keypress)="onlyNumberAllowed($event)">
+      </div>
+      <label class="col-sm-1">المرفقات</label>
+      <div class="col-sm-2">
+        <div class="custom-file">
+          <input type="file" (change)='onFileChange4($event, "المقايسة")' class="custom-file-input" id="inputFile2"
+            aria-describedby="inputGroupFile01" name="inputFile2">
+          <label class="custom-file-label" for="inputGroupFile01"> .... Choose file</label>
+        </div>
+      </div>
+      <label class="col-sm-3">
+        <ng-container *ngFor="let item of damagePdf;let i = index">
+          <div *ngIf="item.IsVoke === 'المقايسة'">{{ item.FileName }} | <span (click)="deletePDf4(item.FileName)"><i
+                class="fa fa-trash"></i></span> | <span (click)="showPdf(item.Pdf)"><i class="fa fa-eye"></i></span>
+          </div>
+        </ng-container>
+      </label>
+    </div>
+    <div class="row mb-1">
+      <label class="col-sm-1">رقم شيك التعويض</label>
+      <div class="col-sm-5">
+        <input type="number" class="form-control form-control-sm" placeholder="Check number"
+          [ngClass]="{'is-invalid': sendFileForm.get('CheckNumber').errors && sendFileForm.get('CheckNumber').touched}"
+          formControlName="CheckNumber" (keypress)="onlyNumberAllowed($event)">
+      </div>
+      <label class="col-sm-1">المرفقات</label>
+      <div class="col-sm-2">
+        <div class="custom-file">
+          <input type="file" (change)='onFileChange4($event, "الشيك")' class="custom-file-input" id="inputFile2"
+            aria-describedby="inputGroupFile01" name="inputFile2">
+          <label class="custom-file-label" for="inputGroupFile01"> .... Choose file</label>
+        </div>
+      </div>
+      <label class="col-sm-3">
+        <ng-container *ngFor="let item of damagePdf;let i = index">
+          <div *ngIf="item.IsVoke === 'الشيك'">{{ item.FileName }} | <span (click)="deletePDf4(item.FileName)"><i
+                class="fa fa-trash"></i></span> | <span (click)="showPdf(item.Pdf)"><i class="fa fa-eye"></i></span>
+          </div>
+        </ng-container>
+      </label>
+    </div>
+    <div class="row mb-1">
+      <label class="col-sm-1">قيمة شيك التعويض</label>
+      <div class="col-sm-5">
+        <input type="number" class="form-control form-control-sm" placeholder="Check amount"
+          [ngClass]="{'is-invalid': sendFileForm.get('CheckAmount').errors && sendFileForm.get('CheckAmount').touched}"
+          formControlName="CheckAmount" (keypress)="onlyNumberAllowed($event)">
+      </div>
+    </div>
+    <div class="row mb-1">
+      <label class="col-sm-1">تاريخ شيك التعويض</label>
+      <div class="col-sm-5">
+        <input type="text" class="form-control form-control-sm" placeholder="Check date" bsDatepicker
+          [ngClass]="{'is-invalid': sendFileForm.get('CheckDate').errors && sendFileForm.get('CheckDate').touched}"
+          formControlName="CheckDate" value="{{ sendFileForm.get('CheckDate').value | date: 'dd-MM-yyyy' }}">
+      </div>
+    </div>
+  </div>
+
+  <!-- ========================================================================= -->
+
+  <h3>المرفقات</h3>
+  <hr />
+  <div class="row mb-2 mt-2">
+    <label class="col-sm-1">العقد</label>
+    <div class="col-sm-2">
+      <div class="input-group mb-1">
+        <div class="custom-file">
+          <input type="file" (change)='onFileChange4($event,"العقد")' class="custom-file-input" id="inputFile"
+            aria-describedby="inputFile" name="inputFile">
+          <label class="custom-file-label" for="inputFile"> .... Choose file</label>
+        </div>
+      </div>
+    </div>
+    <label class="col-sm-3">
+      <ng-container *ngFor="let item of damagePdf;let i = index">
+        <div *ngIf="item.IsVoke === 'العقد'">{{ item.FileName }} | <span (click)="deletePDf4(item.FileName)"><i
+              class="fa fa-trash"></i></span> | <span (click)="showPdf(item.Pdf)"><i class="fa fa-eye"></i></span>
+        </div>
+      </ng-container>
+    </label>
+    <label class="col-sm-1">المدنية</label>
+    <div class="col-sm-2">
+      <div class="input-group mb-1">
+        <div class="custom-file">
+          <input type="file" (change)='onFileChange4($event,"المدنية")' class="custom-file-input" id="inputFile"
+            aria-describedby="inputGroupFileAddon01" name="inputFile2">
+          <label class="custom-file-label" for="inputGroupFile01"> .... Choose file</label>
+        </div>
+      </div>
+    </div>
+    <label class="col-sm-3">
+      <ng-container *ngFor="let item of damagePdf;let i = index">
+        <div *ngIf="item.IsVoke === 'المدنية'">{{ item.FileName }} | <span (click)="deletePDf4(item.FileName)"><i
+              class="fa fa-trash"></i></span> | <span (click)="showPdf(item.Pdf)"><i class="fa fa-eye"></i></span>
+        </div>
+      </ng-container>
+    </label>
+  </div>
+  <div class="row mt-2">
+    <label class="col-sm-1">دفتر السيارة</label>
+    <div class="col-sm-2">
+      <div class="input-group mb-1">
+        <div class="custom-file">
+          <input type="file" (change)='onFileChange4($event,"دفتر السيارة")' class="custom-file-input" id="inputFile"
+            aria-describedby="inputGroupFileAddon01" name="inputFile2">
+          <label class="custom-file-label" for="inputGroupFile01"> .... Choose file</label>
+        </div>
+      </div>
+    </div>
+    <label class="col-sm-3">
+      <ng-container *ngFor="let item of damagePdf;let i = index">
+        <div *ngIf="item.IsVoke === 'دفتر السيارة'">{{ item.FileName }} | <span (click)="deletePDf4(item.FileName)"><i
+              class="fa fa-trash"></i></span> | <span (click)="showPdf(item.Pdf)"><i class="fa fa-eye"></i></span>
+        </div>
+      </ng-container>
+    </label>
+    <label class="col-sm-1">كشف حساب مختوم</label>
+    <div class="col-sm-2">
+      <div class="input-group mb-1">
+        <div class="custom-file">
+          <input type="file" (change)='onFileChange4($event,"كشف حساب")' class="custom-file-input" id="inputFile"
+            aria-describedby="inputGroupFileAddon01" name="inputFile2">
+          <label class="custom-file-label" for="inputGroupFile01"> .... Choose file</label>
+        </div>
+      </div>
+    </div>
+    <label class="col-sm-3">
+      <ng-container *ngFor="let item of damagePdf;let i = index">
+        <div *ngIf="item.IsVoke === 'كشف حساب'">{{ item.FileName }} | <span (click)="deletePDf4(item.FileName)"><i
+              class="fa fa-trash"></i></span> | <span (click)="showPdf(item.Pdf)"><i class="fa fa-eye"></i></span>
+        </div>
+      </ng-container>
+    </label>
+  </div>
+
+  <!-- ========================================================================= -->
+
+  <h3>فواتير الاصلاحات وغيرها مع اضافات اخرى</h3>
+  <hr />
+  <div class="row mb-2 mt-2">
+    <label class="col-sm-1">المبلغ</label>
+    <div class="col-sm-2">
+      <input type="number" class="form-control" value="0" placeholder="Amount" [(ngModel)]="additionalAmount"
+        (keypress)="onlyNumberAllowed($event)" [ngModelOptions]="{standalone: true}">
+    </div>
+    <label class="col-sm-1">البيان</label>
+    <div class="col-sm-5">
+      <input type="text" class="form-control" placeholder="Note" [(ngModel)]="additionalNote"
+        [ngModelOptions]="{standalone: true}">
+    </div>
+    <div class="col-sm-2">
+      <div class="input-group mb-1">
+        <div class="custom-file">
+          <input type="file" (change)='onFileChange($event)' class="custom-file-input" id="inputFile"
+            aria-describedby="inputGroupFileAddon01" name="inputFile4">
+          <label class="custom-file-label" for="inputGroupFile01"> .... Choose file</label>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-1">
+      <input type="button" class="btn btn-success" (click)="addNewRowAdditional()" value="Add">
+    </div>
+  </div>
+  <div class="row mb-1">
+    <div class="col-sm-12">
+      <table class="table table-pdf">
+        <thead>
+          <tr>
+            <th>Id</th>
+            <th>Amount</th>
+            <th>Note</th>
+            <th>Name</th>
+            <th>Size</th>
+            <th>Delete</th>
+            <th>Show</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of additioanl;let i = index">
+            <th>{{ i + 1 }}</th>
+            <th>{{ item.Amount }}</th>
+            <th>{{ item.Note }}</th>
+            <th>{{ item.FileName }}</th>
+            <th>{{ item.FileSize }}</th>
+            <th (click)="deletePDf(item.FileName)"><i class="fa fa-trash"></i></th>
+            <th (click)="showPdf(item.Pdf)"><i class="fa fa-eye"></i></th>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div class="row mt-1">
+    <div class="col-sm-12">
+      <textarea class="form-control" placeholder="ملاحظات اخرى" formControlName="Note"></textarea>
+    </div>
+  </div>
+  <div class="row mb-2 mt-2">
+    <div class="col-sm-3">
+      <input type="submit" [disabled]="!sendFileForm.valid" value="Upload File" class="btn btn-primary btn-block">
+    </div>
+  </div>
+</form>

@@ -1,0 +1,124 @@
+.container-fluid {
+  direction: rtl;
+}
+
+/* .row {
+    padding-right: 10px;
+  } */
+.input-group {
+  direction: ltr;
+}
+
+table tbody .right-number {
+  background-color: #1e8449;
+  color: #fff;
+}
+
+table tbody .rong-number {
+  background-color: #943126;
+  color: #fff;
+}
+
+table {
+  border: 1px solid #ccc;
+  text-align: center;
+  width: 100%;
+}
+
+pagination {
+  direction: ltr;
+}
+
+.pagination {
+  margin: -17px;
+}
+
+.tab-statment {
+  margin-bottom: 0px;
+}
+
+.pagination-statment {
+  position: absolute;
+  left: 50%;
+}
+
+.hidden {
+  display: none;
+}
+
+.wrap {
+  max-width: 350px;
+}
+
+.content {
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+}
+
+.label-write {
+  font-size: 15px;
+}
+
+#dtHorizontalExample th,
+td {
+  white-space: nowrap;
+}
+
+#dtHorizontalExample::-webkit-scrollbar {
+  -webkit-appearance: none;
+  width: 7px;
+}
+
+#dtHorizontalExample::-webkit-scrollbar-thumb {
+  border-radius: 4px;
+  background-color: rgba(0, 0, 0, 0.5);
+  -webkit-box-shadow: 0 0 1px rgba(255, 255, 255, 0.5);
+  box-shadow: 0 0 1px rgba(255, 255, 255, 0.5);
+}
+
+.scroll-view-table {
+  overflow: scroll;
+}
+
+.wrap-word {
+  white-space: pre-line;
+  word-break: break-all;
+}
+
+.col-padding {
+  padding: 5px;
+}
+
+.modal-installment {
+  display: block;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+  padding: 5px;
+}
+
+.modal-installment div .col-sm-6 {
+  padding: 5px;
+}
+
+.btn-small {
+  height: 10px;
+}
+
+.pay-color {
+  background: #f2f2f2;
+  margin: 0%;
+  padding: 15px;
+  border-radius: 3%;
+  border: 1px solid #999;
+}
+
+.col-reduce-padding {
+  padding-left: 2px;
+  padding-right: 2px;
+}
+
+.outof-rtl {
+  direction: ltr;
+}
+/*# sourceMappingURL=maincallcenter.component.css.map */

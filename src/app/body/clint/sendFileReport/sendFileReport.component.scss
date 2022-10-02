@@ -1,0 +1,33 @@
+.container-fluid {
+  direction: rtl;
+  h3 {
+    font-weight: bold;
+    font-size: 24px;
+  }
+}
+ng-template {
+  h3 {
+    font-weight: bold;
+    font-size: 24px;
+  }
+}
+.send-file {
+  direction: rtl;
+  .table-pdf {
+    direction: ltr;
+  }
+  .row-renatal-date {
+    border: 1px solid #000;
+    background-color: #f5f5f5;
+    padding: 10px;
+    border-radius: 10px;
+    width: 100%;
+  }
+  h4 {
+    color: #ff0000;
+    text-align: center;
+    font-size: 25px;
+    font-weight: bold;
+    margin-top: 20px;
+  }
+}

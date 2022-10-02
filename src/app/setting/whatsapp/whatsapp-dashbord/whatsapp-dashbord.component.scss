@@ -1,0 +1,114 @@
+$--body-color: #e4e9f7;
+$--sidbar-color: #fff;
+$--primary-color: #695cfe;
+$--primary-color-light: #f6f5ff;
+$--toggle-color: #ddd;
+$--text-color: #707070;
+$--trans-02: all 0.2s ease;
+$--trans-03: all 0.3s ease;
+$--trans-04: all 0.4s ease;
+$--trans-05: all 0.5s ease;
+
+.sidbar {
+  position: fixed;
+  top: 54px;
+  left: 0;
+  height: 100%;
+  width: 250px;
+  background: $--sidbar-color;
+  font-size: 20px;
+  padding: 10px 14px;
+  overflow: scroll;
+  header {
+    position: relative;
+    .image-text {
+      display: flex;
+      align-items: center;
+      .image {
+        min-width: 60px;
+        display: flex;
+      }
+      img {
+        width: 40px;
+        border-radius: 6px;
+      }
+      .header-text {
+        .name {
+          font-weight: 600;
+        }
+        .profession {
+          margin-top: -2px;
+        }
+      }
+    }
+    .text {
+      font-size: 16px;
+      font-weight: 500;
+      color: $--text-color;
+    }
+    fa-icon {
+      position: absolute;
+      top: 50%;
+      right: -25px;
+      transform: translateY(-50%);
+      height: 25px;
+      width: 25px;
+      background: $--primary-color;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      font-size: 12px;
+    }
+  }
+  .menu-bar {
+    ul {
+      .collapsie {
+        background-color: #695cfe;
+        overflow: hidden;
+        border-radius: 4px;
+        padding: 10px;
+        position: relative;
+        display: none;
+      }
+      margin-left: -40px;
+      margin-top: 20px;
+      li {
+        height: 75px;
+        margin-top: -15px;
+        list-style: none;
+        display: flex;
+        align-items: center;
+        width: 250px;
+        a {
+          text-decoration: none;
+          height: 100%;
+          width: 100%;
+          display: flex;
+          align-items: center;
+          border-radius: 6px;
+          transition: $--trans-04;
+          &:hover {
+            background-color: $--primary-color;
+            fa-icon,
+            .text {
+              color: $--sidbar-color;
+            }
+          }
+          fa-icon,
+          .text {
+            color: $--text-color;
+            font-size: 20px;
+          }
+          fa-icon {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-width: 60px;
+            font-size: 20px;
+          }
+        }
+      }
+    }
+  }
+}

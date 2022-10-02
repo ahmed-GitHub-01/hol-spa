@@ -1,0 +1,27 @@
+.container-fluid {
+  direction: rtl;
+  h2 {
+    text-align: center;
+    font-size: 27px;
+    font-weight: bold;
+  }
+  label {
+    font-size: 16px;
+    font-weight: bold;
+  }
+}
+.input-group-text {
+  background-color: #007bff;
+  color: #fff;
+}
+tabset {
+  direction: rtl;
+}
+.outof-rtl {
+  direction: ltr;
+}
+section {
+  .appear {
+    display: none;
+  }
+}

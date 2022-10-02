@@ -1,0 +1,46 @@
+@import "../../../../../node_modules/jquery-ui/themes/base/all.css";
+@import "../../../../../node_modules/devextreme/dist/css/dx.common.css";
+@import "../../../../../node_modules/devextreme/dist/css/dx.light.css";
+@import "../../../../../node_modules/@devexpress/analytics-core/dist/css/dx-analytics.common.css";
+@import "../../../../../node_modules/@devexpress/analytics-core/dist/css/dx-analytics.light.css";
+@import "../../../../../node_modules/devexpress-reporting/dist/css/dx-webdocumentviewer.css";
+.settings-box {
+  position: fixed;
+  right: -200px;
+  top: 0;
+  background-color: #ffffffba;
+  width: 200px;
+  z-index: 10000;
+  height: 100vh;
+  min-height: 100vh;
+  transition: 0.3s;
+  .toggle-settings {
+    position: absolute;
+    left: -30px;
+    top: 66px;
+    background-color: rgb(253, 227, 154);
+    text-align: center;
+    width: 35px;
+    height: 35px;
+    padding: 8px 0;
+    cursor: pointer;
+  }
+  .settings-content {
+    .container-fluid {
+      h2 {
+        font-size: 100px;
+        font-weight: bold;
+      }
+      h3 {
+        font-size: 27px;
+        font-weight: bold;
+      }
+      .btn-small {
+        height: 36px;
+      }
+    }
+  }
+}
+.settings-box.open {
+  right: 0;
+}

@@ -1,0 +1,28 @@
+<div id="background_header"></div>
+<div id="background_body"></div>
+
+<div id="chatContainer">
+    <app-whatsapp-sidbar (conversationClicked)="onConversationSelected($event)"></app-whatsapp-sidbar>
+    <div id="chat">
+        <div id="chatPlaceholder" *ngIf="!conversation">
+            <img width="400" src="../assets/images/phoneIcon.png" />
+            <h2>Keep your phone connected to House Of law</h2>
+            <p>
+                WhatsApp connects your phone to sync messages. To reduce data<br /><br />
+                usage, connect to your phone to Wi-Fi.
+            </p>
+            <div class="seperator"></div>
+
+            <p>WhatsApp is available for Hosue Of law. <a href="/whatsapp">Get it here</a></p>
+        </div>
+
+        <app-whatsapp-chat [conversation]="conversation" *ngIf="conversation"></app-whatsapp-chat>
+    </div>
+</div>
+
+<!-- <div class="container">
+    <div class="row">
+        <div class="col-xl-3"></div>
+        <div class="col-xl-9"></div>
+    </div>
+</div> -->

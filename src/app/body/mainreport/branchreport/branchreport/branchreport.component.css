@@ -1,0 +1,19 @@
+.container-fluid {
+  direction: rtl;
+}
+
+.container-fluid .row .out-line {
+  background-color: #d9d9d9;
+  padding: 20px;
+  border: 1px solid #000;
+  border-radius: 7px;
+}
+
+.container-fluid .row .out-line .input-group {
+  direction: ltr;
+}
+
+.container-fluid .row .outof-rtl {
+  direction: ltr;
+}
+/*# sourceMappingURL=branchreport.component.css.map */

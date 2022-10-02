@@ -1,0 +1,9 @@
+{
+    "version": 3,
+    "mappings": "AAAA,AAAA,gBAAgB,CAAC;EACf,SAAS,EAAE,GAAG;CAUf;;AAXD,AAEE,gBAFc,CAEd,EAAE,CAAC;EACD,UAAU,EAAE,MAAM;EAClB,SAAS,EAAE,IAAI;EACf,WAAW,EAAE,IAAI;CAClB;;AANH,AAOE,gBAPc,CAOd,KAAK,CAAC;EACJ,SAAS,EAAE,IAAI;EACf,WAAW,EAAE,IAAI;CAClB;;AAEH,AAAA,iBAAiB,CAAC;EAChB,gBAAgB,EAAE,OAAO;EACzB,KAAK,EAAE,IAAI;CACZ",
+    "sources": [
+        "comminactionreport.component.scss"
+    ],
+    "names": [],
+    "file": "comminactionreport.component.css"
+}

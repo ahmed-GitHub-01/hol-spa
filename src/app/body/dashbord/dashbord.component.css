@@ -1,0 +1,259 @@
+.modal-body {
+  direction: rtl;
+}
+
+.modal-body ul li {
+  padding: 10px;
+  list-style: none;
+  cursor: pointer;
+  font-size: 25px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+* {
+  margin: 0;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+* body {
+  overflow-x: hidden;
+}
+
+.containr {
+  position: relative;
+  height: 100%;
+}
+
+.containr .navigation.active {
+  width: 60px;
+}
+
+.containr .navigation {
+  position: fixed;
+  width: 300px;
+  height: 100%;
+  padding: 0;
+  background: #003147;
+  -webkit-transition: 0.5s;
+  transition: 0.5s;
+  overflow: hidden;
+}
+
+.containr .navigation ul {
+  position: absolute;
+  top: 0;
+  left: -40px;
+  width: 165%;
+}
+
+.containr .navigation ul li {
+  position: relative;
+  width: 100%;
+  list-style: none;
+  display: block;
+}
+
+.containr .navigation ul li a {
+  position: relative;
+  display: block;
+  width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  text-decoration: none;
+  color: #fff;
+}
+
+.containr .navigation ul li a .icon {
+  position: relative;
+  display: block;
+  min-width: 60px;
+  height: 60px;
+  line-height: 60px;
+  text-align: center;
+}
+
+.containr .navigation ul li a .icon svg {
+  color: #fff;
+  font-size: 24px;
+}
+
+.containr .navigation ul li a .icon i {
+  color: #fff;
+  font-size: 50px;
+}
+
+.containr .navigation ul li a .title {
+  position: relative;
+  display: block;
+  padding: 0 10px;
+  line-height: 60px;
+  text-align: center;
+  white-space: nowrap;
+}
+
+.containr .navigation ul li:hover {
+  background: #03a9f4;
+  cursor: pointer;
+}
+
+.containr .main {
+  position: absolute;
+  width: calc(100% - 300px);
+  left: 300px;
+  top: 5px;
+  height: 100%;
+  background: #c7c7c7;
+  -webkit-transition: 0.5s;
+  transition: 0.5s;
+}
+
+.containr .main .toggle {
+  position: relative;
+  width: 40px;
+  height: 40px;
+  cursor: pointer;
+}
+
+.containr .main .toggle svg {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  line-height: 60px;
+  font-size: 24px;
+  text-align: center;
+  padding: 10px;
+  color: #000;
+}
+
+.containr .main .card-box {
+  position: relative;
+  width: 100%;
+  padding: 20px;
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: (1fr)[4];
+      grid-template-columns: repeat(4, 1fr);
+  grid-gap: 20px;
+}
+
+.containr .main .card-box a {
+  text-decoration: none;
+}
+
+.containr .main .card-box .card-style {
+  padding: 20px;
+  position: relative;
+  background-color: #e2e2e2;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  cursor: pointer;
+  border-radius: 10px;
+}
+
+.containr .main .card-box .card-style .card-name {
+  font-size: 20px;
+  color: #000;
+}
+
+.containr .main .card-box .card-style .card-icon {
+  font-size: 1.5em;
+  color: #03a9f4;
+}
+
+.containr .main.active {
+  width: calc(100% - 60px);
+  left: 60px;
+}
+
+@media (max-width: 1025px) {
+  .containr .navigation {
+    left: -300px;
+  }
+  .containr .navigation.active {
+    left: 0;
+    width: 300px;
+  }
+  .containr .main {
+    width: 100%;
+    left: 0;
+  }
+  .containr .main .card-box {
+    -ms-grid-columns: (1fr)[3];
+        grid-template-columns: repeat(3, 1fr);
+  }
+  .containr .main.active {
+    width: calc(100% - 300px);
+    left: 300px;
+  }
+}
+
+@media (max-width: 992px) {
+  .containr .navigation {
+    left: -300px;
+  }
+  .containr .navigation.active {
+    left: 0;
+    width: 300px;
+  }
+  .containr .main {
+    width: 100%;
+    left: 0;
+  }
+  .containr .main .card-box {
+    -ms-grid-columns: (1fr)[2];
+        grid-template-columns: repeat(2, 1fr);
+  }
+  .containr .main.active {
+    width: calc(100% - 300px);
+    left: 300px;
+  }
+}
+
+@media (max-width: 480px) {
+  .containr .navigation {
+    width: 100%;
+    left: -100%;
+    z-index: 100;
+  }
+  .containr .navigation.active {
+    width: 100%;
+    left: 0;
+  }
+  .containr .main {
+    width: 100%;
+    left: 0;
+  }
+  .containr .main .card-box {
+    -ms-grid-columns: (1fr)[1];
+        grid-template-columns: repeat(1, 1fr);
+  }
+  .containr .main .toggle.active {
+    position: fixed;
+    z-index: 101;
+    right: 0;
+    left: initial;
+  }
+  .containr .main .toggle.active svg {
+    color: #fff;
+  }
+  .containr .main.active {
+    width: 100%;
+    left: 0;
+  }
+}
+
+.modal-body a {
+  text-decoration: none;
+}
+
+.modal-body a li {
+  color: #000;
+}
+/*# sourceMappingURL=dashbord.component.css.map */

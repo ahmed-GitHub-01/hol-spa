@@ -1,0 +1,122 @@
+<div class="containr">
+  <div class="navigation">
+    <ul>
+      <li>
+        <a (click)="selectApp(9)" routerLinkActive="router-link-active">
+          <span class="icon"><i class="fa fa-id-badge"></i></span>
+          <span class="title">متابعة الجلسات</span>
+        </a>
+      </li>
+      <li>
+        <a>
+          <span class="icon"><i class="fa fa-phone-volume"></i></span>
+          <span class="title">متابعة التنفيذ</span>
+        </a>
+      </li>
+      <li>
+        <a>
+          <span class="icon"><i class="fa fa-puzzle-piece"></i></span>
+          <span class="title">متابعة التواصل</span>
+        </a>
+      </li>
+      <li>
+        <a (click)="selectApp(8)" routerLinkActive="router-link-active">
+          <span class="icon"><i class="fa fa-book-reader"></i></span>
+          <span class="title">تقارير عامة</span>
+        </a>
+      </li>
+      <li>
+        <a (click)="selectApp(9)">
+          <span class="icon"><i class="fa fa-clipboard"></i></span>
+          <span class="title">المحاسبة</span>
+        </a>
+      </li>
+      <li>
+        <a (click)="selectApp(10)">
+          <span class="icon"><i class=" fa fa-money-check-alt"></i></span>
+          <span class="title">ارسال الملفات</span>
+        </a>
+      </li>
+      <li>
+        <a (click)="logout()">
+          <span class="icon"><i class="fa fa-sign-out-alt"></i></span>
+          <span class="title">Log out</span>
+        </a>
+      </li>
+    </ul>
+  </div>
+  <div class="main">
+    <div class="toggle" (click)="toggleMenu()"><i class="fa fa-bars fa-lg"></i></div>
+    <!-- Start Send file -->
+    <div class="container-fluid" *ngIf="app == 9">
+      <div class="card-box">
+        <a [routerLink]="[ '/' ]">
+          <div class="card-style">
+            <div>
+              <div class="card-name"></div>
+            </div>
+            <div class="card-icon">
+              <i class="fa fa-phone-square fa-2x" aria-hidden="true"></i>
+            </div>
+          </div>
+        </a>
+      </div>
+    </div>
+
+    <!-- Start Send Files -->
+
+    <div class="container-fluid send-file" *ngIf="app == 10 && sectors == 1">
+      <app-sendFile></app-sendFile>
+    </div>
+
+    <!-- End Send Files -->
+
+    <!-- Start Send Files report -->
+
+    <div class="container-fluid" *ngIf="app == 8">
+      <div class="card-box">
+        <a [routerLink]="[ '/filereport' ]" data-aos="fade-up">
+          <div class="card-style">
+            <div>
+              <div class="card-name">الملفات المرسلة</div>
+            </div>
+            <div class="card-icon">
+              <i class="fa fa-file-archive fa-2x" aria-hidden="true"></i>
+            </div>
+          </div>
+        </a>
+        <a [routerLink]="[ '/ComReport' ]" data-aos="fade-up">
+          <div class="card-style">
+            <div>
+              <div class="card-name">التفاوض والسداد</div>
+            </div>
+            <div class="card-icon">
+              <i class="fa fa-phone-alt fa-2x" aria-hidden="true"></i>
+            </div>
+          </div>
+        </a>
+        <a [routerLink]="[ '/ImpReport' ]" data-aos="fade-up">
+          <div class="card-style">
+            <div>
+              <div class="card-name">تقرير التنفيذ</div>
+            </div>
+            <div class="card-icon">
+              <i class="fa fa-balance-scale fa-2x" aria-hidden="true"></i>
+            </div>
+          </div>
+        </a>
+        <a [routerLink]="[ '/MdlReport' ]" data-aos="fade-up">
+          <div class="card-style">
+            <div>
+              <div class="card-name">تقرير المتداول</div>
+            </div>
+            <div class="card-icon">
+              <i class="fa fa-balance-scale fa-2x" aria-hidden="true"></i>
+            </div>
+          </div>
+        </a>
+      </div>
+    </div>
+    <!-- End Send Files report -->
+  </div>
+</div>

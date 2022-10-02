@@ -1,0 +1,17 @@
+.container-fluid {
+  direction: rtl;
+  h2 {
+    text-align: center;
+    font-size: 27px;
+    font-weight: bold;
+  }
+  label {
+    font-size: 16px;
+    font-weight: bold;
+  }
+  p {
+    font-size: 17px;
+    color: red;
+    text-align: right;
+  }
+}

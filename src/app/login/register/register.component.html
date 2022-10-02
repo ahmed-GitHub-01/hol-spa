@@ -1,0 +1,39 @@
+<div class="container">
+    <div>
+        <h2>تسجيل مستخدم جديد</h2>
+    </div>
+    <form #registerForm="ngForm" (ngSubmit)="register()">
+        <div class="row">
+            <div class="col-md-1">
+                <span>الكود</span>
+            </div>
+            <div class="col-md-4">
+                <input type="number" name="Code" class="form-control" [(ngModel)]="model.Code">
+            </div>
+            <div class="col-md-1">
+                <span>الاسم</span>
+            </div>
+            <div class="col-md-4">
+                <input type="text" class="form-control" name="username" [(ngModel)]="model.Username">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-1 mt-2">
+                <span>الباسورد</span>
+            </div>
+            <div class="col-md-4 mt-2">
+                <input type="password" class="form-control" name="password" [(ngModel)]="model.Password">
+            </div>
+        </div>
+        <div class="dropdown-divider"></div>
+        <div class="row mt-2">
+            <div class="col-md-1"></div>
+            <div class="col-md-2">
+                <input [disabled]="!registerForm.valid" type="submit" value="SAVE" class="btn btn-primary btn-block">
+            </div>
+            <div class="col-md-2">
+                <input type="button" value="CANCEL" class="btn btn-info btn-block" (click)="Cancel()">
+            </div>
+        </div>
+    </form>
+</div>

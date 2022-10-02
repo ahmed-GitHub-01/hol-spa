@@ -1,0 +1,426 @@
+$crimson: crimson;
+$black: #0d0d0d;
+$light-bg: #1a1a1a;
+$white: #fff;
+$light-color: #aaa;
+$box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.7);
+
+section {
+  // margin: 0;
+  // padding: 5rem 9%;
+  box-sizing: border-box;
+  text-decoration: none;
+  outline: none;
+  border: none;
+  text-transform: capitalize();
+  font-size: 100%;
+  overflow-x: hidden;
+  background-color: $black;
+  &::-webkit-scrollbar {
+    width: 1rem;
+  }
+  &::-webkit-scrollbar-track {
+    background-color: $light-color;
+  }
+  &::-webkit-scrollbar-thumb {
+    background-color: $light-color;
+    border-radius: 5px;
+  }
+
+  // ================================================================================
+
+  .home {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 4rem;
+    min-height: calc(100vh - 6.5rem);
+    .image {
+      flex: 1 1 42rem;
+      text-align: center;
+      img {
+        height: 350px;
+        width: 350px;
+        border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
+        border: 2px solid $crimson;
+        padding-top: 12px;
+      }
+    }
+    .content {
+      flex: 1 1 42rem;
+      margin: 10px;
+      h3 {
+        color: $white;
+        font-size: 3rem;
+        line-height: 1;
+        font-family: "Oswald";
+      }
+      .span-s {
+        font-size: 2rem;
+        padding: 0.5rem 0;
+        color: $crimson;
+        display: block;
+        line-height: 1;
+      }
+      p {
+        font-size: 1rem;
+        color: $light-color;
+        padding: 0.25rem 0;
+        line-height: 1.5;
+      }
+    }
+  }
+
+  // ================================================================================
+
+  .partners {
+    margin-bottom: 50px;
+    .heading {
+      margin-top: 3rem;
+      text-align: center;
+      font-size: 40px;
+      color: $white;
+      margin-bottom: 3rem;
+      text-transform: uppercase;
+      font-family: "Oswald";
+      span {
+        text-transform: uppercase;
+        color: $crimson;
+      }
+    }
+    .box {
+      padding-top: 20px;
+      text-align: center;
+      box-shadow: $box-shadow;
+      border-radius: 0.5rem;
+      background-color: $light-bg;
+      padding-bottom: 15px;
+      margin-bottom: 10px;
+      &:hover {
+        background-color: $white;
+        h3 {
+          color: $black;
+          font-family: "Oswald";
+        }
+      }
+      img {
+        height: 7rem;
+        width: 100%;
+        margin-bottom: 20px;
+      }
+      h3 {
+        color: $white;
+        font-size: 20px;
+        font-family: "Oswald";
+      }
+    }
+  }
+  .light {
+    background-color: $light-bg;
+  }
+
+  // ================================================================================
+
+  .achievements {
+    .heading {
+      margin-top: 3rem;
+      text-align: center;
+      font-size: 40px;
+      color: $white;
+      margin-bottom: 3rem;
+      text-transform: uppercase;
+      font-family: "Oswald";
+      span {
+        text-transform: uppercase;
+        color: $crimson;
+      }
+    }
+    .box-achievment {
+      flex: 1 1 24rem;
+      margin-left: 20px;
+      padding-left: 3.5rem;
+      padding-bottom: 3rem;
+      border-left: 0.1rem solid $light-color;
+      position: relative;
+      svg {
+        height: 2.5rem;
+        width: 2.5rem;
+        line-height: 4.5rem;
+        font-size: 1rem;
+        border-radius: 50%;
+        background-color: $crimson;
+        color: $white;
+        text-align: center;
+        padding: 10px;
+        position: absolute;
+        top: -10px;
+        left: -22px;
+      }
+      span {
+        font-size: 15px;
+        color: $white;
+        border-radius: 5rem;
+        padding: 1px 26px;
+        background-color: #363636;
+      }
+      p {
+        padding-top: 10px;
+        font-size: 15px;
+        color: $light-color;
+        line-height: 1.5;
+      }
+    }
+  }
+
+  // ================================================================================
+
+  .pictures {
+    margin-bottom: 50px;
+    .heading {
+      margin-top: 3rem;
+      text-align: center;
+      font-size: 40px;
+      color: $white;
+      margin-bottom: 3rem;
+      text-transform: uppercase;
+      font-family: "Oswald";
+      span {
+        text-transform: uppercase;
+        color: $crimson;
+      }
+    }
+    .box-pic {
+      border-radius: 0.5rem;
+      text-align: center;
+      overflow: hidden;
+      position: relative;
+      box-shadow: $box-shadow;
+      height: 100%;
+      width: 100%;
+      &:hover .content {
+        transform: translateY(0);
+      }
+      img {
+        height: 100%;
+        width: 100%;
+        object-fit: cover;
+        background-color: $light-bg;
+        padding: 15px;
+      }
+      .content {
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 100%;
+        width: 100%;
+        background-color: $light-bg;
+        align-items: center;
+        justify-content: center;
+        padding: 10px;
+        transform: translateY(-100%);
+        transition: 0.2s linear;
+        h3 {
+          font-size: 20px;
+          color: $white;
+          text-transform: uppercase;
+          font-weight: normal;
+          font-family: "Oswald";
+        }
+        p {
+          padding: 1rem 0;
+          font-size: 15px;
+          line-height: 1.5;
+          color: $light-color;
+        }
+        a {
+          font-size: 15px;
+          color: $crimson;
+          &:hover {
+            color: $white;
+          }
+        }
+      }
+    }
+  }
+
+  // ================================================================================
+
+  .blogs {
+    margin-bottom: 50px;
+    .heading {
+      margin-top: 3rem;
+      text-align: center;
+      font-size: 40px;
+      color: $white;
+      margin-bottom: 3rem;
+      text-transform: uppercase;
+      font-family: "Oswald";
+      span {
+        text-transform: uppercase;
+        color: $crimson;
+      }
+    }
+    .box {
+      text-align: center;
+      padding: 10px;
+      border-radius: 0.5rem;
+      box-shadow: $box-shadow;
+      .image {
+        height: 100%;
+        width: 100%;
+        border-radius: 0.5rem;
+        overflow: hidden;
+      }
+      img {
+        height: 100%;
+        width: 100%;
+        object-fit: cover;
+        transition: 0.2s linear;
+      }
+      &:hover .image img {
+        transform: scale(1.2);
+      }
+      .content {
+        .icon {
+          position: relative;
+          top: -1rem;
+          border-radius: 0.5rem;
+          display: inline-block;
+          background: $black;
+          height: 40px;
+          padding: 9px;
+          a {
+            font-size: 15px;
+            margin: 0 1rem;
+            color: $white;
+            &:hover {
+              color: $crimson;
+            }
+            svg {
+              color: $crimson;
+              margin-right: 10px;
+            }
+          }
+        }
+        h3 {
+          font-size: 20px;
+          color: $white;
+          font-family: "Oswald";
+        }
+        p {
+          font-size: 15px;
+          color: $light-color;
+        }
+      }
+    }
+  }
+
+  // ================================================================================
+
+  .contact {
+    margin-bottom: 50px;
+    .heading {
+      margin-top: 3rem;
+      text-align: center;
+      font-size: 40px;
+      color: $white;
+      margin-bottom: 3rem;
+      text-transform: uppercase;
+      font-family: "Oswald";
+      span {
+        text-transform: uppercase;
+        color: $crimson;
+      }
+    }
+    .inputbox {
+      input {
+        background-color: $light-bg;
+      }
+      textarea {
+        background-color: $light-bg;
+      }
+    }
+    .btn-send {
+      display: inline-block;
+      margin-top: 1rem;
+      border-radius: 10px;
+      background-color: $crimson;
+      padding: 10px;
+      width: 100px;
+      font-size: 1rem;
+      color: $white;
+      // padding-left: 2rem;
+    }
+    h1 {
+      font-size: 35px;
+      color: $white;
+      font-family: "Oswald";
+      text-transform: uppercase;
+    }
+    P {
+      color: $light-color;
+      padding: 1rem 0.5rem;
+      font-size: 15px;
+    }
+    .box {
+      display: flex;
+      gap: 2rem;
+      svg {
+        font-size: 2rem;
+        color: $crimson;
+        padding-top: 0.5;
+      }
+      h3 {
+        font-size: 20px;
+        font-family: "Oswald";
+        color: $white;
+      }
+      .phone {
+        font-size: 50px;
+        color: $white;
+      }
+    }
+    .share {
+      svg {
+        height: 3rem;
+        width: 3rem;
+        line-height: 1;
+        border-radius: 50%;
+        background-color: $light-bg;
+        color: $light-color;
+        margin-right: 15px;
+        padding: 10px;
+        &:hover {
+          background-color: $crimson;
+        }
+      }
+    }
+  }
+
+  // ================================================================================
+
+  .btn {
+    display: inline-block;
+    margin-top: 1rem;
+    border-radius: 25px;
+    background-color: $crimson;
+    // padding: 0.7rem;
+    font-size: 1rem;
+    color: $white;
+    padding-left: 2rem;
+    .span-i {
+      line-height: 2rem;
+      font-size: 15px;
+      text-align: center;
+      background: $white;
+      color: $crimson;
+      border-radius: 50%;
+      margin-left: 1rem;
+      padding: 7px;
+      transition: 0.2s linear;
+      &:hover {
+        margin-left: 2rem;
+      }
+    }
+  }
+}

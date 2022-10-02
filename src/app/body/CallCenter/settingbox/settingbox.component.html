@@ -1,0 +1,144 @@
+<div class="settings-box">
+  <div class="toggle-settings" (click)="toggle()"><i class="fa fa-cog"></i></div>
+  <div class="settings-content">
+    <div class="container-fluid">
+      <div class="row mt-1">
+        <div class="col-sm-12">
+          <input type="button" value="تكليف بالوفاء" class="btn btn-block btn-success btn-small"
+            (click)="Taklef(taklef)">
+        </div>
+      </div>
+      <div class="row mt-1">
+        <div class="col-sm-12">
+          <input type="button" value="فاكس جهة العمل" class="btn btn-block btn-success btn-small">
+        </div>
+      </div>
+      <div class="row mt-1">
+        <div class="col-sm-12">
+          <input type="button" value="العقد" class="btn btn-block btn-success btn-small">
+        </div>
+      </div>
+      <div class="row mt-1">
+        <div class="col-sm-12">
+          <input type="button" value="المدنية" class="btn btn-block btn-success btn-small">
+        </div>
+      </div>
+      <div class="row mt-1">
+        <div class="col-sm-12">
+          <input type="button" value="رسائل" class="btn btn-block btn-success btn-small"
+            (click)="massages(sendMessages)">
+        </div>
+      </div>
+      <div class="row mt-1">
+        <div class="col-sm-12">
+          <input type="button" value="تحديث الملفات" class="btn btn-block btn-success btn-small">
+        </div>
+      </div>
+      <div class="row mt-1">
+        <div class="col-sm-12">
+          <input type="button" value="استمارة مندوب" class="btn btn-block btn-success btn-small">
+        </div>
+      </div>
+      <div class="row mt-1">
+        <div class="col-sm-12">
+          <input type="button" value="تارجيت الباتشات" class="btn btn-block btn-success btn-small">
+        </div>
+      </div>
+      <div class="row mt-1">
+        <div class="col-sm-12">
+          <input type="button" value="صحف الدعاوى" class="btn btn-block btn-success btn-small">
+        </div>
+      </div>
+      <div class="row mt-1">
+        <label class="col-sm-12">{{ main.empName }}</label>
+      </div>
+      <div class="row mt-1">
+        <label class="col-sm-12">{{ main.localTele }}</label>
+      </div>
+      <div class="row mt-1">
+        <label class="col-sm-12 text-center">
+          <h3>عدد العملاء</h3>
+        </label>
+      </div>
+      <div class="row mt-1">
+        <label class="col-sm-12 text-center">
+          <h2>{{ countStatementClean }}</h2>
+        </label>
+      </div>
+      <div class="row mt-1">
+        <label class="col-sm-12 text-center">
+          <h3>عدد الافادات</h3>
+        </label>
+      </div>
+      <div class="row mt-1 text-center">
+        <label class="col-sm-12">
+          <h2>{{ countStatement }}</h2>
+        </label>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Start Modal taklef -->
+<ng-template #taklef>
+  <div class="modal-header">
+    <h4 class="modal-title pull-left">Send messages</h4>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+      <i class="fa fa-window-close"></i>
+    </button>
+  </div>
+  <div class="modal-body">
+    <app-print-taklef></app-print-taklef>
+  </div>
+</ng-template>
+
+<!-- Start Modal taklef -->
+
+<ng-template #sendMessages>
+  <div class="modal-header">
+    <h4 class=" pull-left">Send Messages</h4>
+    <button class="btn btn-primary mb-1 ml-lg-5">Copy</button>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+      <i class="fa fa-window-close"></i>
+    </button>
+  </div>
+  <div class="modal-body">
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-12">
+          <textarea rows="10" class="form-control">{{ massage }}</textarea>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-2">
+          <input type="button" value="رسالة زين" class="btn btn-primary btn-block mt-1" (click)="zainMsg()">
+        </div>
+        <div class="col-sm-2">
+          <input type="button" value="رسائل تذكير" class="btn btn-primary btn-block mt-1" (click)="attmsg()">
+        </div>
+        <div class="col-sm-2">
+          <input type="button" value="رسالة اجراءات" class="btn btn-primary btn-block mt-1" (click)="procMsg()">
+        </div>
+        <div class="col-sm-2">
+          <input type="button" value="AR اخطار هام" class="btn btn-primary btn-block mt-1" (click)="notAr()">
+        </div>
+        <div class="col-sm-2">
+          <input type="button" value="EN اخطار هام" class="btn btn-primary btn-block mt-1" (click)="notEn()">
+        </div>
+        <div class="col-sm-2">
+          <input type="button" value="تذكير هام" class="btn btn-primary btn-block mt-1" (click)="remindMsg()">
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-2">
+          <input type="button" value="اخطار هام باسم العميل" class="btn btn-primary btn-block mt-1"
+            (click)="notNameCustomer()">
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-template>

@@ -1,0 +1,482 @@
+section {
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  text-decoration: none;
+  outline: none;
+  border: none;
+  text-transform: capitalize();
+  font-size: 100%;
+  overflow-x: hidden;
+  background-color: #0d0d0d;
+}
+
+section::-webkit-scrollbar {
+  width: 1rem;
+}
+
+section::-webkit-scrollbar-track {
+  background-color: #aaa;
+}
+
+section::-webkit-scrollbar-thumb {
+  background-color: #aaa;
+  border-radius: 5px;
+}
+
+section .home {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  gap: 4rem;
+  min-height: calc(100vh - 6.5rem);
+}
+
+section .home .image {
+  -webkit-box-flex: 1;
+      -ms-flex: 1 1 42rem;
+          flex: 1 1 42rem;
+  text-align: center;
+}
+
+section .home .image img {
+  height: 350px;
+  width: 350px;
+  border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
+  border: 2px solid crimson;
+  padding-top: 12px;
+}
+
+section .home .content {
+  -webkit-box-flex: 1;
+      -ms-flex: 1 1 42rem;
+          flex: 1 1 42rem;
+  margin: 10px;
+}
+
+section .home .content h3 {
+  color: #fff;
+  font-size: 3rem;
+  line-height: 1;
+  font-family: "Oswald";
+}
+
+section .home .content .span-s {
+  font-size: 2rem;
+  padding: 0.5rem 0;
+  color: crimson;
+  display: block;
+  line-height: 1;
+}
+
+section .home .content p {
+  font-size: 1rem;
+  color: #aaa;
+  padding: 0.25rem 0;
+  line-height: 1.5;
+}
+
+section .partners {
+  margin-bottom: 50px;
+}
+
+section .partners .heading {
+  margin-top: 3rem;
+  text-align: center;
+  font-size: 40px;
+  color: #fff;
+  margin-bottom: 3rem;
+  text-transform: uppercase;
+  font-family: "Oswald";
+}
+
+section .partners .heading span {
+  text-transform: uppercase;
+  color: crimson;
+}
+
+section .partners .box {
+  padding-top: 20px;
+  text-align: center;
+  -webkit-box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.7);
+          box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.7);
+  border-radius: 0.5rem;
+  background-color: #1a1a1a;
+  padding-bottom: 15px;
+  margin-bottom: 10px;
+}
+
+section .partners .box:hover {
+  background-color: #fff;
+}
+
+section .partners .box:hover h3 {
+  color: #0d0d0d;
+  font-family: "Oswald";
+}
+
+section .partners .box img {
+  height: 7rem;
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+section .partners .box h3 {
+  color: #fff;
+  font-size: 20px;
+  font-family: "Oswald";
+}
+
+section .light {
+  background-color: #1a1a1a;
+}
+
+section .achievements .heading {
+  margin-top: 3rem;
+  text-align: center;
+  font-size: 40px;
+  color: #fff;
+  margin-bottom: 3rem;
+  text-transform: uppercase;
+  font-family: "Oswald";
+}
+
+section .achievements .heading span {
+  text-transform: uppercase;
+  color: crimson;
+}
+
+section .achievements .box-achievment {
+  -webkit-box-flex: 1;
+      -ms-flex: 1 1 24rem;
+          flex: 1 1 24rem;
+  margin-left: 20px;
+  padding-left: 3.5rem;
+  padding-bottom: 3rem;
+  border-left: 0.1rem solid #aaa;
+  position: relative;
+}
+
+section .achievements .box-achievment svg {
+  height: 2.5rem;
+  width: 2.5rem;
+  line-height: 4.5rem;
+  font-size: 1rem;
+  border-radius: 50%;
+  background-color: crimson;
+  color: #fff;
+  text-align: center;
+  padding: 10px;
+  position: absolute;
+  top: -10px;
+  left: -22px;
+}
+
+section .achievements .box-achievment span {
+  font-size: 15px;
+  color: #fff;
+  border-radius: 5rem;
+  padding: 1px 26px;
+  background-color: #363636;
+}
+
+section .achievements .box-achievment p {
+  padding-top: 10px;
+  font-size: 15px;
+  color: #aaa;
+  line-height: 1.5;
+}
+
+section .pictures {
+  margin-bottom: 50px;
+}
+
+section .pictures .heading {
+  margin-top: 3rem;
+  text-align: center;
+  font-size: 40px;
+  color: #fff;
+  margin-bottom: 3rem;
+  text-transform: uppercase;
+  font-family: "Oswald";
+}
+
+section .pictures .heading span {
+  text-transform: uppercase;
+  color: crimson;
+}
+
+section .pictures .box-pic {
+  border-radius: 0.5rem;
+  text-align: center;
+  overflow: hidden;
+  position: relative;
+  -webkit-box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.7);
+          box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.7);
+  height: 100%;
+  width: 100%;
+}
+
+section .pictures .box-pic:hover .content {
+  -webkit-transform: translateY(0);
+          transform: translateY(0);
+}
+
+section .pictures .box-pic img {
+  height: 100%;
+  width: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+  background-color: #1a1a1a;
+  padding: 15px;
+}
+
+section .pictures .box-pic .content {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background-color: #1a1a1a;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  padding: 10px;
+  -webkit-transform: translateY(-100%);
+          transform: translateY(-100%);
+  -webkit-transition: 0.2s linear;
+  transition: 0.2s linear;
+}
+
+section .pictures .box-pic .content h3 {
+  font-size: 20px;
+  color: #fff;
+  text-transform: uppercase;
+  font-weight: normal;
+  font-family: "Oswald";
+}
+
+section .pictures .box-pic .content p {
+  padding: 1rem 0;
+  font-size: 15px;
+  line-height: 1.5;
+  color: #aaa;
+}
+
+section .pictures .box-pic .content a {
+  font-size: 15px;
+  color: crimson;
+}
+
+section .pictures .box-pic .content a:hover {
+  color: #fff;
+}
+
+section .blogs {
+  margin-bottom: 50px;
+}
+
+section .blogs .heading {
+  margin-top: 3rem;
+  text-align: center;
+  font-size: 40px;
+  color: #fff;
+  margin-bottom: 3rem;
+  text-transform: uppercase;
+  font-family: "Oswald";
+}
+
+section .blogs .heading span {
+  text-transform: uppercase;
+  color: crimson;
+}
+
+section .blogs .box {
+  text-align: center;
+  padding: 10px;
+  border-radius: 0.5rem;
+  -webkit-box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.7);
+          box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.7);
+}
+
+section .blogs .box .image {
+  height: 100%;
+  width: 100%;
+  border-radius: 0.5rem;
+  overflow: hidden;
+}
+
+section .blogs .box img {
+  height: 100%;
+  width: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+  -webkit-transition: 0.2s linear;
+  transition: 0.2s linear;
+}
+
+section .blogs .box:hover .image img {
+  -webkit-transform: scale(1.2);
+          transform: scale(1.2);
+}
+
+section .blogs .box .content .icon {
+  position: relative;
+  top: -1rem;
+  border-radius: 0.5rem;
+  display: inline-block;
+  background: #0d0d0d;
+  height: 40px;
+  padding: 9px;
+}
+
+section .blogs .box .content .icon a {
+  font-size: 15px;
+  margin: 0 1rem;
+  color: #fff;
+}
+
+section .blogs .box .content .icon a:hover {
+  color: crimson;
+}
+
+section .blogs .box .content .icon a svg {
+  color: crimson;
+  margin-right: 10px;
+}
+
+section .blogs .box .content h3 {
+  font-size: 20px;
+  color: #fff;
+  font-family: "Oswald";
+}
+
+section .blogs .box .content p {
+  font-size: 15px;
+  color: #aaa;
+}
+
+section .contact {
+  margin-bottom: 50px;
+}
+
+section .contact .heading {
+  margin-top: 3rem;
+  text-align: center;
+  font-size: 40px;
+  color: #fff;
+  margin-bottom: 3rem;
+  text-transform: uppercase;
+  font-family: "Oswald";
+}
+
+section .contact .heading span {
+  text-transform: uppercase;
+  color: crimson;
+}
+
+section .contact .inputbox input {
+  background-color: #1a1a1a;
+}
+
+section .contact .inputbox textarea {
+  background-color: #1a1a1a;
+}
+
+section .contact .btn-send {
+  display: inline-block;
+  margin-top: 1rem;
+  border-radius: 10px;
+  background-color: crimson;
+  padding: 10px;
+  width: 100px;
+  font-size: 1rem;
+  color: #fff;
+}
+
+section .contact h1 {
+  font-size: 35px;
+  color: #fff;
+  font-family: "Oswald";
+  text-transform: uppercase;
+}
+
+section .contact P {
+  color: #aaa;
+  padding: 1rem 0.5rem;
+  font-size: 15px;
+}
+
+section .contact .box {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  gap: 2rem;
+}
+
+section .contact .box svg {
+  font-size: 2rem;
+  color: crimson;
+  padding-top: 0.5;
+}
+
+section .contact .box h3 {
+  font-size: 20px;
+  font-family: "Oswald";
+  color: #fff;
+}
+
+section .contact .box .phone {
+  font-size: 50px;
+  color: #fff;
+}
+
+section .contact .share svg {
+  height: 3rem;
+  width: 3rem;
+  line-height: 1;
+  border-radius: 50%;
+  background-color: #1a1a1a;
+  color: #aaa;
+  margin-right: 15px;
+  padding: 10px;
+}
+
+section .contact .share svg:hover {
+  background-color: crimson;
+}
+
+section .btn {
+  display: inline-block;
+  margin-top: 1rem;
+  border-radius: 25px;
+  background-color: crimson;
+  font-size: 1rem;
+  color: #fff;
+  padding-left: 2rem;
+}
+
+section .btn .span-i {
+  line-height: 2rem;
+  font-size: 15px;
+  text-align: center;
+  background: #fff;
+  color: crimson;
+  border-radius: 50%;
+  margin-left: 1rem;
+  padding: 7px;
+  -webkit-transition: 0.2s linear;
+  transition: 0.2s linear;
+}
+
+section .btn .span-i:hover {
+  margin-left: 2rem;
+}
+/*# sourceMappingURL=home.component.css.map */

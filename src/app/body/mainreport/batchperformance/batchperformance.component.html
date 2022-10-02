@@ -1,0 +1,38 @@
+<section>
+  <div class="container-fluid">
+    <div class="row mt-5">
+      <div class="col-lg-4">
+        <div class="input-group input-group-m">
+          <div class="input-group-append">
+            <label class="input-group-text">الشركة</label>
+          </div>
+          <select class="custom-select" [(ngModel)]="valueCompany">
+            <option *ngFor="let item of company" [value]="item.code">
+              {{ item.name }}</option>
+          </select>
+        </div>
+      </div>
+      <div class="col-lg-2">
+        <input type="button" value="Search" class="btn btn-primary btn-block" (click)="batchPerformance()">
+      </div>
+    </div>
+    <div class="row mt-2">
+      <div class="col-lg-12">
+        <div class="outof-rtl">
+          <dx-data-grid [dataSource]="dataPerformance" [rowAlternationEnabled]="true" [allowColumnReordering]="true"
+            [columnAutoWidth]="true" [showBorders]="true">
+            <dxo-paging [pageSize]="10"></dxo-paging>
+            <dxo-pager [showPageSizeSelector]="true" [allowedPageSizes]="[5,10,20,30,50,80,100]" [showInfo]="true">
+            </dxo-pager>
+            <dxo-filter-row [visible]="true" [applyFilter]="true"></dxo-filter-row>
+            <dxo-export [enabled]="true"></dxo-export>
+            <dxo-header-filter [visible]="true"></dxo-header-filter>
+            <dxi-column dataField="batchNo" caption="اسم الباتش"></dxi-column>
+            <dxi-column dataField="dateLogin" dataType="date" format="dd-MM-yyyy" caption="تاريخ الورود"></dxi-column>
+            <dxi-column dataField="batchNo" caption="اسم الباتش"></dxi-column>
+          </dx-data-grid>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

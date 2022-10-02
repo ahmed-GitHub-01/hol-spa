@@ -1,0 +1,126 @@
+<div id="container">
+    <div id="header">
+        <div class="avatarSection">
+            <div class="picture">
+                <img src="../../assets/images/noPic.svg" />
+            </div>
+
+            <div class="nameSection">{{ conversation.phoneNumber }}</div>
+        </div>
+        <div class="actionButtons">
+            <label for="myfile"><img src="../../assets/images/attached.svg" /></label>
+            <img src="../../assets/images/moreVertIcon.svg" />
+        </div>
+    </div>
+    <div id="body">
+        <!-- <div class="message" [ngClass]="{ me: message.me }" *ngFor="let message of conversation.messages">
+            <div class="messageContent">
+                {{ message.body }}
+                <div class="time">{{ message.time }}</div>
+            </div>
+        </div> -->
+        <div *ngIf="(message.messageThread$ | async)?.length === 0">
+            No messages yet... send any word by using the message box below
+        </div>
+        <div *ngIf="(message.messageThread$ | async)?.length != 0">
+            <div class="message" [ngClass]="{ me: msg.toAnyOne }" *ngFor="let msg of (message.messageThread$ | async)">
+                <div>
+                    <div class="messageContent">
+                        <!-- [ngClass]="getReplyMessage(msg.replyId)" -->
+                        <div class="reply" *ngIf="msg.replyId">
+                            <div *ngFor="let reply of (message.messageThread$ | async)">
+                                <div *ngIf="reply.messageID === msg.replyId">
+                                    <h4 class="phone-number">{{ reply.fromNumber }} - {{ reply.nameSentMessage }} </h4>
+                                    <div *ngIf="msg.typeMessage === 'image'">
+                                        <img src="data:image/png;base64,{{ msg.mediaEncode }}" height="50px"
+                                            width="500px" alt="There is Image file">
+                                    </div>
+                                    <div *ngIf="msg.typeMessage === 'video'">
+                                        <video src="data:video/mp4;base64,{{ msg.mediaEncode }}" height="50px"
+                                            alt="There is video file" controls></video>
+                                    </div>
+                                    <div *ngIf="msg.typeMessage === 'audio'">
+                                        <audio src="data:audio/ogg;base64,{{ msg.mediaEncode }}" height="50px"
+                                            alt="There is audio file" controls></audio>
+                                    </div>
+                                    <p>{{ reply.contentMessage }}</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div *ngIf="msg.typeMessage === 'image'">
+                            <img src="data:image/png;base64,{{ msg.mediaEncode }}" height="250px" width="500px"
+                                alt="There is Image file">
+                        </div>
+                        <div *ngIf="msg.typeMessage === 'video'">
+                            <video src="data:video/mp4;base64,{{ msg.mediaEncode }}" height="250px"
+                                alt="There is video file" controls></video>
+                        </div>
+                        <div *ngIf="msg.typeMessage === 'audio'">
+                            <audio src="data:audio/ogg;base64,{{ msg.mediaEncode }}" height="250px"
+                                alt="There is audio file" controls></audio>
+                        </div>
+                        <div class="message-pdf" (click)="hashingFile(msg.mediaEncode, msg.contentMessage)"
+                            *ngIf="msg.typeMessage === 'document'">
+                            <fa-icon [icon]="faCoffee"></fa-icon>
+                            <p>{{ msg.contentMessage }}</p>
+                        </div>
+                        <p *ngIf="msg.typeMessage != 'document'">{{ msg.contentMessage }}</p>
+                        <div class="time">{{ msg.dateSent | timeago }}
+                            <span class="checkmark" *ngIf="msg.status == 'sent'">
+                                <div class="checkmark_stem"></div>
+                                <div class="checkmark_kick"></div>
+                            </span>
+                            <span class="checkmark" *ngIf="msg.status == 'delivered'">
+                                <div class="checkmark_stem"></div>
+                                <div class="checkmark_kick"></div>
+                                <div class="checkmark_stem-delivered"></div>
+                                <div class="checkmark_kick-delivered"></div>
+                            </span>
+                            <span class="checkmark" *ngIf="msg.status == 'read'">
+                                <div class="checkmark_stem1"></div>
+                                <div class="checkmark_kick1"></div>
+                                <div class="checkmark_stem-read"></div>
+                                <div class="checkmark_kick-read"></div>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="footer">
+        <div id="smileyIcon">
+            <img (click)="emojiPickerVisible = !emojiPickerVisible" src="../../assets/images/smileIcon.svg" />
+            <emoji-mart (emojiClick)="emojiClicked($event)" *ngIf="emojiPickerVisible"
+                style="position: absolute; bottom: 50px" [darkMode]="false" title="Pick your emoji…" emoji="point_up">
+            </emoji-mart>
+        </div>
+        <div id="textarea">
+            <textarea [(ngModel)]="messages" (paste)="getPasteValue($event, showImage)"
+                (keyup.enter)="submitMessage($event)"></textarea>
+            <!-- <fa-icon (click)="submitMessage2(message.value)" [icon]="faPaperPlan"></fa-icon> -->
+        </div>
+        <div id="micIcon">
+            <img src="../../assets/images/voiceIcon.svg" />
+        </div>
+    </div>
+</div>
+
+
+<ng-template #showImage>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-xl-12">
+                <img class="imgefrompaste" src="{{ imageblob }}" alt="adfasdfadg">
+            </div>
+        </div>
+        <div class="row mb-4">
+            <div class="col-xl-10">
+                <input type="text" #message placeholder="Write your massage here...." class="form-control">
+            </div>
+            <div class="col-xl-2">
+                <fa-icon (click)="submitMessageImage(message.value);modalRef.hide()" [icon]="faPaperPlan"></fa-icon>
+            </div>
+        </div>
+    </div>
+</ng-template>

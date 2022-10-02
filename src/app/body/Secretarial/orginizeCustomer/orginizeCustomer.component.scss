@@ -1,0 +1,25 @@
+section {
+  div.container-fluid {
+    direction: rtl;
+    margin-top: 20px;
+    label {
+      font-weight: bold;
+    }
+    .data-table {
+      direction: ltr;
+      box-shadow: 1px 1px 10px #000;
+    }
+  }
+
+  h4 {
+    font-weight: bold;
+  }
+}
+
+section {
+  .refresh-button {
+    width: 20px;
+    height: 15px;
+    color: rgb(21, 121, 21);
+  }
+}

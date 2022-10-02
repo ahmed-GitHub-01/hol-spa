@@ -1,0 +1,205 @@
+<!-- <div class="mat-progress" *ngIf="loading$ | async">
+  <div class="mat-progress-spinner">
+    <mat-progress-spinner [mode]="'indeterminate'" *ngIf="loading$ | async"></mat-progress-spinner>
+  </div>
+</div> -->
+<section>
+  <div class="container-fluid">
+    <div class="row mt-3">
+      <div class="col-sm-12">
+        <h2>تقرير المتداول</h2>
+      </div>
+    </div>
+  </div>
+  <!-- start container search -->
+  <div class="container-fluid">
+    <div class="row mt-2">
+      <label class="col-sm-1 mt-2">الاسم</label>
+      <div class="col-sm-2">
+        <!-- <input type="number" class="form-control" #civil> -->
+        <div class="input-group">
+          <input type="text" class="form-control" #name (keyup.enter)="searchInMdlByName(name.value)">
+          <div class="input-group-append">
+            <button class="input-group-text form-control" (click)="searchInMdlByName(name.value)"><i
+                class="fa fa-search"></i></button>
+          </div>
+        </div>
+      </div>
+      <label class="col-sm-1 mt-2">المدنى</label>
+      <div class="col-sm-2">
+        <!-- <input type="text" class="form-control" #name> -->
+        <div class="input-group">
+          <input type="number" class="form-control" #civil (keypress)="onlyNumberAllowed($event)"
+            (keyup.enter)="searchInMdlByCivilId(civil.value)">
+          <div class="input-group-append">
+            <button class="input-group-text form-control" (click)="searchInMdlByCivilId(civil.value)">
+              <i class="fa fa-search"></i></button>
+          </div>
+        </div>
+      </div>
+      <label class="col-sm-1 mt-2">الرقم الالى</label>
+      <div class="col-sm-2">
+        <!-- <input type="text" class="form-control" #autoNumber> -->
+        <div class="input-group">
+          <input type="number" class="form-control" #autoNum (keypress)="onlyNumberAllowed($event)"
+            (keyup.enter)="searchInMdlByAutoNum(autoNum.value)">
+          <div class="input-group-append">
+            <button class="input-group-text form-control" (click)="searchInMdlByAutoNum(autoNum.value)"><i
+                class="fa fa-search"></i></button>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-3">
+        <input type="button" class="btn btn-block btn-dark mt-2" value="بحث عن الكل" (click)="searchAllinMDl()">
+      </div>
+    </div>
+    <div class="row mt-1">
+      <div class="col-sm-12">
+        <div class="outof-rtl">
+          <dx-data-grid [dataSource]="allSearch" [rowAlternationEnabled]="true" [allowColumnReordering]="true"
+            [columnAutoWidth]="true" [showBorders]="true">
+            <dxo-paging [pageSize]="10"></dxo-paging>
+            <dxo-pager [showPageSizeSelector]="true" [allowedPageSizes]="[5,10,20,30,50,80,100]" [showInfo]="true">
+            </dxo-pager>
+            <dxo-filter-row [visible]="true" [applyFilter]="true"></dxo-filter-row>
+            <dxo-export [enabled]="true"></dxo-export>
+            <dxo-header-filter [visible]="true"></dxo-header-filter>
+            <dxi-column type="buttons" caption="جلسات الخبراء" cellTemplate="celTemp">
+              <div *dxTemplate="let data of 'celTemp'">
+                <button class="btn mce-btn-small" (click)="showCourtGlsa(data, showResom1,'جلسة خبراء')"><i
+                    class="fa fa-flag"></i></button>
+              </div>
+            </dxi-column>
+            <dxi-column type="buttons" caption="جلسات المحكمة" cellTemplate="celTemp1">
+              <div *dxTemplate="let data of 'celTemp1'">
+                <button class="btn mce-btn-small" (click)="showCourtGlsa(data, showResom1,'جلسة محكمة')"><i
+                    class="fa fa-flag"></i></button>
+              </div>
+            </dxi-column>
+            <dxi-column dataField="lastExpertHkm.date" dataType="date" format="dd-MM-yyyy" caption="تاريخ الخبراء">
+            </dxi-column>
+            <dxi-column dataField="lastExpertHkm.expert" caption="جلسات الخبراء"></dxi-column>
+            <dxi-column dataField="lastGlsaMhkma.date" dataType="date" format="dd-MM-yyyy"
+              caption="تاريخ جلسات المحكمة"></dxi-column>
+            <dxi-column dataField="lastGlsaMhkma.hokm" caption="جلسات المحكمة"></dxi-column>
+            <dxi-column dataField="court" caption="المحكمة"></dxi-column>
+            <dxi-column dataField="circle" caption="الدائرة"></dxi-column>
+            <dxi-column dataField="autoNum" caption="الرقم الالى"></dxi-column>
+            <dxi-column dataField="numDecr" caption="رقم التمييز"></dxi-column>
+            <dxi-column dataField="decr" caption="التمييز"></dxi-column>
+            <dxi-column dataField="numResum" caption="رقم الاستئناف"></dxi-column>
+            <dxi-column dataField="resum" caption="الاستئناف"></dxi-column>
+            <dxi-column dataField="numFirstDegree" caption="رقم اول درجة"></dxi-column>
+            <dxi-column dataField="firstDigree" caption="اول درجة"></dxi-column>
+            <dxi-column dataField="subject" caption="موضوع الدعوى"></dxi-column>
+            <dxi-column dataField="type" caption="الحالة"></dxi-column>
+            <dxi-column dataField="batchNum" caption="الباتش / المحفظة"></dxi-column>
+            <dxi-column dataField="name" caption="الاسم"></dxi-column>
+            <dxi-column dataField="civilid" caption="المدنى"></dxi-column>
+          </dx-data-grid>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- End container search -->
+</section>
+
+<!-- Start fee Modal -->
+
+<ng-template #showResom1>
+  <div class="modal-header">
+    <h2 class="modal-title">الجلسات</h2>
+    <button type="button" class="btn" printSectionId="printsection" [useExistingCss]="true" ngxPrint
+      [printStyle]="{'.font-size' : {'font-size': '17px','font-weight': 'bold'}}"><i class="fa fa-print"></i></button>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+      <span aria-hidden="true"><i class="fa fa-times-circle"></i></span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-sm-12">
+          <table class="table">
+            <thead>
+              <tr>
+                <th>الجلسة القادمة</th>
+                <th>القرار</th>
+                <th>الدرجة</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let item of courtGlsa">
+                <td>{{ item.dateRe }}</td>
+                <td>{{ item.krar }}</td>
+                <td>{{ item.isVoke }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-template>
+
+<!-- End fee Modal -->
+
+<!-- Start print Modal -->
+<section id="printsection">
+  <div class="container-fluid appear">
+    <div class="row">
+      <div class="col-sm-12"><img src="../../../../assets/img/hol-header.png" alt="HOL" width="100%"></div>
+    </div>
+    <div class="row">
+      <h1 class="col-sm-12 text-center mb-3">الجلــــسات</h1>
+    </div>
+    <div class="row">
+      <h4 class="col-sm-1 text-right">الاسم : </h4>
+      <h5 class="col-sm-5 text-right">{{ dataPrint.name }}</h5>
+      <h4 class="col-sm-1 text-right">الالى :</h4>
+      <h5 class="col-sm-5 text-right">{{ dataPrint.autoNum }}</h5>
+    </div>
+    <div class="row">
+      <h4 class="col-sm-2 text-right">المدنى: </h4>
+      <h5 class="col-sm-4 text-right">{{ dataPrint.civilid }}</h5>
+    </div>
+    <div class="row">
+      <h4 class="col-sm-2 text-right">اول درجة : </h4>
+      <h5 class="col-sm-4 text-right">{{ dataPrint.firstDigree }}</h5>
+      <h4 class="col-sm-2 text-right">رقم اول درجة :</h4>
+      <h5 class="col-sm-4 text-right">{{ dataPrint.numFirstDegree }}</h5>
+    </div>
+    <div class="row">
+      <h4 class="col-sm-2 text-right">الاستئناف : </h4>
+      <h5 class="col-sm-4 text-right">{{ dataPrint.resum }}</h5>
+      <h4 class="col-sm-2 text-right">رقم الاستئناف :</h4>
+      <h5 class="col-sm-4 text-right">{{ dataPrint.numResum }}</h5>
+    </div>
+    <div class="row mb-5">
+      <h4 class="col-sm-2 text-right">التمييز : </h4>
+      <h5 class="col-sm-4 text-right">{{ dataPrint.decr }}</h5>
+      <h4 class="col-sm-2 text-right">رقم التمييز :</h4>
+      <h5 class="col-sm-4 text-right">{{ dataPrint.numDecr }}</h5>
+    </div>
+    <div class="row">
+      <div class="col-sm-12">
+        <table class="table font-size">
+          <thead>
+            <tr>
+              <th>الجلسة القادمة</th>
+              <th>القرار</th>
+              <th>الدرجة</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let item of courtGlsa">
+              <td>{{ item.dateRe }}</td>
+              <td>{{ item.krar }}</td>
+              <td>{{ item.isVoke }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- End print Modal -->

@@ -1,0 +1,668 @@
+<section class="mt-3">
+  <div class="container-fluid">
+    <app-settingimplement></app-settingimplement>
+    <div class="row">
+      <div class="col-xl-12">
+        <tabset>
+          <tab heading="العملاء">
+            <div class="row mt-3">
+              <div class="col-xl-12">
+                <div class="outof-rtl">
+                  <dx-data-grid [dataSource]="main" [rowAlternationEnabled]="true" [allowColumnReordering]="true"
+                    [columnAutoWidth]="true" [showBorders]="true">
+                    <dxo-paging [pageSize]="15"></dxo-paging>
+                    <dxo-column-chooser [enabled]="true"></dxo-column-chooser>
+                    <dxo-group-panel [visible]="true"></dxo-group-panel>
+                    <dxo-filter-row [visible]="true" [applyFilter]="true"></dxo-filter-row>
+                    <dxo-header-filter [visible]="true"></dxo-header-filter>
+                    <dxo-export [enabled]="true"></dxo-export>
+                    <dxo-search-panel [visible]="true" [width]="300" placeholder="Search..."></dxo-search-panel>
+                    <dxo-pager [showPageSizeSelector]="true" [allowedPageSizes]="[10,20,30,50,80,100]"
+                      [showInfo]="true">
+                    </dxo-pager>
+                    <dxi-column dataField="dateNextProcess" caption="تاريخ الاجراء القادم"></dxi-column>
+                    <dxi-column dataField="nextProces" caption="الاجراء القادم"></dxi-column>
+                    <dxi-column dataField="dateOldProsess" caption="تاريخ اخر اجراء"></dxi-column>
+                    <dxi-column dataField="lastEvent" caption="اخر اجراء"></dxi-column>
+                    <dxi-column dataField="dateLastStatment" caption="التاريخ"></dxi-column>
+                    <dxi-column dataField="dateEndHokm" caption="تاريخ الاعلان"></dxi-column>
+                    <dxi-column dataField="batchNo" caption="الباتش"></dxi-column>
+                    <dxi-column dataField="dateHokm" caption="تاريخ صدور الحكم"></dxi-column>
+                    <dxi-column dataField="nationality" caption="الجنسية"></dxi-column>
+                    <dxi-column dataField="client" caption="الموكل"></dxi-column>
+                    <dxi-column dataField="placeFile" caption="مكان الملف"></dxi-column>
+                    <dxi-column dataField="repetation" caption="التكرار"></dxi-column>
+                    <dxi-column dataField="department" caption="القسم"></dxi-column>
+                    <dxi-column dataField="caseKhism" caption="حالةالعميل"></dxi-column>
+                    <dxi-column dataField="caseProses" caption="حالة الاجراءات"></dxi-column>
+                    <dxi-column dataField="remain" caption="المتبقى"></dxi-column>
+                    <dxi-column dataField="payment" caption="المسدد"></dxi-column>
+                    <dxi-column dataField="totalDue" caption="قيمة المطالبة"></dxi-column>
+                    <dxi-column dataField="contractNum" caption="رقم العقد"></dxi-column>
+                    <dxi-column dataField="cases" caption="الحالة"></dxi-column>
+                    <dxi-column dataField="autoNum" caption="الرقم الالى"></dxi-column>
+                    <dxi-column dataField="resonDue" caption="المديونية"></dxi-column>
+                    <dxi-column dataField="prosecutor" caption="المدعى"></dxi-column>
+                    <dxi-column dataField="civilID" caption="المدنى"></dxi-column>
+                    <dxi-column dataField="name" caption="الاسم"></dxi-column>
+                    <dxi-column dataField="motaba" caption="المتابعة"></dxi-column>
+                    <dxi-column dataField="code" caption="الكود"></dxi-column>
+                  </dx-data-grid>
+                </div>
+              </div>
+            </div>
+          </tab>
+          <tab heading="الرئيسية">
+            <div class="container-fluid">
+              <!-- Start firsrt data in implemnt -->
+              <div class="row mt-2">
+                <!-- Start main data -->
+                <div class="col-xl-4 border-reduce">
+                  <div class="row">
+                    <label class="col-xl-1">الكود</label>
+                    <div class="col-xl-6 input-group-sm">
+                      <input type="text" class="form-control" placeholder="الكود" #code
+                        (keyup.enter)="searchCode(code.value)">
+                    </div>
+                    <div class="col-xl-5">
+                      <input type="button" class="btn btn-primary btn-block btn-sm" value="Search"
+                        (click)="searchCode(code.value)">
+                    </div>
+                  </div>
+                  <div class="row mt-1">
+                    <label class="col-xl-1">الموكل</label>
+                    <div class="col-xl-11 input-group-sm">
+                      <input type="text" class="form-control" placeholder="الموكل" [(ngModel)]="mainData.client">
+                    </div>
+                  </div>
+                  <div class="row mt-1">
+                    <label class="col-xl-1 mt-1">الخصم</label>
+                    <div class="col-xl-11">
+                      <!-- <input type="text" class="form-control" placeholder="الخصم"> -->
+                      <div class="input-group input-group-sm">
+                        <input type="text" class="form-control" #name [(ngModel)]="mainData.name"
+                          (keyup.enter)="searchInImplemntByName(name.value)" placeholder="الخصم">
+                        <div class="input-group-append input-group-sm">
+                          <button class="input-group-text form-control" (click)="searchInImplemntByName(name.value)"><i
+                              class="fa fa-search"></i></button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row mt-1">
+                    <label class="col-xl-1">المدنى</label>
+                    <div class="col-xl-5">
+                      <!-- <input type="text" class="form-control" placeholder="المدنى"> -->
+                      <div class="input-group input-group-sm">
+                        <input type="text" class="form-control" #civilid
+                          (keyup.enter)="searchInMdlByCivilId(civilid.value)" (keypress)="onlyNumberAllowed($event)"
+                          placeholder="المدنى" [(ngModel)]="mainData.civilID">
+                        <div class="input-group-append input-group-sm">
+                          <button class="input-group-text form-control" (click)="searchInMdlByCivilId(civilid.value)"><i
+                              class="fa fa-search"></i></button>
+                        </div>
+                      </div>
+                    </div>
+                    <label class="col-xl-1">الحالة</label>
+                    <div class="col-xl-5 input-group-sm">
+                      <input type="text" class="form-control" placeholder="الحالة" [(ngModel)]="mainData.cases">
+                    </div>
+                  </div>
+                  <div class="row mt-1">
+                    <label class="col-xl-1">الجنسية</label>
+                    <div class="col-xl-5 input-group-sm">
+                      <input type="text" class="form-control" placeholder="الجنسية" [(ngModel)]="mainData.nationality">
+                    </div>
+                    <label class="col-xl-1">الالى</label>
+                    <div class="col-xl-5">
+                      <!-- <input type="text" class="form-control" placeholder="الالى"> -->
+                      <div class="input-group input-group-sm">
+                        <input type="text" class="form-control" #autoNum
+                          (keyup.enter)="searchInMdlByAutoNum(autoNum.value)" (keypress)="onlyNumberAllowed($event)"
+                          placeholder="الالى" [(ngModel)]="mainData.autoNum">
+                        <div class="input-group-append input-group-sm">
+                          <button class="input-group-text form-control" (click)="searchInMdlByAutoNum(autoNum.value)"><i
+                              class="fa fa-search"></i></button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row mt-1">
+                    <label class="col-xl-1">العقد</label>
+                    <div class="col-xl-5">
+                      <!-- <input type="text" class="form-control" placeholder="العقد"> -->
+                      <div class="input-group input-group-sm">
+                        <input type="text" class="form-control" #contract
+                          (keyup.enter)="searchInMdlByContract(contract.value)" placeholder="العقد"
+                          [(ngModel)]="mainData.contract">
+                        <div class="input-group-append input-group-sm">
+                          <button class="input-group-text form-control"
+                            (click)="searchInMdlByContract(contract.value)"><i class="fa fa-search"></i></button>
+                        </div>
+                      </div>
+                    </div>
+                    <label class="col-xl-1">المديونية</label>
+                    <div class="col-xl-5">
+                      <!-- <input type="text" class="form-control" placeholder="المديونية"> -->
+                      <div class="input-group input-group-sm">
+                        <input type="text" class="form-control" #contract
+                          (keyup.enter)="searchInMdlByReasonDue(contract.value)" placeholder="المديونية"
+                          [(ngModel)]="mainData.resonDue">
+                        <div class="input-group-append input-group-sm">
+                          <button class="input-group-text form-control"
+                            (click)="searchInMdlByReasonDue(contract.value)"><i class="fa fa-search"></i></button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row mt-1">
+                    <label class="col-xl-1">الموحد</label>
+                    <div class="col-xl-5 input-group-sm">
+                      <input type="text" class="form-control" placeholder="الموحد" [(ngModel)]="mainData.mohd">
+                    </div>
+                    <label class="col-xl-1">الباتش</label>
+                    <div class="col-xl-5 input-group-sm">
+                      <input type="text" class="form-control" placeholder="الباتش" [(ngModel)]="mainData.batch">
+                    </div>
+                  </div>
+                  <div class="row mt-1">
+                    <label class="col-xl-1 input-group-sm">العنوان</label>
+                    <div class="col-xl-11">
+                      <textarea class="form-control" [(ngModel)]="mainData.address"></textarea>
+                    </div>
+                  </div>
+                </div>
+                <!-- End main data -->
+
+                <!-- Start slide data -->
+                <div class="col-xl-5 border-reduce">
+                  <tabset>
+                    <tab heading="الرئيسية">
+                      <div class="row mt-1">
+                        <div class="col-xl-6">
+                          <div class="row">
+                            <label class="col-xl-2">القطاع</label>
+                            <div class="col-xl-10 input-group-sm">
+                              <input type="text" class="form-control form-control-sm" placeholder="القطاع"
+                                [(ngModel)]="mainData.sector">
+                            </div>
+                          </div>
+                          <div class="row mt-1">
+                            <label class="col-xl-2">المدعى</label>
+                            <div class="col-xl-10 input-group-sm">
+                              <input type="text" class="form-control form-control-sm" placeholder="المدعى"
+                                [(ngModel)]="mainData.prosecutor">
+                            </div>
+                          </div>
+                          <div class="row mt-1">
+                            <label class="col-xl-2">تاريخ الاخلاء</label>
+                            <div class="col-xl-10 input-group-sm">
+                              <input type="text" class="form-control form-control-sm" placeholder="الاخلاء">
+                            </div>
+                          </div>
+                          <div class="row mt-1">
+                            <label class="col-xl-2">تاريخ التوزيع</label>
+                            <div class="col-xl-10 input-group-sm">
+                              <input type="text" class="form-control form-control-sm" placeholder="تاريخ التوزيع"
+                                [(ngModel)]="mainData.dateCourt">
+                            </div>
+                          </div>
+                          <div class="row mt-1">
+                            <label class="col-xl-2">ادارة التنفيذ</label>
+                            <div class="col-xl-10 input-group-sm">
+                              <input type="text" class="form-control form-control-sm" placeholder="ادارة التنفيذ"
+                                [(ngModel)]="mainData.court">
+                            </div>
+                          </div>
+                        </div>
+                        <div class="col-xl-6">
+                          <div class="row">
+                            <label class="col-xl-2">التكرار</label>
+                            <div class="col-xl-10 input-group-sm">
+                              <input type="text" class="form-control form-control-sm" placeholder="التكرار"
+                                [(ngModel)]="mainData.dublicate">
+                            </div>
+                          </div>
+                          <div class="row mt-1">
+                            <label class="col-xl-2">صدور الحكم</label>
+                            <div class="col-xl-10 input-group-sm">
+                              <input type="text" class="form-control form-control-sm" placeholder="صدور الحكم">
+                            </div>
+                          </div>
+                          <div class="row mt-1">
+                            <label class="col-xl-2">يعلن قبل</label>
+                            <div class="col-xl-10 input-group-sm">
+                              <input type="text" class="form-control form-control-sm" placeholder="يعلن قبل">
+                            </div>
+                          </div>
+                          <div class="row mt-1">
+                            <label class="col-xl-2">نوع الحكم</label>
+                            <div class="col-xl-10 input-group-sm">
+                              <select name="" id="" class="custom-select">
+                                <option value="1">امر اداء</option>
+                              </select>
+                            </div>
+                          </div>
+                          <div class="row mt-1">
+                            <div class="col-xl-2"></div>
+                            <div class="col-xl-10 input-group-sm">
+                              <input type="button" class="btn btn-success btn-block btn-sm" value="Save">
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </tab>
+                    <tab heading="التصنيف">
+                      <div class="row mt-1">
+                        <label class="col-xl-2">الاجراء المطلوب</label>
+                        <div class="col-xl-8">
+                          <input type="text" class="form-control form-control-sm" placeholder="الاجراء المطلوب"
+                            [(ngModel)]="mainData.proc">
+                        </div>
+                        <div class="col-xl-2">
+                          <input type="button" class="btn btn-primary btn-block btn-sm" value="...">
+                        </div>
+                      </div>
+                      <div class="row mt-1">
+                        <label class="col-xl-2">حالة العميل</label>
+                        <div class="col-xl-8">
+                          <input type="text" class="form-control form-control-sm" placeholder="حالة العميل"
+                            [(ngModel)]="mainData.khsmCase">
+                        </div>
+                        <div class="col-xl-2">
+                          <input type="button" class="btn btn-primary btn-block btn-sm" value="...">
+                        </div>
+                      </div>
+                      <div class="row mt-1">
+                        <label class="col-xl-2">القسم</label>
+                        <div class="col-xl-8">
+                          <input type="text" class="form-control form-control-sm" placeholder="القسم"
+                            [(ngModel)]="mainData.departCourt">
+                        </div>
+                        <div class="col-xl-2">
+                          <input type="button" class="btn btn-primary btn-block btn-sm" value="...">
+                        </div>
+                      </div>
+                      <div class="row mt-1">
+                        <div class="col-xl-2"></div>
+                        <div class="col-sm-3">
+                          <input type="button" class="btn btn-primary btn-block btn-sm" value="Save">
+                        </div>
+                      </div>
+                    </tab>
+                    <tab heading="جهة العمل">
+                      <div class="row mt-1">
+                        <label class="col-xl-2">جهة العمل</label>
+                        <div class="col-xl-10">
+                          <input type="text" class="form-control form-control-sm" placeholder="جهة العمل"
+                            [(ngModel)]="mainData.nameWork">
+                        </div>
+                      </div>
+                      <div class="row mt-1">
+                        <label class="col-xl-2">عنوان العمل</label>
+                        <div class="col-xl-10">
+                          <input type="text" class="form-control form-control-sm" placeholder="عنوان العمل"
+                            [(ngModel)]="mainData.adressWork">
+                        </div>
+                      </div>
+                      <div class="row mt-1">
+                        <label class="col-xl-2">الرقم العسكرى</label>
+                        <div class="col-xl-10">
+                          <input type="text" class="form-control form-control-sm" placeholder="الرقم العسكرى"
+                            [(ngModel)]="mainData.numberWork">
+                        </div>
+                      </div>
+                      <div class="row mt-1">
+                        <div class="col-xl-2"></div>
+                        <div class="col-sm-3">
+                          <input type="button" class="btn btn-primary btn-block btn-sm" value="Save">
+                        </div>
+                        <div class="col-sm-3">
+                          <input type="button" class="btn btn-primary btn-block btn-sm" value="الاخلاء">
+                        </div>
+                      </div>
+                    </tab>
+                    <tab heading="منطوق الحكم">
+                      <div class="row mt-1">
+                        <div class="col-xl-12">
+                          <div class="outof-rtl">
+                            <dx-data-grid [dataSource]="mainData.mntokHokm" [rowAlternationEnabled]="true"
+                              [allowColumnReordering]="true" [columnAutoWidth]="true" [showBorders]="true">
+                              <dxo-paging [pageSize]="5"></dxo-paging>
+                              <dxo-pager [showPageSizeSelector]="true" [allowedPageSizes]="[10,20,30,50,80,100]"
+                                [showInfo]="true"></dxo-pager>
+                              <dxi-column type="buttons" caption="PDF" cellTemplate="celTemp">
+                                <div *dxTemplate="let data of 'celTemp'">
+                                  <div (click)="goToPdf(data.row.data.id, 'mntokPdf')"><i
+                                      class="fa fa-envelope-open-text"></i>
+                                  </div>
+                                </div>
+                              </dxi-column>
+                              <dxi-column dataField="court" caption="المحكمة"></dxi-column>
+                              <dxi-column dataField="typeHokm" caption="نوع الحكم"></dxi-column>
+                              <dxi-column dataField="typeDegree" caption="درجة التقاضى"></dxi-column>
+                              <dxi-column dataField="dateDegree" caption="تاريخ الحكم"></dxi-column>
+                              <dxi-column dataField="note" caption="منطوق الحكم"></dxi-column>
+                            </dx-data-grid>
+                          </div>
+                        </div>
+                      </div>
+                    </tab>
+                    <tab heading="العنوان">
+                      <div class="row mt-1">
+                        <div class="col-xl-12">
+                          <div class="outof-rtl">
+                            <dx-data-grid [dataSource]="mainData.adressList" [rowAlternationEnabled]="true"
+                              [allowColumnReordering]="true" [columnAutoWidth]="true" [showBorders]="true">
+                              <dxo-paging [pageSize]="5"></dxo-paging>
+                              <dxo-pager [showPageSizeSelector]="true" [allowedPageSizes]="[10,20,30,50,80,100]"
+                                [showInfo]="true"></dxo-pager>
+                              <dxi-column type="buttons" caption="PDF" cellTemplate="celTemp">
+                                <div *dxTemplate="let data of 'celTemp'">
+                                  <div (click)="goToPdf(data.row.data.id,'addressPdf')"><i
+                                      class="fa fa-envelope-open-text"></i>
+                                  </div>
+                                </div>
+                              </dxi-column>
+                              <dxi-column dataField="caseAdv" caption="حالة الاعلان"></dxi-column>
+                              <dxi-column dataField="work" caption="جهة العمل"></dxi-column>
+                              <dxi-column dataField="addres" caption="العنوان"></dxi-column>
+                            </dx-data-grid>
+                          </div>
+                        </div>
+                      </div>
+                    </tab>
+                    <tab heading="الجلسات">
+                      <div class="row mt-1">
+                        <div class="col-xl-12">
+                          <div class="outof-rtl">
+                            <dx-data-grid [dataSource]="mainData.glsat" [rowAlternationEnabled]="true"
+                              [allowColumnReordering]="true" [columnAutoWidth]="true" [showBorders]="true">
+                              <dxo-paging [pageSize]="5"></dxo-paging>
+                              <dxo-pager [showPageSizeSelector]="true" [allowedPageSizes]="[10,20,30,50,80,100]"
+                                [showInfo]="true"></dxo-pager>
+                              <dxi-column type="buttons" caption="PDF" cellTemplate="celTemp">
+                                <div *dxTemplate="let data of 'celTemp'">
+                                  <div (click)="goToPdf(data.row.data.id,'glsatPdf')"><i
+                                      class="fa fa-envelope-open-text"></i>
+                                  </div>
+                                </div>
+                              </dxi-column>
+                              <dxi-column dataField="typeGlsa" caption="نوع الجلسة"></dxi-column>
+                              <dxi-column dataField="caseGlsa" caption="حالة الجلسة"></dxi-column>
+                              <dxi-column dataField="dateGlsa" caption="تاريخ الجلسة"></dxi-column>
+                              <dxi-column dataField="glsa" caption="الجلسة"></dxi-column>
+                            </dx-data-grid>
+                          </div>
+                        </div>
+                      </div>
+                    </tab>
+                    <tab heading="الرسوم">
+                      <div class="row mt-1">
+                        <div class="col-xl-12">
+                          <div class="outof-rtl">
+                            <dx-data-grid [dataSource]="mainData.resom" [rowAlternationEnabled]="true"
+                              [allowColumnReordering]="true" [columnAutoWidth]="true" [showBorders]="true">
+                              <dxo-paging [pageSize]="5"></dxo-paging>
+                              <dxo-pager [showPageSizeSelector]="true" [allowedPageSizes]="[10,20,30,50,80,100]"
+                                [showInfo]="true"></dxo-pager>
+                              <dxi-column type="buttons" caption="PDF" cellTemplate="celTemp">
+                                <div *dxTemplate="let data of 'celTemp'">
+                                  <div (click)="goToPdf(data.row.data.id, 'resomPdf')"><i
+                                      class="fa fa-envelope-open-text"></i>
+                                  </div>
+                                </div>
+                              </dxi-column>
+                              <dxi-column dataField="totalNumK" caption="رقم العهدة"></dxi-column>
+                              <dxi-column dataField="numk" caption="رقم الكشف"></dxi-column>
+                              <dxi-column dataField="amount" caption="المبلغ"></dxi-column>
+                              <dxi-column dataField="courtOrder" caption="المصروف"></dxi-column>
+                            </dx-data-grid>
+                          </div>
+                        </div>
+                      </div>
+                    </tab>
+                    <tab heading="قيمة المطالبة">
+                      <div class="row mt-1">
+                        <div class="col-xl-12">
+                          <div class="outof-rtl">
+                            <dx-data-grid [dataSource]="" [rowAlternationEnabled]="true" [allowColumnReordering]="true"
+                              [columnAutoWidth]="true" [showBorders]="true">
+                              <dxo-paging [pageSize]="5"></dxo-paging>
+                              <dxo-pager [showPageSizeSelector]="true" [allowedPageSizes]="[10,20,30,50,80,100]"
+                                [showInfo]="true"></dxo-pager>
+                              <dxi-column dataField="" caption="التاريخ"></dxi-column>
+                              <dxi-column dataField="" caption="المبلغ"></dxi-column>
+                            </dx-data-grid>
+                          </div>
+                        </div>
+                      </div>
+                    </tab>
+                    <tab heading="المرفقات">
+                      <div class="row mt-1">
+                        <div class="col-xl-12">
+                          <div class="outof-rtl">
+                            <dx-data-grid [dataSource]="mainData.attachment" [rowAlternationEnabled]="true"
+                              [allowColumnReordering]="true" [columnAutoWidth]="true" [showBorders]="true">
+                              <dxo-paging [pageSize]="5"></dxo-paging>
+                              <dxo-pager [showPageSizeSelector]="true" [allowedPageSizes]="[10,20,30,50,80,100]"
+                                [showInfo]="true"></dxo-pager>
+                              <dxi-column type="buttons" caption="PDF" cellTemplate="celTemp">
+                                <div *dxTemplate="let data of 'celTemp'">
+                                  <div (click)="goToPdf(data.row.data.id, 'attachPdf')"><i
+                                      class="fa fa-envelope-open-text"></i>
+                                  </div>
+                                </div>
+                              </dxi-column>
+                              <dxi-column dataField="date" caption="تاريخ الاجراء"></dxi-column>
+                              <dxi-column dataField="name" caption="الاجراء"></dxi-column>
+                            </dx-data-grid>
+                          </div>
+                        </div>
+                      </div>
+                    </tab>
+                  </tabset>
+                </div>
+                <!-- End slide data -->
+
+                <!-- start paymnent data -->
+                <div class="col-xl-3 border-reduce">
+                  <div class="row mt-1">
+                    <label class="col-xl-1">المطالبة</label>
+                    <div class="col-xl-11">
+                      <input type="text" class="form-control form-control-sm" placeholder="المطالبة">
+                    </div>
+                  </div>
+                  <div class="row mt-1">
+                    <label class="col-xl-1">الرسوم</label>
+                    <div class="col-xl-5">
+                      <input type="text" class="form-control form-control-sm" placeholder="الرسوم">
+                    </div>
+                    <label class="col-xl-1">الاتعاب</label>
+                    <div class="col-xl-5">
+                      <input type="text" class="form-control form-control-sm" placeholder="الاتعاب">
+                    </div>
+                  </div>
+                  <div class="row mt-1">
+                    <div class="col-sm-12">
+                      <div class="outof-rtl">
+                        <dx-data-grid [dataSource]="mainData.payment" [rowAlternationEnabled]="true"
+                          [allowColumnReordering]="true" [columnAutoWidth]="true" [showBorders]="true">
+                          <dxo-paging [pageSize]="3"></dxo-paging>
+                          <dxo-pager [showPageSizeSelector]="true" [showInfo]="true"></dxo-pager>
+                          <dxi-column dataField="date_" caption="التاريخ"></dxi-column>
+                          <dxi-column dataField="payment" caption="المبلغ"></dxi-column>
+                        </dx-data-grid>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row mt-1">
+                    <label class="col-sm-1">المسدد</label>
+                    <div class="col-xl-11">
+                      <input type="text" class="form-control form-control-sm" placeholder="المسدد">
+                    </div>
+                  </div>
+                  <div class="row mt-1">
+                    <label class="col-sm-1">المخفض</label>
+                    <div class="col-xl-5">
+                      <input type="text" class="form-control form-control-sm" placeholder="التخفيض">
+                    </div>
+                    <label class="col-sm-1">المتبقى</label>
+                    <div class="col-xl-5">
+                      <input type="text" class="form-control form-control-sm" placeholder="المتبقى">
+                    </div>
+                  </div>
+                </div>
+                <!-- End paymnent data -->
+              </div>
+              <!-- End firsrt data in implemnt -->
+
+              <!-- Start Second data -->
+              <div class="row">
+                <div class="col-xl-6">
+                  <div class="row mt-3">
+                    <textarea class="form-control form-control-sm" readonly></textarea>
+                  </div>
+                  <div class="row">
+                    <textarea class="form-control form-control-sm"></textarea>
+                  </div>
+                  <div class="row mt-1">
+                    <div class="col-xl-6">
+                      <input type="button" value="اخر اجراء" class="btn btn-block btn-success">
+                    </div>
+                    <div class="col-xl-6">
+                      <input type="button" value="حفظ الافادة" class="btn btn-block btn-primary">
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- End Second data -->
+
+              <!-- Start Statment data -->
+              <div class="row mt-1 mb-5">
+                <div class="col-xl-12">
+                  <tabset #staticTabs>
+                    <tab heading="الاجراءات">
+                      <div class="outof-rtl">
+                        <dx-data-grid [dataSource]="mainData.statment" [rowAlternationEnabled]="true"
+                          [allowColumnReordering]="true" [columnAutoWidth]="true" [showBorders]="true">
+                          <dxo-paging [pageSize]="5"></dxo-paging>
+                          <dxo-pager [showPageSizeSelector]="true" [allowedPageSizes]="[10,20,30,50,80,100]"
+                            [showInfo]="true">
+                          </dxo-pager>
+                          <dxi-column dataField="emp" caption="المستخدم"></dxi-column>
+                          <dxi-column dataField="note" caption="ملاحظات"></dxi-column>
+                          <dxi-column dataField="placeFile" caption="مكان الملف"></dxi-column>
+                          <dxi-column dataField="dateReview" caption="تاريخ الاجراء القادم"></dxi-column>
+                          <dxi-column dataField="nextProcs" caption="الاجراء القادم"></dxi-column>
+                          <dxi-column dataField="dateLastProces" caption="تاريخ اخر اجراء"></dxi-column>
+                          <dxi-column dataField="lastProces" caption="اخر اجراء"></dxi-column>
+                          <dxi-column dataField="date_" caption="التاريخ"></dxi-column>
+                        </dx-data-grid>
+                      </div>
+                    </tab>
+                    <tab heading="الافادات">
+                      <div class="outof-rtl">
+                        <dx-data-grid [dataSource]="mainData.statmentproces1" [rowAlternationEnabled]="true"
+                          [allowColumnReordering]="true" [columnAutoWidth]="true" [showBorders]="true">
+                          <dxo-paging [pageSize]="5"></dxo-paging>
+                          <dxo-pager [showPageSizeSelector]="true" [allowedPageSizes]="[10,20,30,50,80,100]"
+                            [showInfo]="true">
+                          </dxo-pager>
+                          <dxi-column dataField="emp" caption="المستخدم"></dxi-column>
+                          <dxi-column dataField="note" caption="ملاحظات"></dxi-column>
+                          <dxi-column dataField="placeFile" caption="مكان الملف"></dxi-column>
+                          <dxi-column dataField="dateReview" caption="تاريخ الاجراء القادم"></dxi-column>
+                          <dxi-column dataField="nextProcs" caption="الاجراء القادم"></dxi-column>
+                          <dxi-column dataField="dateLastProces" caption="تاريخ اخر اجراء"></dxi-column>
+                          <dxi-column dataField="lastProces" caption="اخر اجراء"></dxi-column>
+                          <dxi-column dataField="date_" caption="التاريخ"></dxi-column>
+                        </dx-data-grid>
+                      </div>
+                    </tab>
+                    <tab heading="الارقام الالية">
+                      <div class="outof-rtl">
+                        <dx-data-grid [dataSource]="" [rowAlternationEnabled]="true" [allowColumnReordering]="true"
+                          [columnAutoWidth]="true" [showBorders]="true">
+                          <dxo-paging [pageSize]="5"></dxo-paging>
+                          <dxo-pager [showPageSizeSelector]="true" [allowedPageSizes]="[10,20,30,50,80,100]"
+                            [showInfo]="true">
+                          </dxo-pager>
+                          <dxi-column dataField="numOhda" caption="العهدة"></dxi-column>
+                          <dxi-column dataField="numK" caption="الكشف"></dxi-column>
+                          <dxi-column dataField="amount" caption="المبلغ"></dxi-column>
+                          <dxi-column dataField="exp" caption="المصروف"></dxi-column>
+                        </dx-data-grid>
+                      </div>
+                    </tab>
+                    <tab heading="نتائج البحث">
+                      <div class="outof-rtl">
+                        <dx-data-grid [dataSource]="searchResult" [rowAlternationEnabled]="true"
+                          [allowColumnReordering]="true" [columnAutoWidth]="true" [showBorders]="true"
+                          (onRowDblClick)="searchCode($event.data.code)">
+                          <dxo-paging [pageSize]="5"></dxo-paging>
+                          <dxo-pager [showPageSizeSelector]="true" [allowedPageSizes]="[10,20,30,50,80,100]"
+                            [showInfo]="true">
+                          </dxo-pager>
+                          <dxi-column dataField="remain" caption="المتبقى"></dxi-column>
+                          <dxi-column dataField="totalPayment" caption="اجمالى المدفوع"></dxi-column>
+                          <dxi-column dataField="totalDue" caption="قيمة المطالبة"></dxi-column>
+                          <dxi-column dataField="nationality" caption="الجنسية"></dxi-column>
+                          <dxi-column dataField="court" caption="المحكمة"></dxi-column>
+                          <dxi-column dataField="courtEmp" caption="موظف المحكمة"></dxi-column>
+                          <dxi-column dataField="telecomEmp" caption="موظف الاتصالات"></dxi-column>
+                          <dxi-column dataField="dateLogin" dataType="date" format="dd-MM-yyyy" caption="تاريخ الورود">
+                          </dxi-column>
+                          <dxi-column dataField="client" caption="الموكل"></dxi-column>
+                          <dxi-column dataField="batchNumber" caption="رقم الباتش"></dxi-column>
+                          <dxi-column dataField="reasonDue" caption="سبب المديونية"></dxi-column>
+                          <dxi-column dataField="name" caption="الاسم"></dxi-column>
+                          <dxi-column dataField="code" caption="الكود"></dxi-column>
+                        </dx-data-grid>
+                      </div>
+                    </tab>
+                    <tab heading="السجل">
+                      <div class="outof-rtl">
+                        <dx-data-grid [dataSource]="" [rowAlternationEnabled]="true" [allowColumnReordering]="true"
+                          [columnAutoWidth]="true" [showBorders]="true">
+                          <dxo-paging [pageSize]="5"></dxo-paging>
+                          <dxo-pager [showPageSizeSelector]="true" [allowedPageSizes]="[10,20,30,50,80,100]"
+                            [showInfo]="true">
+                          </dxo-pager>
+                          <dxi-column dataField="numOhda" caption="العهدة"></dxi-column>
+                          <dxi-column dataField="numK" caption="الكشف"></dxi-column>
+                          <dxi-column dataField="amount" caption="المبلغ"></dxi-column>
+                          <dxi-column dataField="exp" caption="المصروف"></dxi-column>
+                        </dx-data-grid>
+                      </div>
+                    </tab>
+                    <tab heading="سجل السكرتارية">
+                      <div class="outof-rtl">
+                        <dx-data-grid [dataSource]="" [rowAlternationEnabled]="true" [allowColumnReordering]="true"
+                          [columnAutoWidth]="true" [showBorders]="true">
+                          <dxo-paging [pageSize]="5"></dxo-paging>
+                          <dxo-pager [showPageSizeSelector]="true" [allowedPageSizes]="[10,20,30,50,80,100]"
+                            [showInfo]="true">
+                          </dxo-pager>
+                          <dxi-column dataField="numOhda" caption="العهدة"></dxi-column>
+                          <dxi-column dataField="numK" caption="الكشف"></dxi-column>
+                          <dxi-column dataField="amount" caption="المبلغ"></dxi-column>
+                          <dxi-column dataField="exp" caption="المصروف"></dxi-column>
+                        </dx-data-grid>
+                      </div>
+                    </tab>
+                  </tabset>
+                </div>
+              </div>
+              <!-- End Statment data -->
+            </div>
+          </tab>
+          <tab heading="المراجعة"></tab>
+          <tab heading="رفع الاجراءات"></tab>
+          <tab heading="منطوق الحكم"></tab>
+          <tab heading="الجلسات"></tab>
+        </tabset>
+      </div>
+    </div>
+  </div>
+</section>

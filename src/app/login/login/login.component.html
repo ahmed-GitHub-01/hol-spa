@@ -1,0 +1,45 @@
+<div class="container">
+  <div class="row">
+    <div class="col-sm-5">
+      <form class="login" (ngSubmit)="login()" #FormLogin="ngForm">
+        <p class="text-center">House Of law <span class="line-client"></span> Users login</p>
+        <hr />
+        <input class="form-control input-lg" required="required" type="number" [(ngModel)]="model.Code" name="user"
+          placeholder="User Name" autocomplete="off" />
+        <input class="form-control input-lg" required="required" type="password" [(ngModel)]="model.Password"
+          name="pass" placeholder="Password" autocomplete="new-password" />
+        <input class="btn input-lg btn-primary btn-block" [disabled]="!FormLogin.valid" type="submit" value="login" />
+        <a [routerLink]="[ '/frgtPass/1' ]">Forget Password?</a>
+      </form>
+    </div>
+    <div class="col-sm-2 between-logindiv">
+      <div class="between-login"></div>
+    </div>
+    <div class="col-sm-5">
+      <form class="login" (ngSubmit)="loginClint()" #FormLogin2="ngForm">
+        <p class="text-center">House Of law
+          <span class="line-client"></span> Cleint login
+        </p>
+        <hr />
+        <input class="form-control input-lg" required="required" type="text" [(ngModel)]="model1.Code" name="user"
+          placeholder="User Name" autocomplete="off" />
+        <input class="form-control input-lg" required="required" type="password" [(ngModel)]="model1.Password"
+          name="pass" placeholder="Password" autocomplete="new-password" />
+        <input class="btn input-lg btn-primary btn-block" [disabled]="!FormLogin2.valid" type="submit" value="login" />
+        <a [routerLink]="['/frgtPass/1']">Forget Password?</a>
+      </form>
+      <!-- <form class="login">
+        <p class="text-center">House Of law
+          <span class="line-client"></span> Cleint login
+        </p>
+        <hr />
+        <input class="form-control input-lg" required="required" type="number" name="user" placeholder="User Name"
+          [(ngModel)]="model1.Code" name="user" autocomplete="off" />
+        <input class="form-control input-lg" required="required" type="password" name="pass" placeholder="Password"
+          [(ngModel)]="model1.Password" autocomplete="new-password" />
+        <input class="btn input-lg btn-primary btn-block" type="button" value="login" (click)="loginClint()" />
+        <a [routerLink]="['/frgtPass/1']">Forget Password?</a>
+      </form> -->
+    </div>
+  </div>
+</div>
